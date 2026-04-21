@@ -1,133 +1,277 @@
-# PharmaSpark 🧬✨
+# pharmaspark
 
-**3D Gaussian Splatting for Pharmaceutical & Biomedical Visualization**
+PharmaSpark — 3D Gaussian Splatting for Pharmaceutical & Biomedical Visualization
 
-基于 [Spark 2.0](https://github.com/sparkjsdev/spark) 架构的医药领域 3D 可视化引擎。将分子结构、蛋白质表面、药物-受体对接结果渲染为 3D 高斯溅射（3DGS），在浏览器中实现超大规模生物医学数据的实时交互。
+## 项目简介
 
-## 核心能力
+这是一个医疗AI项目，致力于通过人工智能技术解决医疗健康领域的挑战。
 
-| 模块 | 功能 | 技术 |
-|------|------|------|
-| **分子渲染** | 原子→splat 映射，CPK 着色，范德华半径缩放 | 坐标映射 + 元素属性库 |
-| **蛋白质表面** | 去除埋藏点的分子表面 splat 云 | Fibonacci 球采样 + 碰撞检测 |
-| **结合口袋** | 靶点区域高亮，外围区域淡化 | 距离着色 + 透明度调制 |
-| **药物库 LoD** | 百万化合物库渐进式流加载 | 3D 网格 + 三级 LoD |
-| **对接可视化** | 药物-受体相互作用线，药效团特征 | 分子间距离 + 类型着色 |
-| **多格式支持** | PDB、SDF/MOL 解析与导出 | 标准格式解析器 |
+## 功能特性
+
+### 核心功能
+- 🏥 医疗AI核心功能
+- 🔬 智能诊断与分析
+- 📊 数据可视化与报告
+- 🤖 多模态交互支持
+- 🔒 数据安全与隐私保护
+
+### 技术特性
+- 🚀 高性能计算
+- 📈 可扩展架构
+- 🔄 实时数据处理
+- 🌐 分布式部署
+- 📱 多平台支持
+
+## 技术栈
+
+### 后端技术
+- **框架**: Python FastAPI, Django, Flask
+- **AI框架**: TensorFlow, PyTorch, Scikit-learn
+- **数据库**: PostgreSQL, MongoDB, Redis
+- **消息队列**: RabbitMQ, Kafka
+- **容器化**: Docker, Kubernetes
+
+### 前端技术
+- **框架**: React, Vue.js, Angular
+- **UI库**: Ant Design, Material-UI, Element UI
+- **可视化**: D3.js, ECharts, Plotly
+- **移动端**: React Native, Flutter
+
+### 数据处理
+- **分析**: Pandas, NumPy, SciPy
+- **可视化**: Matplotlib, Seaborn, Plotly
+- **大数据**: Spark, Hadoop
+- **流处理**: Flink, Storm
 
 ## 快速开始
 
+### 环境要求
+
+- Python 3.9+
+- Node.js 16+
+- Docker 20+
+- Git 2.30+
+
+### 安装步骤
+
+1. **克隆仓库**
 ```bash
-# 安装
-npm install pharmaspark
-
-# 或从源码构建
-git clone https://github.com/MoKangMedical/pharmaspark
+git clone https://github.com/MoKangMedical/pharmaspark.git
 cd pharmaspark
+```
+
+2. **后端设置**
+```bash
+# 创建虚拟环境
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate  # Windows
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 配置环境变量
+cp .env.example .env
+# 编辑.env文件，配置数据库连接等
+```
+
+3. **前端设置**
+```bash
+cd frontend
 npm install
-npm run dev
+npm run build
 ```
 
-### 浏览器中渲染一个分子
-
-```typescript
-import { parsePDB, atomsToSplats, PharmaSparkViewer } from "pharmaspark";
-
-// 解析 PDB 文件
-const response = await fetch("/protein.pdb");
-const protein = parsePDB(await response.text());
-
-// 转换为 splat 数据
-const splats = atomsToSplats(protein.atoms, {
-  colorMode: "element",
-  radiusScale: 0.5,
-});
-
-// 渲染
-const viewer = new PharmaSparkViewer({
-  container: document.getElementById("viewer")!,
-});
-await viewer.addMolecule("my-protein", splats);
+4. **数据库设置**
+```bash
+# 初始化数据库
+python manage.py migrate
+python manage.py createsuperuser
 ```
 
-### 药物库浏览
+5. **启动服务**
+```bash
+# 使用Docker Compose（推荐）
+docker-compose up -d
 
-```typescript
-import { DrugLibraryRenderer } from "pharmaspark";
-
-const library = new DrugLibraryRenderer({
-  compounds: myCompounds,
-  gridSize: [10, 10, 10],
-  spacing: 30,
-  lodLevels: 3,
-});
-
-// 根据相机位置动态加载
-const splats = library.generateLoDSplats(
-  2,                    // LoD level
-  [0, 0, 0],           // camera position
-  100                   // view radius
-);
+# 或手动启动
+python manage.py runserver
 ```
 
-## 架构
+## 项目结构
 
 ```
 pharmaspark/
-├── src/
-│   ├── core/
-│   │   ├── pdb-parser.ts       # PDB 文件解析
-│   │   ├── sdf-parser.ts       # SDF/MOL 分子解析
-│   │   ├── elements.ts         # 元素属性库（CPK 色、vdW 半径）
-│   │   ├── atom-to-splat.ts    # 原子→splat 核心转换
-│   │   ├── drug-library.ts     # 药物库 LoD 渲染
-│   │   ├── docking.ts          # 对接可视化 + 药效团
-│   │   └── ply-export.ts       # PLY 导出（兼容 Spark）
-│   ├── renderers/
-│   │   └── spark-bridge.ts     # Spark 集成层（Three.js + SplatMesh）
-│   └── index.ts                # 统一导出
-├── examples/
-│   ├── molecule-viewer/        # 分子查看器 demo
-│   ├── protein-surface/        # 蛋白质表面 demo
-│   ├── docking-viz/            # 对接可视化 demo
-│   └── drug-library/           # 药物库浏览 demo
-├── cli/                        # 命令行工具
-└── test/                       # 测试
+├── backend/                 # 后端代码
+│   ├── api/                # API接口
+│   ├── models/             # 数据模型
+│   ├── services/           # 业务逻辑
+│   ├── utils/              # 工具函数
+│   └── tests/              # 测试用例
+├── frontend/               # 前端代码
+│   ├── src/               # 源代码
+│   ├── public/            # 静态资源
+│   └── package.json       # 依赖配置
+├── ai-engine/             # AI引擎
+│   ├── models/           # AI模型
+│   ├── training/         # 训练脚本
+│   └── inference/        # 推理服务
+├── data/                  # 数据存储
+│   ├── raw/              # 原始数据
+│   ├── processed/        # 处理后的数据
+│   └── models/           # 训练好的模型
+├── docs/                  # 项目文档
+│   ├── api/              # API文档
+│   ├── user/             # 用户手册
+│   └── dev/              # 开发文档
+├── scripts/               # 脚本工具
+│   ├── deploy/           # 部署脚本
+│   ├── data/             # 数据处理脚本
+│   └── utils/            # 工具脚本
+├── tests/                 # 测试代码
+├── docker-compose.yml     # Docker编排
+├── Dockerfile            # Docker配置
+├── requirements.txt      # Python依赖
+├── .env.example          # 环境变量示例
+├── .gitignore           # Git忽略文件
+└── README.md            # 项目说明
 ```
 
-## 与 Spark 的关系
+## API文档
 
-PharmaSpark 是 Spark 2.0 的**垂直领域应用层**：
-- **Spark** 提供通用 3DGS 渲染引擎（LoD、流式加载、虚拟内存）
-- **PharmaSpark** 提供医药领域的数据转换层（分子→splat、蛋白质表面、对接可视化）
-- 两者通过 PLY 格式桥接：PharmaSpark 输出标准 PLY，Spark 负责 GPU 渲染
+### 主要接口
 
-## 应用场景
+#### 基础接口
+- `GET /` - 首页
+- `GET /health` - 健康检查
+- `GET /api/v1/status` - 系统状态
 
-- 🔬 **药物发现** — 浏览百万化合物库，快速定位活性分子
-- 🧬 **结构生物学** — 蛋白质结构、结合口袋、突变位点的 3D 交互
-- 💊 **药物设计** — 药效团可视化、分子对接结果分析
-- 🏥 **医学教育** — 分子机制的沉浸式教学
-- 🌐 **Web 协作** — 浏览器端分享 3D 分子结构，无需安装插件
+#### 数据接口
+- `GET /api/v1/data` - 获取数据列表
+- `POST /api/v1/data` - 上传数据
+- `GET /api/v1/data/<built-in function id>` - 获取特定数据
 
-## 📐 理论基础
+#### 分析接口
+- `POST /api/v1/analyze` - 数据分析
+- `GET /api/v1/analyze/<built-in function id>` - 获取分析结果
+- `GET /api/v1/reports` - 获取报告列表
 
-### Harness 理论
+#### 用户接口
+- `POST /api/v1/auth/login` - 用户登录
+- `POST /api/v1/auth/register` - 用户注册
+- `GET /api/v1/users/me` - 获取当前用户信息
 
-在AI领域，Harness（环境设计）比模型本身更重要。优秀的Harness设计（工具链+信息格式+上下文管理+失败恢复+结果验证）能使性能提升64%。
+### 详细文档
 
-PharmaSpark 的 Harness 设计体现在渲染管线的每一层：多格式分子解析（PDB/SDF）→ splat 映射 → LoD 渐进加载 → GPU 渲染，每一步都经过精心设计以最大化可视化质量和交互性能。
+启动服务后，访问以下地址查看完整API文档：
 
-### 红杉论点
+- **Swagger UI**: http://localhost:8000/docs
+- **ReDoc**: http://localhost:8000/redoc
+- **OpenAPI JSON**: http://localhost:8000/openapi.json
 
-> 下一代万亿美元公司是伪装成服务公司的软件公司。从卖工具到卖结果。
+## 配置说明
 
-PharmaSpark 从 3D 渲染引擎进化为药物发现可视化平台——用户上传分子结构，平台直接呈现药物-受体对接分析结果，而非要求用户自行解读坐标数据。
+### 环境变量
 
-### 理论宪法
+创建 `.env` 文件并配置以下变量：
 
-本项目遵循理论宪法四卷八章统一框架，将分子可视化技术建立在可验证、可复现、可扩展的理论根基之上。
+```bash
+# 基础配置
+DEBUG=True
+SECRET_KEY=your-secret-key
+ALLOWED_HOSTS=localhost,127.0.0.1
 
-## License
+# 数据库配置
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+REDIS_URL=redis://localhost:6379/0
 
-MIT
+# AI服务配置
+OPENAI_API_KEY=your-openai-key
+HUGGINGFACE_TOKEN=your-hf-token
+
+# 文件存储配置
+AWS_ACCESS_KEY_ID=your-aws-key
+AWS_SECRET_ACCESS_KEY=your-aws-secret
+AWS_STORAGE_BUCKET_NAME=your-bucket-name
+
+# 邮件配置
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-email-password
+```
+
+## 部署指南
+
+### Docker部署（推荐）
+
+1. **构建镜像**
+```bash
+docker build -t pharmaspark .
+```
+
+2. **运行容器**
+```bash
+docker run -d -p 8000:8000 --name pharmaspark pharmaspark
+```
+
+3. **使用Docker Compose**
+```bash
+docker-compose up -d
+```
+
+## 测试
+
+### 运行测试
+
+```bash
+# 运行所有测试
+python -m pytest tests/
+
+# 运行特定测试
+python -m pytest tests/test_api.py
+
+# 生成测试覆盖率报告
+python -m pytest --cov=app tests/
+```
+
+## 贡献指南
+
+我们欢迎任何形式的贡献！请遵循以下步骤：
+
+1. **Fork本仓库**
+2. **创建特性分支**
+```bash
+git checkout -b feature/AmazingFeature
+```
+
+3. **提交更改**
+```bash
+git commit -m 'Add some AmazingFeature'
+```
+
+4. **推送到分支**
+```bash
+git push origin feature/AmazingFeature
+```
+
+5. **创建Pull Request**
+
+## 许可证
+
+本项目采用 [MIT License](LICENSE) 许可证。
+
+## 联系方式
+
+- **项目维护者**: MoKangMedical
+- **邮箱**: contact@mokangmedical.com
+- **项目主页**: https://github.com/MoKangMedical/pharmaspark
+- **问题反馈**: https://github.com/MoKangMedical/pharmaspark/issues
+
+## 致谢
+
+感谢所有为这个项目做出贡献的开发者和医疗领域专家！
+
+---
+
+**注意**: 这是一个活跃开发中的项目，API和功能可能会发生变化。请定期查看更新日志获取最新信息。
