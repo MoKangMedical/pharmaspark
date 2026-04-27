@@ -75,16 +75,16 @@ ATOM      4  O   ALA A   1       4.000   5.000   6.000  1.00  0.00           O
   it('should set correct colors in element mode', () => {
     const splatData = atomsToSplats(protein.atoms, { colorMode: 'element', opacity: 1.0 });
     
-    // Nitrogen color: [0, 0, 255]
-    expect(splatData.colors[0]).toBeCloseTo(0 / 255);     // R
-    expect(splatData.colors[1]).toBeCloseTo(0 / 255);     // G
-    expect(splatData.colors[2]).toBeCloseTo(255 / 255);   // B
+    // Nitrogen color: [48, 80, 240] from elements.ts
+    expect(splatData.colors[0]).toBeCloseTo(48 / 255);    // R
+    expect(splatData.colors[1]).toBeCloseTo(80 / 255);    // G
+    expect(splatData.colors[2]).toBeCloseTo(240 / 255);   // B
     expect(splatData.colors[3]).toBeCloseTo(1.0);          // A
     
-    // Carbon color: [200, 200, 200]
-    expect(splatData.colors[4]).toBeCloseTo(200 / 255);   // R
-    expect(splatData.colors[5]).toBeCloseTo(200 / 255);   // G
-    expect(splatData.colors[6]).toBeCloseTo(200 / 255);   // B
+    // Carbon color: [100, 100, 100] from elements.ts
+    expect(splatData.colors[4]).toBeCloseTo(100 / 255);   // R
+    expect(splatData.colors[5]).toBeCloseTo(100 / 255);   // G
+    expect(splatData.colors[6]).toBeCloseTo(100 / 255);   // B
     expect(splatData.colors[7]).toBeCloseTo(1.0);          // A
   });
 

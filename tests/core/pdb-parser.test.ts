@@ -43,9 +43,12 @@ ATOM      3  N   GLY A   2       3.000   4.000   5.000  1.00  0.00           N
     
     const protein = parsePDB(pdbText);
     
-    expect(protein.residues).toHaveLength(2);
-    expect(protein.residues[0].name).toBe('ALA');
-    expect(protein.residues[1].name).toBe('GLY');
+    // Check chains and residues
+    expect(protein.chains).toHaveLength(1);
+    expect(protein.chains[0].id).toBe('A');
+    expect(protein.chains[0].residues).toHaveLength(2);
+    expect(protein.chains[0].residues[0].name).toBe('ALA');
+    expect(protein.chains[0].residues[1].name).toBe('GLY');
   });
 
   it('should parse chain information correctly', () => {
@@ -67,7 +70,6 @@ ATOM      2  N   GLY B   1       2.000   3.000   4.000  1.00  0.00           N
     const protein = parsePDB(pdbText);
     
     expect(protein.atoms).toHaveLength(0);
-    expect(protein.residues).toHaveLength(0);
     expect(protein.chains).toHaveLength(0);
   });
 
@@ -102,14 +104,14 @@ ATOM      3  O   ALA A   1       3.000   4.000   5.000  1.00  0.00           O
     
     const protein = parsePDB(pdbText);
     
-    // Nitrogen should be blue
-    expect(protein.atoms[0].color).toEqual([0, 0, 255]);
+    // Nitrogen should be [48, 80, 240]
+    expect(protein.atoms[0].color).toEqual([48, 80, 240]);
     
-    // Carbon should be gray
-    expect(protein.atoms[1].color).toEqual([200, 200, 200]);
+    // Carbon should be [100, 100, 100]
+    expect(protein.atoms[1].color).toEqual([100, 100, 100]);
     
-    // Oxygen should be red
-    expect(protein.atoms[2].color).toEqual([255, 0, 0]);
+    // Oxygen should be [255, 13, 13]
+    expect(protein.atoms[2].color).toEqual([255, 13, 13]);
   });
 
   it('should assign vdW radius based on element', () => {

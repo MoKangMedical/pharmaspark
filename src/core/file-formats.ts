@@ -545,16 +545,3 @@ export function parseMolecularFile(content: string): { format: FileFormat; molec
       throw new Error(`Unsupported file format: ${format}`);
   }
 }
-
-// ============ Export Functions ============
-
-export {
-  parseMOL2,
-  parseXYZ,
-  parsePQR,
-  mol2ToMolecule,
-  xyzToMolecule,
-  pqrToMolecule,
-  detectFileFormat,
-  parseMolecularFile,
-};
