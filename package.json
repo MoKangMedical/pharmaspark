@@ -1,6 +1,6 @@
 {
   "name": "pharmaspark",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "PharmaSpark — 3D Gaussian Splatting renderer for pharmaceutical & biomedical visualization",
   "type": "module",
   "main": "./dist/pharmaspark.cjs.js",
@@ -20,9 +20,14 @@
     "build:watch": "onchange 'src/**/*.{ts,glsl}' -- npm run build:dev",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "format": "biome format .",
     "lint": "biome check .",
-    "cli": "node --loader ts-node/esm src/cli/index.ts"
+    "cli": "node --loader ts-node/esm src/cli/index.ts",
+    "demo": "vite --host 0.0.0.0 --port 8097",
+    "server": "cd server && npm run dev",
+    "server:start": "cd server && npm start",
+    "server:build": "cd server && npm run build"
   },
   "keywords": [
     "3d-gaussian-splatting",
