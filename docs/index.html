@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaSpark - 3D分子可视化平台</title>
+    <meta name="description" content="PharmaSpark — 3D Gaussian Splatting for Pharmaceutical & Biomedical Visualization">
+    <meta name="keywords" content="3D Gaussian Splatting, molecular visualization, drug discovery, protein structure, pharmaceutical, biomedical">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PharmaSpark - 3D分子可视化平台">
+    <meta property="og:description" content="基于3D Gaussian Splatting技术的分子可视化平台">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mokangmedical.github.io/pharmaspark/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a1a;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+        
+        header p {
+            font-size: 20px;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #00d4ff;
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+        
+        .btn:hover {
+            background: #00b8d4;
+        }
+        
+        .btn-secondary {
+            background: #333;
+            color: #fff;
+        }
+        
+        .btn-secondary:hover {
+            background: #444;
+        }
+        
+        /* Features */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #00d4ff;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: #111;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+        
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+        
+        .feature-card p {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        /* Demo */
+        .demo {
+            padding: 80px 0;
+            background: #111;
+        }
+        
+        .demo h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #00d4ff;
+        }
+        
+        .demo-container {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .demo-container p {
+            color: #888;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+        }
+        
+        .pricing h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #00d4ff;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: #111;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+        
+        .pricing-card.popular {
+            border-color: #00d4ff;
+        }
+        
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+        
+        .pricing-card .price {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .pricing-card .price span {
+            font-size: 16px;
+            color: #888;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .pricing-card li {
+            padding: 10px 0;
+            color: #888;
+            border-bottom: 1px solid #333;
+        }
+        
+        /* Tech Stack */
+        .tech-stack {
+            padding: 80px 0;
+            background: #111;
+        }
+        
+        .tech-stack h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #00d4ff;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        
+        .tech-item {
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .tech-item h4 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .tech-item p {
+            color: #888;
+            font-size: 12px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        footer p {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 36px;
+            }
+            
+            header p {
+                font-size: 16px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>PharmaSpark</h1>
+            <p>基于3D Gaussian Splatting技术的分子可视化平台，专为药物发现和生物医学研究设计</p>
+            <div class="hero-buttons">
+                <a href="https://github.com/MoKangMedical/pharmaspark" class="btn">GitHub</a>
+                <a href="#demo" class="btn btn-secondary">查看演示</a>
+            </div>
+        </div>
+    </header>
+    
+    <section class="features">
+        <div class="container">
+            <h2>核心功能</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>分子解析</h3>
+                    <p>支持PDB、SDF、MOL2、XYZ、PQR等多种分子文件格式的解析和处理</p>
+                </div>
+                <div class="feature-card">
+                    <h3>3D高斯溅射</h3>
+                    <p>将分子结构转换为高质量的3D高斯溅射数据，实现实时渲染</p>
+                </div>
+                <div class="feature-card">
+                    <h3>可视化选项</h3>
+                    <p>14种可视化模式、10种颜色方案，满足不同研究需求</p>
+                </div>
+                <div class="feature-card">
+                    <h3>用户系统</h3>
+                    <p>完整的用户注册、登录、个人中心和API配额管理</p>
+                </div>
+                <div class="feature-card">
+                    <h3>数据管理</h3>
+                    <p>分子上传、下载、保存、历史记录和标签管理</p>
+                </div>
+                <div class="feature-card">
+                    <h3>分析功能</h3>
+                    <p>分子分析、对接可视化、相似性搜索等功能</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="demo" id="demo">
+        <div class="container">
+            <h2>功能演示</h2>
+            <div class="demo-container">
+                <p>PharmaSpark提供直观的3D分子可视化界面，支持多种交互操作</p>
+                <a href="https://github.com/MoKangMedical/pharmaspark" class="btn">查看源代码</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing">
+        <div class="container">
+            <h2>订阅方案</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>免费版</h3>
+                    <div class="price">$0<span>/月</span></div>
+                    <ul>
+                        <li>1,000次API调用/月</li>
+                        <li>基础分子解析</li>
+                        <li>基础可视化</li>
+                        <li>社区支持</li>
+                    </ul>
+                    <a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-secondary">开始使用</a>
+                </div>
+                <div class="pricing-card popular">
+                    <h3>专业版</h3>
+                    <div class="price">$29<span>/月</span></div>
+                    <ul>
+                        <li>10,000次API调用/月</li>
+                        <li>高级分子解析</li>
+                        <li>所有可视化选项</li>
+                        <li>分子存储和管理</li>
+                        <li>分析功能</li>
+                        <li>邮件支持</li>
+                    </ul>
+                    <a href="https://github.com/MoKangMedical/pharmaspark" class="btn">立即订阅</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>企业版</h3>
+                    <div class="price">$99<span>/月</span></div>
+                    <ul>
+                        <li>无限API调用</li>
+                        <li>所有功能</li>
+                        <li>自定义部署</li>
+                        <li>优先支持</li>
+                        <li>SLA保障</li>
+                    </ul>
+                    <a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-secondary">联系我们</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tech-stack">
+        <div class="container">
+            <h2>技术栈</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h4>TypeScript</h4>
+                    <p>类型安全</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Vite</h4>
+                    <p>快速构建</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Three.js</h4>
+                    <p>3D图形</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Spark.js</h4>
+                    <p>高斯溅射</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Express.js</h4>
+                    <p>后端框架</p>
+                </div>
+                <div class="tech-item">
+                    <h4>SQLite</h4>
+                    <p>数据存储</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Stripe</h4>
+                    <p>支付集成</p>
+                </div>
+                <div class="tech-item">
+                    <h4>Docker</h4>
+                    <p>容器部署</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PharmaSpark. All rights reserved. | <a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>
