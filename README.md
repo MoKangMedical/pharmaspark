@@ -4,14 +4,16 @@ PharmaSpark — 3D Gaussian Splatting for Pharmaceutical & Biomedical Visualizat
 
 ## 项目简介
 
-PharmaSpark 是一个基于 3D Gaussian Splatting 技术的分子可视化库，专为药物发现和生物医学研究设计。它能够将蛋白质和小分子结构转换为高质量的 3D 高斯溅射数据，实现前所未有的实时渲染效果。
+PharmaSpark 是一个基于 3D Gaussian Splatting 技术的分子可视化平台，专为药物发现和生物医学研究设计。它能够将蛋白质和小分子结构转换为高质量的 3D 高斯溅射数据，实现前所未有的实时渲染效果。
 
 ## 核心功能
 
 ### 分子解析
-- **PDB 解析**: 支持蛋白质数据库（PDB）格式，解析原子坐标、残基、链等信息
-- **SDF 解析**: 支持结构数据文件（SDF）格式，解析小分子结构和键信息
-- **元素数据**: 内置元素周期表数据，包括范德华半径、颜色等属性
+- **PDB 解析**: 支持蛋白质数据库（PDB）格式
+- **SDF 解析**: 支持结构数据文件（SDF）格式
+- **MOL2 解析**: 支持 Tripos MOL2 格式
+- **XYZ 解析**: 支持 XYZ 坐标格式
+- **PQR 解析**: 支持 PQR 格式（含电荷和半径）
 
 ### 3D 高斯溅射转换
 - **原子到溅射**: 将原子坐标转换为 3D 高斯溅射数据
@@ -21,46 +23,64 @@ PharmaSpark 是一个基于 3D Gaussian Splatting 技术的分子可视化库，
 - **口袋高亮**: 高亮显示蛋白质结合口袋
 
 ### 可视化选项
-- **颜色模式**: 支持多种颜色模式
-  - 按元素着色
-  - 按链着色
-  - 按二级结构着色
-  - 按 B 因子着色
-  - 按疏水性着色
-  - 自定义颜色函数
-- **渲染参数**: 可调整半径缩放、透明度等参数
-- **相机控制**: 支持鼠标拖拽、缩放等交互操作
+- **14种可视化模式**: standard, spacefill, surface, cartoon, backbone, wireframe, licorice, sphere, electrostatic, hydrophobicity, b-factor, chain, residue, element
+- **10种颜色方案**: element, chain, residue, secondary, b-factor, hydrophobicity, electrostatic, rainbow, gradient, custom
+- **性能优化**: 批量处理、空间分区、颜色缓存、LOD支持
 
-### 数据导出
-- **PLY 导出**: 将溅射数据导出为 PLY 格式
-- **Blob 生成**: 生成可下载的 Blob 对象
-- **URL 生成**: 生成可分享的下载 URL
+### 用户系统
+- **用户注册和登录**: 支持邮箱注册、密码登录
+- **JWT认证**: 安全的令牌认证
+- **个人中心**: 用户信息管理
+- **API配额管理**: 免费/专业/企业层级
 
-### 药物库支持
-- **LoD 渲染**: 支持多细节层次（Level of Detail）渲染
-- **化合物库**: 支持大规模化合物库的可视化
-- **对接可视化**: 支持分子对接结果的可视化
+### 分子管理
+- **保存分子**: 将分子保存到服务器
+- **分子列表**: 查看所有保存的分子
+- **分子详情**: 查看分子详细信息
+- **分子更新**: 更新分子信息
+- **分子删除**: 删除不需要的分子
+- **公开/私有**: 控制分子可见性
+- **分子标签**: 为分子添加标签
+
+### 分析功能
+- **基础分析**: 原子数、残基数、链数统计
+- **Splat转换分析**: 3D高斯溅射转换结果
+- **表面分析**: 分子表面积和体积估算
+- **分析历史**: 查看历史分析记录
+
+### 导出功能
+- **PLY导出**: 导出为PLY格式
+- **图片导出**: 导出为PNG/JPG图片
+- **视频导出**: 导出为MP4视频
+- **报告导出**: 生成分析报告
 
 ## 技术栈
 
-### 核心技术
+### 前端
 - **TypeScript**: 类型安全的 JavaScript 超集
 - **Vite**: 现代化的前端构建工具
 - **Three.js**: 3D 图形库
 - **Spark.js**: GPU 加速的 3D 高斯溅射渲染器
 
-### 开发工具
-- **Biome**: 代码格式化和检查
-- **Vitest**: 单元测试框架
-- **Git**: 版本控制
+### 后端
+- **Express.js**: Web 应用框架
+- **better-sqlite3**: SQLite 数据库
+- **JWT**: JSON Web Token 认证
+- **bcrypt**: 密码哈希
+- **multer**: 文件上传处理
+
+### 部署
+- **Docker**: 容器化部署
+- **GitHub Actions**: CI/CD 流程
+- **GitHub Pages**: 静态资源托管
 
 ## 快速开始
 
 ### 环境要求
 
 - Node.js 18+
-- npm 或 yarn
-- 现代浏览器（支持 WebGL 2.0）
+- pnpm 8+
+- Docker (可选)
 
 ### 安装步骤
 
@@ -72,355 +92,306 @@ cd pharmaspark
 
 2. **安装依赖**
 ```bash
-npm install
+pnpm install
+cd server && pnpm install && cd ..
 ```
 
-3. **启动开发服务器**
+3. **配置环境变量**
 ```bash
-npm run dev
+cp .env.example .env
+# 编辑 .env 文件，配置必要的环境变量
 ```
 
-4. **访问 Demo 页面**
-打开浏览器访问 `http://localhost:8097`
-
-### 构建库
-
+4. **启动开发服务器**
 ```bash
-# 构建生产版本
-npm run build
+# 启动前端和后端
+pnpm start
 
-# 构建开发版本
-npm run build:dev
-
-# 监听文件变化并自动构建
-npm run build:watch
+# 或分别启动
+pnpm dev      # 前端 (端口 8097)
+pnpm server   # 后端 (端口 8000)
 ```
 
-### 运行测试
+5. **访问应用**
+- 前端: http://localhost:8097
+- 后端API: http://localhost:8000
+- API文档: http://localhost:8000/
 
+### Docker 部署
+
+1. **构建镜像**
 ```bash
-# 运行所有测试
-npm test
+docker build -t pharmaspark .
+```
 
-# 监听文件变化并自动运行测试
-npm run test:watch
+2. **运行容器**
+```bash
+docker run -d -p 8000:8000 --name pharmaspark pharmaspark
+```
+
+3. **使用 Docker Compose**
+```bash
+docker-compose up -d
+```
+
+## API 文档
+
+### 认证端点
+
+#### 用户注册
+```http
+POST /api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "username": "username",
+  "password": "password"
+}
+```
+
+#### 用户登录
+```http
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password"
+}
+```
+
+#### 获取用户信息
+```http
+GET /api/auth/profile
+Authorization: Bearer <token>
+```
+
+### 分子端点
+
+#### 获取分子列表
+```http
+GET /api/molecules
+Authorization: Bearer <token>
+```
+
+#### 获取分子详情
+```http
+GET /api/molecules/:id
+Authorization: Bearer <token>
+```
+
+#### 创建分子
+```http
+POST /api/molecules
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "name": "Molecule Name",
+  "format": "pdb",
+  "data": "PDB file content",
+  "isPublic": false,
+  "tags": ["tag1", "tag2"]
+}
+```
+
+#### 更新分子
+```http
+PUT /api/molecules/:id
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "name": "Updated Name",
+  "isPublic": true,
+  "tags": ["new-tag"]
+}
+```
+
+#### 删除分子
+```http
+DELETE /api/molecules/:id
+Authorization: Bearer <token>
+```
+
+### 分析端点
+
+#### 分析分子
+```http
+POST /api/analysis
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "moleculeId": "molecule-id",
+  "type": "basic",
+  "options": {
+    "colorMode": "element",
+    "radiusScale": 0.5
+  }
+}
+```
+
+#### 获取分析列表
+```http
+GET /api/analysis
+Authorization: Bearer <token>
+```
+
+#### 获取分析详情
+```http
+GET /api/analysis/:id
+Authorization: Bearer <token>
 ```
 
 ## 项目结构
 
 ```
 pharmaspark/
-├── src/                    # 源代码
+├── src/                    # 前端源代码
 │   ├── core/              # 核心功能
-│   │   ├── atom-to-splat.ts    # 原子到溅射转换
-│   │   ├── pdb-parser.ts       # PDB 文件解析
-│   │   ├── sdf-parser.ts       # SDF 文件解析
-│   │   ├── elements.ts         # 元素数据
-│   │   ├── ply-export.ts       # PLY 导出
-│   │   ├── drug-library.ts     # 药物库支持
-│   │   └── docking.ts          # 分子对接可视化
+│   │   ├── atom-to-splat.ts
+│   │   ├── atom-to-splat-optimized.ts
+│   │   ├── visualization-options.ts
+│   │   ├── file-formats.ts
+│   │   ├── pdb-parser.ts
+│   │   ├── sdf-parser.ts
+│   │   ├── elements.ts
+│   │   ├── ply-export.ts
+│   │   ├── drug-library.ts
+│   │   └── docking.ts
 │   ├── renderers/         # 渲染器
-│   │   └── spark-bridge.ts     # Spark.js 集成
+│   │   └── spark-bridge.ts
 │   └── index.ts           # 主入口
+├── server/                # 后端源代码
+│   ├── index.ts           # Express服务器
+│   ├── database.ts        # SQLite数据库
+│   └── package.json       # 后端依赖
+├── tests/                 # 测试文件
+│   └── core/
+│       ├── pdb-parser.test.ts
+│       ├── sdf-parser.test.ts
+│       └── atom-to-splat.test.ts
 ├── docs/                  # 文档
-├── tests/                 # 测试
-├── scripts/               # 脚本
-├── .github/               # GitHub 配置
-├── index.html             # Demo 页面
-├── package.json           # 项目配置
-├── vite.config.ts         # Vite 配置
-├── tsconfig.json          # TypeScript 配置
+├── .github/               # GitHub配置
+│   └── workflows/
+│       └── ci.yml
+├── index.html             # 前端Demo页面
+├── package.json           # 前端依赖
+├── vite.config.ts         # Vite配置
+├── vitest.config.ts       # Vitest配置
+├── Dockerfile             # Docker配置
+├── docker-compose.yml     # Docker Compose配置
+├── .env.example           # 环境变量示例
+├── CHANGELOG.md           # 更新日志
+├── CONTRIBUTING.md        # 贡献指南
 └── README.md              # 项目说明
 ```
 
-## API 文档
+## 订阅层级
 
-### 核心函数
+### 免费用户
+- 1,000 次 API 调用/月
+- 基础分子解析
+- 基础可视化选项
+- 社区支持
 
-#### parsePDB(pdbText: string): Protein
-解析 PDB 格式的蛋白质结构文件。
+### 专业用户 ($29/月)
+- 10,000 次 API 调用/月
+- 高级分子解析
+- 所有可视化选项
+- 分子保存和管理
+- 分析功能
+- 邮件支持
 
-**参数:**
-- `pdbText`: PDB 格式的文本内容
-
-**返回值:**
-- `Protein`: 蛋白质结构对象，包含原子、残基、链等信息
-
-#### parseSDF(sdfText: string): Molecule
-解析 SDF 格式的小分子结构文件。
-
-**参数:**
-- `sdfText`: SDF 格式的文本内容
-
-**返回值:**
-- `Molecule`: 分子结构对象，包含原子、键等信息
-
-#### atomsToSplats(atoms: Atom[], options?: AtomToSplatOptions): SplatData
-将原子数组转换为 3D 高斯溅射数据。
-
-**参数:**
-- `atoms`: 原子数组
-- `options`: 转换选项
-  - `colorMode`: 颜色模式（默认: "element"）
-  - `radiusScale`: 半径缩放（默认: 0.5）
-  - `opacity`: 透明度（默认: 0.9）
-  - `includeHydrogens`: 是否包含氢原子（默认: false）
-  - `customColorFn`: 自定义颜色函数
-
-**返回值:**
-- `SplatData`: 溅射数据对象，包含位置、缩放、旋转、颜色等信息
-
-#### moleculeToSplats(molecule: Molecule, options?: MoleculeToSplatOptions): SplatData
-将分子结构转换为 3D 高斯溅射数据。
-
-**参数:**
-- `molecule`: 分子结构对象
-- `options`: 转换选项
-
-**返回值:**
-- `SplatData`: 溅射数据对象
-
-### 渲染器类
-
-#### PharmaSparkViewer
-3D 高斯溅射查看器类。
-
-**构造函数:**
-```typescript
-new PharmaSparkViewer(options: PharmaSparkViewerOptions)
-```
-
-**选项:**
-- `container`: 容器 HTML 元素
-- `width`: 宽度（默认: 容器宽度）
-- `height`: 高度（默认: 容器高度）
-- `backgroundColor`: 背景颜色（默认: 0x1a1a2e）
-- `cameraDistance`: 相机距离（默认: 50）
-
-**方法:**
-- `addMolecule(name: string, splatData: SplatData)`: 添加分子
-- `removeMolecule(name: string)`: 移除分子
-- `clear()`: 清除所有分子
-- `setCameraTarget(x: number, y: number, z: number)`: 设置相机目标点
-- `setCameraDistance(d: number)`: 设置相机距离
-- `dispose()`: 销毁查看器
-
-## 使用示例
-
-### 基本使用
-
-```typescript
-import { parsePDB, atomsToSplats, PharmaSparkViewer } from 'pharmaspark';
-
-// 创建查看器
-const viewer = new PharmaSparkViewer({
-  container: document.getElementById('viewer'),
-  backgroundColor: 0x1a1a2e,
-});
-
-// 加载 PDB 文件
-const response = await fetch('https://files.rcsb.org/download/1crn.pdb');
-const pdbText = await response.text();
-
-// 解析 PDB
-const protein = parsePDB(pdbText);
-
-// 转换为溅射数据
-const splatData = atomsToSplats(protein.atoms, {
-  colorMode: 'element',
-  radiusScale: 0.5,
-  opacity: 0.9,
-});
-
-// 添加到查看器
-await viewer.addMolecule('1crn', splatData);
-```
-
-### 自定义颜色
-
-```typescript
-import { parsePDB, atomsToSplats, PharmaSparkViewer } from 'pharmaspark';
-
-// 自定义颜色函数
-const customColorFn = (atom) => {
-  // 根据原子类型返回不同颜色
-  switch (atom.element) {
-    case 'C': return [200, 200, 200]; // 灰色
-    case 'N': return [0, 0, 255];     // 蓝色
-    case 'O': return [255, 0, 0];     // 红色
-    case 'S': return [255, 255, 0];   // 黄色
-    default: return [255, 255, 255];  // 白色
-  }
-};
-
-// 使用自定义颜色
-const splatData = atomsToSplats(protein.atoms, {
-  colorMode: 'custom',
-  customColorFn,
-});
-```
-
-### 分子对接可视化
-
-```typescript
-import { parseSDF, moleculeToSplats, interactionLinesToSplats, PharmaSparkViewer } from 'pharmaspark';
-
-// 创建查看器
-const viewer = new PharmaSparkViewer({
-  container: document.getElementById('viewer'),
-});
-
-// 加载蛋白质和配体
-const proteinResponse = await fetch('protein.pdb');
-const proteinText = await proteinResponse.text();
-const protein = parsePDB(proteinText);
-
-const ligandResponse = await fetch('ligand.sdf');
-const ligandText = await ligandResponse.text();
-const ligand = parseSDF(ligandText);
-
-// 转换为溅射数据
-const proteinSplats = atomsToSplats(protein.atoms);
-const ligandSplats = moleculeToSplats(ligand);
-
-// 添加到查看器
-await viewer.addMolecule('protein', proteinSplats);
-await viewer.addMolecule('ligand', ligandSplats);
-
-// 添加相互作用线
-const interactions = [
-  { type: 'hydrogen_bond', atom1: 10, atom2: 25, distance: 2.8 },
-  { type: 'hydrophobic', atom1: 15, atom2: 30, distance: 3.5 },
-];
-
-const interactionSplats = interactionLinesToSplats(interactions, protein.atoms);
-await viewer.addMolecule('interactions', interactionSplats);
-```
-
-## 配置说明
-
-### 环境变量
-
-创建 `.env` 文件并配置以下变量：
-
-```bash
-# 开发环境
-VITE_API_URL=http://localhost:8000
-VITE_DEBUG=true
-
-# 生产环境
-VITE_API_URL=https://api.pharmaspark.com
-VITE_DEBUG=false
-```
-
-### 构建配置
-
-在 `vite.config.ts` 中可以配置：
-
-```typescript
-export default defineConfig({
-  // 开发服务器配置
-  server: {
-    host: '0.0.0.0',
-    port: 8097,
-  },
-  
-  // 构建配置
-  build: {
-    lib: {
-      entry: 'src/index.ts',
-      name: 'PharmaSpark',
-      formats: ['es', 'cjs'],
-    },
-    rollupOptions: {
-      external: ['three', '@sparkjsdev/spark'],
-    },
-  },
-});
-```
+### 企业用户 ($99/月)
+- 无限 API 调用
+- 所有功能
+- 自定义部署
+- 优先支持
+- SLA保障
 
 ## 部署指南
 
-### 开发环境
+### 生产环境部署
 
+1. **配置环境变量**
 ```bash
-# 克隆仓库
-git clone https://github.com/MoKangMedical/pharmaspark.git
-cd pharmaspark
-
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
+export JWT_SECRET=your-production-secret
+export DB_PATH=/var/lib/pharmaspark/pharmaspark.db
+export NODE_ENV=production
 ```
 
-### 生产环境
-
+2. **构建生产版本**
 ```bash
-# 构建生产版本
-npm run build
-
-# 预览构建结果
-npm run preview
-
-# 部署到静态服务器
-# 将 dist 目录部署到 Nginx、Apache 或 CDN
+pnpm build
+cd server && pnpm build && cd ..
 ```
 
-### Docker 部署
-
-```dockerfile
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-## 测试
-
-### 运行测试
-
+3. **启动服务**
 ```bash
-# 运行所有测试
-npm test
-
-# 运行特定测试文件
-npm test -- tests/core/pdb-parser.test.ts
-
-# 生成测试覆盖率报告
-npm test -- --coverage
+cd server && node dist/index.js
 ```
 
-### 编写测试
+### 使用 PM2 部署
 
-```typescript
-import { describe, it, expect } from 'vitest';
-import { parsePDB } from '../src/core/pdb-parser';
-
-describe('PDB Parser', () => {
-  it('should parse PDB file correctly', () => {
-    const pdbText = `
-ATOM      1  N   ALA A   1       1.000   2.000   3.000  1.00  0.00           N
-ATOM      2  CA  ALA A   1       2.000   3.000   4.000  1.00  0.00           C
-    `;
-    
-    const protein = parsePDB(pdbText);
-    
-    expect(protein.atoms).toHaveLength(2);
-    expect(protein.atoms[0].element).toBe('N');
-    expect(protein.atoms[1].element).toBe('C');
-  });
-});
+1. **安装 PM2**
+```bash
+npm install -g pm2
 ```
+
+2. **启动服务**
+```bash
+pm2 start server/dist/index.js --name pharmaspark
+```
+
+3. **设置开机自启**
+```bash
+pm2 startup
+pm2 save
+```
+
+### 使用 Nginx 反向代理
+
+```nginx
+server {
+    listen 80;
+    server_name pharmaspark.example.com;
+
+    location / {
+        root /path/to/pharmaspark/dist;
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api {
+        proxy_pass http://localhost:8000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+## 监控和日志
+
+### 健康检查
+```bash
+curl http://localhost:8000/health
+```
+
+### 日志文件
+- 应用日志: `/var/log/pharmaspark/app.log`
+- 错误日志: `/var/log/pharmaspark/error.log`
+- 访问日志: `/var/log/pharmaspark/access.log`
+
+### 监控指标
+- API 响应时间
+- 错误率
+- 用户活跃度
+- 分子处理数量
 
 ## 贡献指南
 

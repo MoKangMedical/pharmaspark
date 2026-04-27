@@ -1,42 +1,78 @@
-# 使用官方Python镜像作为基础镜像
-FROM python:3.9-slim
+# PharmaSpark Docker Configuration
+# Multi-stage build for production deployment
 
-# 设置工作目录
+# Stage 1: Build frontend
+FROM node:20-alpine AS frontend-builder
+
 WORKDIR /app
 
-# 设置环境变量
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH=/app
+# Copy package files
+COPY package.json pnpm-lock.yaml ./
 
-# 安装系统依赖
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    curl \
-    git \
-    && rm -rf /var/lib/apt/lists/*
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# 复制requirements文件
-COPY requirements.txt .
+# Install dependencies
+RUN pnpm install --frozen-lockfile
 
-# 安装Python依赖
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
-
-# 复制项目代码
+# Copy source code
 COPY . .
 
-# 创建非root用户
-RUN useradd --create-home --shell /bin/bash app && \
-    chown -R app:app /app
-USER app
+# Build frontend
+RUN pnpm build
 
-# 暴露端口
+# Stage 2: Build backend
+FROM node:20-alpine AS backend-builder
+
+WORKDIR /app/server
+
+# Copy package files
+COPY server/package.json server/pnpm-lock.yaml ./
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy server source
+COPY server/ .
+
+# Build server
+RUN pnpm build
+
+# Stage 3: Production
+FROM node:20-alpine AS production
+
+WORKDIR /app
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy built frontend
+COPY --from=frontend-builder /app/dist ./dist
+COPY --from=frontend-builder /app/index.html ./
+
+# Copy built backend
+COPY --from=backend-builder /app/server/dist ./server/dist
+COPY --from=backend-builder /app/server/node_modules ./server/node_modules
+COPY --from=backend-builder /app/server/package.json ./server/
+
+# Create data directory
+RUN mkdir -p /app/data
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=8000
+ENV DB_PATH=/app/data/pharmaspark.db
+ENV JWT_SECRET=${JWT_SECRET}
+
+# Expose ports
 EXPOSE 8000
 
-# 健康检查
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:8000/health || exit 1
 
-# 启动命令
-CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start server
+CMD ["node", "server/dist/index.js"]
