@@ -3,8 +3,8 @@
 
 import * as THREE from "three";
 import { SplatMesh, SparkRenderer } from "@sparkjsdev/spark";
-import { type SplatData } from "./atom-to-splat";
-import { splatsToBlob } from "./ply-export";
+import { type SplatData } from "../core/atom-to-splat";
+import { splatsToBlob } from "../core/ply-export";
 
 export interface PharmaSparkViewerOptions {
   container: HTMLElement;
