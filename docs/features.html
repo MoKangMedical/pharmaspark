@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PharmaSpark Features — AI Drug Discovery Platform</title><meta name="description" content="Explore PharmaSpark's powerful AI-driven features for pharmaceutical research and drug development.">
+<link rel="stylesheet" href="https://mokangmedical.github.io/opc-homepage/shared-design-system.css">
+<style>
+/* Page-specific styles for detailed features */
+.feature-hero { text-align:center; padding:8rem 2rem 4rem; }
+.feature-hero h1 { font-size:clamp(2rem,5vw,3.5rem); font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa,#f472b6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1rem; }
+.feature-hero .subtitle { color:#94a3b8; font-size:1.15rem; max-width:600px; margin:0 auto; line-height:1.7; }
+
+.feature-detail { max-width:1100px; margin:0 auto; padding:4rem 2rem; }
+.feature-block { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; margin-bottom:5rem; }
+.feature-block.reverse { direction:rtl; }
+.feature-block.reverse > * { direction:ltr; }
+.feature-text h2 { font-size:1.8rem; font-weight:700; color:#f1f5f9; margin-bottom:1rem; }
+.feature-text p { color:#94a3b8; line-height:1.8; margin-bottom:1.5rem; }
+.feature-text ul { list-style:none; padding:0; }
+.feature-text ul li { color:#cbd5e1; padding:.5rem 0; padding-left:1.5rem; position:relative; }
+.feature-text ul li::before { content:"✦"; position:absolute; left:0; color:#60a5fa; }
+.feature-visual { background:linear-gradient(135deg,rgba(96,165,250,.08),rgba(167,139,250,.08)); border:1px solid #1e293b; border-radius:16px; padding:2.5rem; text-align:center; min-height:280px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.feature-visual .icon-large { font-size:4rem; margin-bottom:1rem; }
+.feature-visual .visual-label { color:#60a5fa; font-size:.85rem; text-transform:uppercase; letter-spacing:.08rem; margin-bottom:.5rem; }
+.feature-visual .visual-stat { font-size:2.5rem; font-weight:800; color:#f1f5f9; }
+.feature-visual .visual-sub { color:#94a3b8; font-size:.9rem; margin-top:.5rem; }
+
+.capabilities-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-top:2rem; }
+.cap-card { background:rgba(15,23,42,.6); border:1px solid #1e293b; border-radius:12px; padding:2rem; transition:all .3s ease; }
+.cap-card:hover { border-color:#334155; transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,.3); }
+.cap-card h3 { color:#f1f5f9; font-size:1.15rem; margin-bottom:.75rem; }
+.cap-card p { color:#94a3b8; line-height:1.7; font-size:.95rem; }
+.cap-icon { font-size:2rem; margin-bottom:1rem; display:block; }
+
+.integration-section { background:rgba(15,23,42,.4); border-top:1px solid #1e293b; border-bottom:1px solid #1e293b; padding:4rem 2rem; margin:3rem 0; }
+.integration-section h2 { text-align:center; font-size:1.8rem; color:#f1f5f9; margin-bottom:.5rem; }
+.integration-section .section-desc { text-align:center; color:#94a3b8; max-width:600px; margin:0 auto 2.5rem; }
+.integrations-list { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; max-width:900px; margin:0 auto; }
+.int-chip { background:rgba(30,41,59,.8); border:1px solid #334155; border-radius:8px; padding:.6rem 1.2rem; color:#cbd5e1; font-size:.9rem; transition:all .2s; }
+.int-chip:hover { border-color:#60a5fa; color:#60a5fa; }
+
+@media (max-width:768px) {
+  .feature-block { grid-template-columns:1fr; }
+  .feature-block.reverse { direction:ltr; }
+  .capabilities-grid { grid-template-columns:1fr; }
+}
+</style>
+</head><body>
+<nav class="eco-nav"><a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
+<div class="nav-links"><a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a><a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem</a><a href="index.html">Home</a><a href="features.html" style="color:#60a5fa">Features</a><a href="pricing.html">Pricing</a></div></nav>
+
+<section class="feature-hero">
+<div class="badge">Pharma AI</div>
+<h1>Powerful Features</h1>
+<p class="subtitle">From target discovery to market access — PharmaSpark accelerates every stage of the drug development pipeline with cutting-edge AI.</p>
+</section>
+
+<section class="feature-detail">
+
+<!-- Feature 1: Target Discovery -->
+<div class="feature-block fade-up">
+<div class="feature-text">
+<h2>🎯 AI-Driven Target Discovery</h2>
+<p>Identify and validate novel drug targets with unprecedented speed. Our multi-modal AI engine analyzes genomic, proteomic, and clinical data to surface the most promising biological targets.</p>
+<ul>
+<li>Genome-wide association study (GWAS) integration</li>
+<li>Protein-protein interaction network analysis</li>
+<li>Druggability scoring with ML models</li>
+<li>Biomarker correlation mapping</li>
+<li>Literature mining from 35M+ publications</li>
+</ul>
+</div>
+<div class="feature-visual">
+<div class="icon-large">🧬</div>
+<div class="visual-label">Discovery Engine</div>
+<div class="visual-stat">50+</div>
+<div class="visual-sub">Validated drug targets identified</div>
+</div>
+</div>
+
+<!-- Feature 2: Lead Optimization -->
+<div class="feature-block reverse fade-up">
+<div class="feature-text">
+<h2>💊 Molecular Lead Optimization</h2>
+<p>Predict and optimize molecular properties before synthesis. Reduce costly wet-lab iterations by simulating ADMET profiles, binding affinities, and toxicity risks computationally.</p>
+<ul>
+<li>QSAR/QSPR property prediction</li>
+<li>ADMET profile simulation</li>
+<li>Off-target toxicity screening</li>
+<li>Synthetic accessibility scoring</li>
+<li>Multi-objective optimization (potency, selectivity, solubility)</li>
+</ul>
+</div>
+<div class="feature-visual">
+<div class="icon-large">⚗️</div>
+<div class="visual-label">Optimization Pipeline</div>
+<div class="visual-stat">1000+</div>
+<div class="visual-sub">Compounds screened per session</div>
+</div>
+</div>
+
+<!-- Feature 3: Clinical Trial Design -->
+<div class="feature-block fade-up">
+<div class="feature-text">
+<h2>🧪 Clinical Trial Simulation</h2>
+<p>Design smarter clinical trials with AI-powered protocol optimization. Simulate patient populations, endpoints, and adaptive designs to maximize success probability.</p>
+<ul>
+<li>Adaptive trial design simulation</li>
+<li>Patient stratification modeling</li>
+<li>Endpoint selection optimization</li>
+<li>Sample size calculation with Bayesian methods</li>
+<li>Historical trial data benchmarking</li>
+</ul>
+</div>
+<div class="feature-visual">
+<div class="icon-large">📋</div>
+<div class="visual-label">Trial Optimizer</div>
+<div class="visual-stat">30%</div>
+<div class="visual-sub">Average timeline reduction</div>
+</div>
+</div>
+
+<!-- Feature 4: Regulatory Intelligence -->
+<div class="feature-block reverse fade-up">
+<div class="feature-text">
+<h2>📑 Regulatory Path Intelligence</h2>
+<p>Navigate FDA, EMA, and global regulatory landscapes with AI-curated guidance. Get submission strategy recommendations based on precedent analysis and real-time regulatory updates.</p>
+<ul>
+<li>FDA/EMA submission pathway mapping</li>
+<li>Regulatory precedent database (10K+ approvals)</li>
+<li>Accelerated pathway eligibility screening</li>
+<li>Document checklist auto-generation</li>
+<li>Real-time regulatory change monitoring</li>
+</ul>
+</div>
+<div class="feature-visual">
+<div class="icon-large">🏛️</div>
+<div class="visual-label">Regulatory AI</div>
+<div class="visual-stat">10K+</div>
+<div class="visual-sub">Approval precedents analyzed</div>
+</div>
+</div>
+
+<!-- Feature 5: Market & Commercial -->
+<div class="feature-block fade-up">
+<div class="feature-text">
+<h2>📊 Market & Commercial Intelligence</h2>
+<p>Make data-driven commercial decisions with competitive landscape analysis, pricing models, and market access strategies powered by real-world evidence.</p>
+<ul>
+<li>Competitive landscape mapping</li>
+<li>HEOR-based pricing optimization</li>
+<li>Patient population sizing</li>
+<li>Launch sequencing simulation</li>
+<li>Payer coverage prediction models</li>
+</ul>
+</div>
+<div class="feature-visual">
+<div class="icon-large">📈</div>
+<div class="visual-label">Market Intel</div>
+<div class="visual-stat">$2M+</div>
+<div class="visual-sub">Average cost reduction per program</div>
+</div>
+</div>
+
+</section>
+
+<!-- Additional Capabilities -->
+<section class="section">
+<h2 class="section-title">Additional Capabilities</h2>
+<p class="section-desc">Built on a modern, extensible platform designed for enterprise-scale pharmaceutical research</p>
+<div class="capabilities-grid">
+<div class="cap-card fade-up">
+<span class="cap-icon">🔌</span>
+<h3>REST API & SDK</h3>
+<p>Full programmatic access with Python and R SDKs. Integrate PharmaSpark into your existing workflows and pipelines seamlessly.</p>
+</div>
+<div class="cap-card fade-up">
+<span class="cap-icon">🔒</span>
+<h3>Enterprise Security</h3>
+<p>SOC 2 Type II compliant. End-to-end encryption, role-based access control, and audit logging for regulated environments.</p>
+</div>
+<div class="cap-card fade-up">
+<span class="cap-icon">🤖</span>
+<h3>Custom Model Training</h3>
+<p>Fine-tune models on your proprietary datasets. Transfer learning from our foundation models to your specific therapeutic areas.</p>
+</div>
+<div class="cap-card fade-up">
+<span class="cap-icon">☁️</span>
+<h3>Cloud & On-Premise</h3>
+<p>Deploy on our managed cloud or within your own infrastructure. Air-gapped installations available for sensitive programs.</p>
+</div>
+<div class="cap-card fade-up">
+<span class="cap-icon">📊</span>
+<h3>Interactive Dashboards</h3>
+<p>Real-time project dashboards with customizable visualizations. Track pipeline progress, milestones, and key metrics at a glance.</p>
+</div>
+<div class="cap-card fade-up">
+<span class="cap-icon">🔗</span>
+<h3>Data Integrations</h3>
+<p>Connect to ChEMBL, PubChem, ClinicalTrials.gov, patent databases, and electronic health records through pre-built connectors.</p>
+</div>
+</div>
+</section>
+
+<!-- Integrations -->
+<div class="integration-section">
+<h2>Seamless Integrations</h2>
+<p class="section-desc">PharmaSpark connects with the tools and databases your team already uses</p>
+<div class="integrations-list">
+<span class="int-chip">ChEMBL</span>
+<span class="int-chip">PubChem</span>
+<span class="int-chip">UniProt</span>
+<span class="int-chip">ClinicalTrials.gov</span>
+<span class="int-chip">PDB</span>
+<span class="int-chip">DrugBank</span>
+<span class="int-chip">SNOMED CT</span>
+<span class="int-chip">OMOP CDM</span>
+<span class="int-chip">REDCap</span>
+<span class="int-chip">AWS HealthLake</span>
+<span class="int-chip">Snowflake</span>
+<span class="int-chip">Databricks</span>
+</div>
+</div>
+
+<!-- CTA -->
+<section class="section" style="text-align:center">
+<h2 class="section-title">Ready to accelerate your pipeline?</h2>
+<p class="section-desc">Join leading biotech and pharmaceutical companies using PharmaSpark to bring therapies to market faster.</p>
+<div class="btn-group" style="justify-content:center;margin-top:2rem">
+<a href="pricing.html" class="btn btn-primary">View Pricing</a>
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-outline">View on GitHub</a>
+</div>
+</section>
+
+<footer class="footer"><div class="footer-links"><a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a><a href="https://github.com/MoKangMedical">GitHub Organization</a><a href="https://github.com/MoKangMedical/pharmaspark">This Project</a></div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
+
+<!-- OPC Eco Nav -->
+<div style="position:fixed;bottom:20px;right:20px;z-index:99;background:rgba(17,24,39,.95);backdrop-filter:blur(10px);border:1px solid #1e293b;border-radius:12px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:200px">
+<div style="font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05rem;padding:4px 8px;border-bottom:1px solid #1e293b;margin-bottom:6px">OPC Ecosystem</div>
+<a href="https://mokangmedical.github.io/opc-homepage/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏠 OPC Home</a>
+<a href="https://mokangmedical.github.io/DrugMind/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">💊 DrugMind</a>
+<a href="https://mokangmedical.github.io/PharmaSim/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🧪 PharmaSim</a>
+<a href="https://mokangmedical.github.io/medichat-rd/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏥 MediChat-RD</a>
+<a href="https://mokangmedical.github.io/tianyan/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">👁️ Tianyan</a>
+</div>
+
+<script>
+// Scroll reveal animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.feature-block, .cap-card, .card, [class*="feature"], [class*="card"]').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    observer.observe(el);
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+// Navbar background on scroll
+const nav = document.querySelector('nav, .nav, .navbar, header');
+if (nav) {
+    window.addEventListener('scroll', () => {
+        nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)';
+    });
+}
+
+console.log('PharmaSpark Features page loaded');
+</script>
+</body></html>

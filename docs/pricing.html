@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PharmaSpark Pricing — AI Drug Discovery Platform</title><meta name="description" content="Choose the PharmaSpark plan that fits your pharmaceutical research needs. From academic researchers to enterprise pharma.">
+<link rel="stylesheet" href="https://mokangmedical.github.io/opc-homepage/shared-design-system.css">
+<style>
+/* Page-specific pricing styles */
+.pricing-hero { text-align:center; padding:8rem 2rem 4rem; }
+.pricing-hero h1 { font-size:clamp(2rem,5vw,3.5rem); font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa,#f472b6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1rem; }
+.pricing-hero .subtitle { color:#94a3b8; font-size:1.15rem; max-width:620px; margin:0 auto; line-height:1.7; }
+
+/* Toggle */
+.billing-toggle { display:flex; align-items:center; justify-content:center; gap:1rem; margin:2rem 0 0; }
+.billing-toggle span { color:#94a3b8; font-size:.95rem; }
+.billing-toggle span.active { color:#f1f5f9; font-weight:600; }
+.toggle-switch { width:48px; height:26px; background:#1e293b; border-radius:13px; cursor:pointer; position:relative; border:1px solid #334155; transition:all .3s; }
+.toggle-switch::after { content:""; position:absolute; width:20px; height:20px; background:#60a5fa; border-radius:50%; top:2px; left:2px; transition:all .3s; }
+.toggle-switch.annual { background:rgba(96,165,250,.2); }
+.toggle-switch.annual::after { left:24px; }
+.save-badge { background:rgba(34,197,94,.15); color:#4ade80; font-size:.75rem; padding:.2rem .6rem; border-radius:6px; font-weight:600; }
+
+/* Pricing Cards */
+.pricing-section { max-width:1200px; margin:0 auto; padding:3rem 2rem 5rem; }
+.pricing-grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; }
+
+.price-card-full { background:rgba(15,23,42,.6); border:1px solid #1e293b; border-radius:16px; padding:2.5rem 2rem; transition:all .3s ease; position:relative; display:flex; flex-direction:column; }
+.price-card-full:hover { border-color:#334155; transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.3); }
+.price-card-full.featured { border-color:#60a5fa; background:linear-gradient(180deg,rgba(96,165,250,.06),rgba(15,23,42,.6)); }
+.price-card-full.featured:hover { border-color:#60a5fa; box-shadow:0 12px 40px rgba(96,165,250,.15); }
+.price-card-full .price-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#60a5fa,#a78bfa); color:#fff; font-size:.75rem; font-weight:700; padding:.3rem 1rem; border-radius:20px; text-transform:uppercase; letter-spacing:.04rem; }
+.price-card-full .plan-icon { font-size:2.5rem; margin-bottom:1rem; }
+.price-card-full h3 { color:#f1f5f9; font-size:1.3rem; margin-bottom:.5rem; }
+.price-card-full .plan-desc { color:#94a3b8; font-size:.9rem; margin-bottom:1.5rem; line-height:1.5; }
+.price-card-full .price-row { display:flex; align-items:baseline; gap:.3rem; margin-bottom:.25rem; }
+.price-card-full .price-amount { font-size:2.5rem; font-weight:800; color:#f1f5f9; }
+.price-card-full .price-period { color:#64748b; font-size:.9rem; }
+.price-card-full .price-annual { color:#4ade80; font-size:.8rem; margin-bottom:1.5rem; min-height:1.2rem; }
+.price-card-full .divider { height:1px; background:#1e293b; margin:1rem 0 1.5rem; }
+.price-card-full ul { list-style:none; padding:0; margin:0 0 2rem; flex:1; }
+.price-card-full ul li { color:#cbd5e1; padding:.45rem 0; padding-left:1.5rem; position:relative; font-size:.93rem; }
+.price-card-full ul li::before { content:"✓"; position:absolute; left:0; color:#4ade80; font-weight:700; }
+.price-card-full ul li.disabled { color:#475569; }
+.price-card-full ul li.disabled::before { color:#334155; }
+.price-card-full .btn { width:100%; justify-content:center; text-align:center; }
+
+/* Feature comparison */
+.comparison-section { max-width:1100px; margin:0 auto; padding:0 2rem 5rem; }
+.comparison-section h2 { text-align:center; font-size:1.8rem; color:#f1f5f9; margin-bottom:.5rem; }
+.comparison-section .section-desc { text-align:center; color:#94a3b8; margin-bottom:2.5rem; }
+.comparison-table { width:100%; border-collapse:collapse; background:rgba(15,23,42,.4); border:1px solid #1e293b; border-radius:12px; overflow:hidden; }
+.comparison-table thead th { padding:1rem; text-align:center; color:#94a3b8; font-size:.85rem; text-transform:uppercase; letter-spacing:.05rem; border-bottom:1px solid #1e293b; background:rgba(15,23,42,.6); }
+.comparison-table thead th:first-child { text-align:left; }
+.comparison-table thead th.highlight { color:#60a5fa; }
+.comparison-table tbody td { padding:.75rem 1rem; color:#cbd5e1; font-size:.9rem; border-bottom:1px solid rgba(30,41,59,.5); text-align:center; }
+.comparison-table tbody td:first-child { text-align:left; color:#f1f5f9; font-weight:500; }
+.comparison-table tbody tr:last-child td { border-bottom:none; }
+.comparison-table .check { color:#4ade80; font-weight:700; }
+.comparison-table .dash { color:#334155; }
+
+/* FAQ */
+.faq-section { max-width:800px; margin:0 auto; padding:3rem 2rem 5rem; }
+.faq-section h2 { text-align:center; font-size:1.8rem; color:#f1f5f9; margin-bottom:2rem; }
+.faq-item { border:1px solid #1e293b; border-radius:12px; margin-bottom:1rem; overflow:hidden; background:rgba(15,23,42,.4); }
+.faq-q { padding:1.2rem 1.5rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:#f1f5f9; font-weight:600; font-size:1rem; transition:background .2s; }
+.faq-q:hover { background:rgba(30,41,59,.5); }
+.faq-q .arrow { color:#64748b; transition:transform .3s; font-size:1.2rem; }
+.faq-q.open .arrow { transform:rotate(180deg); }
+.faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease,padding .3s; padding:0 1.5rem; color:#94a3b8; line-height:1.7; }
+.faq-a.open { max-height:300px; padding:0 1.5rem 1.2rem; }
+
+@media (max-width:768px) {
+  .pricing-grid-4 { grid-template-columns:1fr; max-width:400px; margin-left:auto; margin-right:auto; }
+  .comparison-table { font-size:.8rem; }
+  .comparison-table thead th, .comparison-table tbody td { padding:.5rem .4rem; }
+}
+</style>
+</head><body>
+<nav class="eco-nav"><a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
+<div class="nav-links"><a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a><a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem</a><a href="index.html">Home</a><a href="features.html">Features</a><a href="pricing.html" style="color:#60a5fa">Pricing</a></div></nav>
+
+<section class="pricing-hero">
+<div class="badge">Pricing</div>
+<h1>Simple, Transparent Pricing</h1>
+<p class="subtitle">Choose the plan that fits your organization. Scale as your pipeline grows. All plans include core AI capabilities.</p>
+<div class="billing-toggle">
+<span id="monthly-label" class="active">Monthly</span>
+<div class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></div>
+<span id="annual-label">Annual</span>
+<span class="save-badge">Save 20%</span>
+</div>
+</section>
+
+<section class="pricing-section">
+<div class="pricing-grid-4">
+
+<!-- Researcher -->
+<div class="price-card-full fade-up">
+<div class="plan-icon">🔬</div>
+<h3>Researcher</h3>
+<p class="plan-desc">For academic researchers and early-stage exploration</p>
+<div class="price-row">
+<span class="price-amount" data-monthly="149" data-annual="119">$149</span>
+<span class="price-period">/mo</span>
+</div>
+<div class="price-annual" data-annual-text="$1,428/yr — save $360">&nbsp;</div>
+<div class="divider"></div>
+<ul>
+<li>5 active projects</li>
+<li>Basic target discovery</li>
+<li>Standard ADMET prediction</li>
+<li>10K compound screenings/mo</li>
+<li>Community support</li>
+<li>CSV data export</li>
+<li class="disabled">API access</li>
+<li class="disabled">Custom models</li>
+</ul>
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-outline">Get Started</a>
+</div>
+
+<!-- Biotech (Featured) -->
+<div class="price-card-full featured fade-up">
+<div class="price-badge">Most Popular</div>
+<div class="plan-icon">🧬</div>
+<h3>Biotech</h3>
+<p class="plan-desc">For growing biotech teams and research labs</p>
+<div class="price-row">
+<span class="price-amount" data-monthly="599" data-annual="479">$599</span>
+<span class="price-period">/mo</span>
+</div>
+<div class="price-annual" data-annual-text="$5,748/yr — save $1,440">&nbsp;</div>
+<div class="divider"></div>
+<ul>
+<li>Unlimited projects</li>
+<li>Full target discovery suite</li>
+<li>Advanced ADMET + toxicity</li>
+<li>100K compound screenings/mo</li>
+<li>Clinical trial simulation</li>
+<li>Priority email support</li>
+<li>REST API access</li>
+<li>Team collaboration (up to 10)</li>
+</ul>
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary">Get Started</a>
+</div>
+
+<!-- Pharma -->
+<div class="price-card-full fade-up">
+<div class="plan-icon">🏭</div>
+<h3>Pharma</h3>
+<p class="plan-desc">For pharmaceutical companies with enterprise needs</p>
+<div class="price-row">
+<span class="price-amount" data-monthly="1999" data-annual="1599">$1,999</span>
+<span class="price-period">/mo</span>
+</div>
+<div class="price-annual" data-annual-text="$19,188/yr — save $4,800">&nbsp;</div>
+<div class="divider"></div>
+<ul>
+<li>Everything in Biotech</li>
+<li>Unlimited screenings</li>
+<li>Custom model training</li>
+<li>Regulatory path intelligence</li>
+<li>Market access modeling</li>
+<li>Dedicated account manager</li>
+<li>SSO & RBAC</li>
+<li>Audit logging & compliance</li>
+</ul>
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-outline">Contact Sales</a>
+</div>
+
+<!-- Enterprise -->
+<div class="price-card-full fade-up">
+<div class="plan-icon">🌐</div>
+<h3>Enterprise</h3>
+<p class="plan-desc">For large-scale deployments with custom requirements</p>
+<div class="price-row">
+<span class="price-amount">Custom</span>
+</div>
+<div class="price-annual">&nbsp;</div>
+<div class="divider"></div>
+<ul>
+<li>Everything in Pharma</li>
+<li>On-premise / air-gapped deploy</li>
+<li>Custom SLA (99.9%+)</li>
+<li>Unlimited team members</li>
+<li>White-label options</li>
+<li>24/7 premium support</li>
+<li>Custom integrations</li>
+<li>Executive business reviews</li>
+</ul>
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-outline">Contact Sales</a>
+</div>
+
+</div>
+</section>
+
+<!-- Feature Comparison -->
+<section class="comparison-section">
+<h2>Feature Comparison</h2>
+<p class="section-desc">A detailed look at what's included in each plan</p>
+<table class="comparison-table fade-up">
+<thead>
+<tr>
+<th>Feature</th>
+<th>Researcher</th>
+<th>Biotech</th>
+<th class="highlight">Pharma</th>
+<th>Enterprise</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Active Projects</td><td>5</td><td>Unlimited</td><td>Unlimited</td><td>Unlimited</td></tr>
+<tr><td>Compound Screenings/mo</td><td>10K</td><td>100K</td><td>Unlimited</td><td>Unlimited</td></tr>
+<tr><td>Target Discovery AI</td><td>Basic</td><td>Full</td><td>Full</td><td>Full + Custom</td></tr>
+<tr><td>ADMET Prediction</td><td>Standard</td><td>Advanced</td><td>Advanced</td><td>Custom Models</td></tr>
+<tr><td>Clinical Trial Simulation</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+<tr><td>Regulatory Intelligence</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+<tr><td>Market Access Modeling</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+<tr><td>Custom Model Training</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+<tr><td>REST API & SDK</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+<tr><td>Team Collaboration</td><td>1 user</td><td>Up to 10</td><td>Up to 50</td><td>Unlimited</td></tr>
+<tr><td>SSO / RBAC</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+<tr><td>Audit Logging</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+<tr><td>On-Premise Deployment</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+<tr><td>SLA Guarantee</td><td class="dash">—</td><td>99%</td><td>99.5%</td><td>99.9%+</td></tr>
+<tr><td>Support</td><td>Community</td><td>Priority Email</td><td>Dedicated AM</td><td>24/7 Premium</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item fade-up">
+<div class="faq-q" onclick="toggleFaq(this)">Can I switch plans at any time? <span class="arrow">▾</span></div>
+<div class="faq-a">Yes! You can upgrade or downgrade your plan at any time. When upgrading, you'll be prorated for the remainder of your billing cycle. Downgrade changes take effect at the start of your next billing period.</div>
+</div>
+
+<div class="faq-item fade-up">
+<div class="faq-q" onclick="toggleFaq(this)">Is there a free trial available? <span class="arrow">▾</span></div>
+<div class="faq-a">We offer a 14-day free trial of the Biotech plan with no credit card required. This gives you full access to explore the platform's capabilities before committing.</div>
+</div>
+
+<div class="faq-item fade-up">
+<div class="faq-q" onclick="toggleFaq(this)">What kind of support is included? <span class="arrow">▾</span></div>
+<div class="faq-a">Researcher plans include community forum support. Biotech plans get priority email support with 24-hour response times. Pharma plans include a dedicated account manager. Enterprise plans get 24/7 premium support with guaranteed response times.</div>
+</div>
+
+<div class="faq-item fade-up">
+<div class="faq-q" onclick="toggleFaq(this)">How is data security handled? <span class="arrow">▾</span></div>
+<div class="faq-a">PharmaSpark is SOC 2 Type II certified. All data is encrypted at rest (AES-256) and in transit (TLS 1.3). Pharma and Enterprise plans add SSO, RBAC, audit logging, and the option for on-premise or air-gapped deployment.</div>
+</div>
+
+<div class="faq-item fade-up">
+<div class="faq-q" onclick="toggleFaq(this)">Can I use PharmaSpark for commercial drug development? <span class="arrow">▾</span></div>
+<div class="faq-a">Absolutely. All plans allow commercial use. The Biotech plan is suitable for small commercial teams, while Pharma and Enterprise plans are designed for full-scale commercial pharmaceutical operations with compliance requirements.</div>
+</div>
+
+<div class="faq-item fade-up">
+<div class="faq-q" onclick="toggleFaq(this)">Do you offer academic discounts? <span class="arrow">▾</span></div>
+<div class="faq-a">Yes, we offer a 40% discount on all plans for verified academic institutions and non-profit research organizations. Contact our sales team with your institution credentials to apply.</div>
+</div>
+
+</section>
+
+<!-- CTA -->
+<section class="section" style="text-align:center">
+<h2 class="section-title">Start accelerating your drug discovery today</h2>
+<p class="section-desc">14-day free trial. No credit card required. Cancel anytime.</p>
+<div class="btn-group" style="justify-content:center;margin-top:2rem">
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary">Start Free Trial</a>
+<a href="features.html" class="btn btn-outline">Explore Features</a>
+</div>
+</section>
+
+<footer class="footer"><div class="footer-links"><a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a><a href="https://github.com/MoKangMedical">GitHub Organization</a><a href="https://github.com/MoKangMedical/pharmaspark">This Project</a></div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
+
+<!-- OPC Eco Nav -->
+<div style="position:fixed;bottom:20px;right:20px;z-index:99;background:rgba(17,24,39,.95);backdrop-filter:blur(10px);border:1px solid #1e293b;border-radius:12px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:200px">
+<div style="font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05rem;padding:4px 8px;border-bottom:1px solid #1e293b;margin-bottom:6px">OPC Ecosystem</div>
+<a href="https://mokangmedical.github.io/opc-homepage/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏠 OPC Home</a>
+<a href="https://mokangmedical.github.io/DrugMind/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">💊 DrugMind</a>
+<a href="https://mokangmedical.github.io/PharmaSim/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🧪 PharmaSim</a>
+<a href="https://mokangmedical.github.io/medichat-rd/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏥 MediChat-RD</a>
+<a href="https://mokangmedical.github.io/tianyan/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">👁️ Tianyan</a>
+</div>
+
+<script>
+// Billing toggle
+let isAnnual = false;
+function toggleBilling() {
+    isAnnual = !isAnnual;
+    const toggle = document.getElementById('billing-toggle');
+    const monthlyLabel = document.getElementById('monthly-label');
+    const annualLabel = document.getElementById('annual-label');
+    toggle.classList.toggle('annual', isAnnual);
+    monthlyLabel.classList.toggle('active', !isAnnual);
+    annualLabel.classList.toggle('active', isAnnual);
+
+    document.querySelectorAll('.price-amount[data-monthly]').forEach(el => {
+        const val = isAnnual ? el.dataset.annual : el.dataset.monthly;
+        el.textContent = '$' + Number(val).toLocaleString();
+    });
+    document.querySelectorAll('.price-annual[data-annual-text]').forEach(el => {
+        el.textContent = isAnnual ? el.dataset['annual-text'] : '\u00a0';
+    });
+}
+
+// FAQ toggle
+function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const isOpen = el.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-q').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
+    if (!isOpen) { el.classList.add('open'); answer.classList.add('open'); }
+}
+
+// Scroll reveal animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.price-card-full, .faq-item, .card, [class*="card"]').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    observer.observe(el);
+});
+
+// Navbar background on scroll
+const nav = document.querySelector('nav, .nav, .navbar, header');
+if (nav) {
+    window.addEventListener('scroll', () => {
+        nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)';
+    });
+}
+
+console.log('PharmaSpark Pricing page loaded');
+</script>
+</body></html>
