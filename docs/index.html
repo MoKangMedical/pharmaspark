@@ -1,355 +1,185 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>PharmaSpark — AI-Powered Drug Discovery Platform</title>
-<meta name="description" content="PharmaSpark: 3D molecular visualization, AI-driven target discovery, lead optimization, and clinical trial intelligence. Accelerate drug development from molecule to market.">
-<meta name="keywords" content="drug discovery, AI, molecular visualization, 3D Gaussian Splatting, pharma, biotech, lead optimization, clinical trials">
-<meta property="og:title" content="PharmaSpark — AI-Powered Drug Discovery Platform">
-<meta property="og:description" content="3D molecular visualization and AI-driven drug development platform">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PharmaSpark — Pharmaceutical Innovation Intelligence | MoKangMedical</title>
+<meta name="description" content="Track pharmaceutical innovation trends, emerging therapeutics, and competitive intelligence with AI-powered market analysis and patent monitoring.">
+<link rel="canonical" href="https://mokangmedical.github.io/pharmaspark/">
+<meta property="og:title" content="PharmaSpark - Pharmaceutical Innovation Intelligence">
+<meta property="og:description" content="Track pharmaceutical innovation trends, emerging therapeutics, and competitive intelligence with AI-powered market analysis and patent monitoring.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://mokangmedical.github.io/pharmaspark/">
+<meta name="robots" content="index, follow">
 <link rel="stylesheet" href="https://mokangmedical.github.io/opc-homepage/shared-design-system.css">
 <style>
-/* PharmaSpark Custom Theme */
-:root {
-  --ps-primary: #06b6d4;
-  --ps-primary-glow: rgba(6,182,212,0.3);
-  --ps-accent: #8b5cf6;
-  --ps-gradient: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
-}
-
-/* Hero Particles Canvas */
-#hero-canvas { position: absolute; inset: 0; z-index: 0; opacity: 0.4; }
-
-/* Pipeline Section */
-.pipeline { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; padding: 2rem 0; }
-.pipeline-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 1.5rem; position: relative; }
-.pipeline-step .step-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 0.75rem; border: 1px solid var(--border); transition: all 0.3s; }
-.pipeline-step:hover .step-icon { border-color: var(--ps-primary); box-shadow: 0 0 20px var(--ps-primary-glow); transform: scale(1.1); }
-.pipeline-step h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
-.pipeline-step p { font-size: 0.8rem; color: var(--text-muted); }
-.pipeline-arrow { color: var(--text-muted); font-size: 1.5rem; padding: 0 0.5rem; }
-
-/* Showcase Cards */
-.showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
-.showcase-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.3s; }
-.showcase-card:hover { border-color: var(--ps-primary); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
-.showcase-card .card-visual { height: 200px; background: linear-gradient(135deg, #0a1628, #1a2d4a); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.showcase-card .card-visual .mol-preview { font-size: 4rem; opacity: 0.6; }
-.showcase-card .card-visual .visual-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 60%, var(--bg-card)); }
-.showcase-card .card-body { padding: 1.5rem; }
-.showcase-card .card-body h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-.showcase-card .card-body p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
-.showcase-card .card-body .card-tags { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
-.showcase-card .card-body .card-tags span { background: var(--primary-light); border: 1px solid var(--border); padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; color: var(--text-muted); }
-
-/* Tech Badges */
-.tech-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1rem; }
-.tech-badge { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.85rem; font-weight: 500; transition: all 0.3s; }
-.tech-badge:hover { border-color: var(--ps-primary); color: var(--ps-primary); }
-
-/* Testimonials */
-.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-.testimonial-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; position: relative; }
-.testimonial-card::before { content: '\201C'; font-size: 4rem; color: var(--ps-primary); opacity: 0.3; position: absolute; top: 0.5rem; left: 1.5rem; line-height: 1; }
-.testimonial-card .quote { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
-.testimonial-card .author { display: flex; align-items: center; gap: 0.75rem; }
-.testimonial-card .author .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
-.testimonial-card .author .info .name { font-weight: 600; font-size: 0.9rem; }
-.testimonial-card .author .info .role { font-size: 0.8rem; color: var(--text-muted); }
-
-/* CTA Banner */
-.cta-banner { background: linear-gradient(135deg, #0a1628 0%, #1a2d4a 50%, #0a1628 100%); border: 1px solid var(--ps-primary); border-radius: var(--radius); padding: 3rem; text-align: center; position: relative; overflow: hidden; }
-.cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, var(--ps-primary-glow) 0%, transparent 60%); }
-.cta-banner > * { position: relative; z-index: 1; }
-.cta-banner h2 { font-size: 2rem; margin-bottom: 1rem; }
-.cta-banner p { color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;padding-top:56px!important}
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+.hero{padding:6rem 0 4rem;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,#e879f911 0%,transparent 50%),radial-gradient(circle at 70% 50%,#e879f908 0%,transparent 50%)}
+.hero .badge{display:inline-block;padding:0.4rem 1.2rem;border-radius:20px;background:#e879f922;color:#e879f9;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem}
+.hero h1{font-size:3.5rem;font-weight:900;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,#fff 0%,#e879f9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:#94a3b8;max-width:700px;margin:0 auto 2rem}
+.btn-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{padding:0.75rem 1.5rem;border-radius:10px;font-weight:600;text-decoration:none;transition:all 0.3s;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:#e879f9;color:#fff;box-shadow:0 4px 20px #e879f944}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px #e879f966}
+.btn-outline{background:transparent;color:#e2e8f0;border:1px solid rgba(255,255,255,0.15)}
+.btn-outline:hover{border-color:#e879f9;color:#e879f9}
+.section{padding:5rem 0}
+.section-title{font-size:2.2rem;font-weight:800;text-align:center;margin-bottom:0.5rem;color:#fff}
+.section-desc{text-align:center;color:#94a3b8;margin-bottom:3rem;max-width:600px;margin-left:auto;margin-right:auto}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.feature-card{background:#12122a;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:2rem;transition:all 0.3s}
+.feature-card:hover{border-color:#e879f944;transform:translateY(-4px);box-shadow:0 12px 40px #e879f915}
+.feature-icon{width:48px;height:48px;border-radius:12px;background:#e879f915;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+.feature-card h3{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem}
+.feature-card p{color:#94a3b8;font-size:0.9rem}
+.stats{display:flex;justify-content:center;gap:3rem;margin:3rem 0;flex-wrap:wrap}
+.stat{text-align:center}
+.stat .num{font-size:2.5rem;font-weight:900;color:#e879f9}
+.stat .lbl{font-size:0.85rem;color:#94a3b8}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.pricing-card{background:#12122a;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:2rem;text-align:center;transition:all 0.3s;position:relative}
+.pricing-card.featured{border-color:#e879f9;box-shadow:0 0 40px #e879f922}
+.pricing-card.featured::before{content:'POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#e879f9;color:#fff;padding:0.25rem 1rem;border-radius:20px;font-size:0.75rem;font-weight:700}
+.pricing-name{font-size:1.25rem;font-weight:700;margin-bottom:0.5rem}
+.pricing-price{font-size:3rem;font-weight:900;color:#e879f9}
+.pricing-features{list-style:none;margin:1.5rem 0;text-align:left}
+.pricing-features li{padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.9rem;color:#94a3b8}
+.pricing-features li::before{content:'✓ ';color:#34d399;font-weight:700}
+.cta{padding:5rem 0;text-align:center;background:linear-gradient(180deg,transparent,#e879f908)}
+.cta h2{font-size:2.5rem;font-weight:900;margin-bottom:1rem;color:#fff}
+.cta p{color:#94a3b8;margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+.footer{padding:3rem 0;border-top:1px solid rgba(255,255,255,0.06);text-align:center}
+.footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1rem;flex-wrap:wrap}
+.footer-links a{color:#94a3b8;text-decoration:none;font-size:0.9rem}
+.footer-links a:hover{color:#e879f9}
+.fade-up{opacity:0;transform:translateY(20px);transition:all 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.hero h1{font-size:2.2rem}.stats{gap:1.5rem}.features-grid{grid-template-columns:1fr}}
 </style>
-<meta name="theme-color" content="#0a0a0f">
-<style>
-@media(max-width:768px){
-  .nav-links,.nl,.links{display:none!important}
-  .features-grid,.fg,.p-grid,.pricing-grid,.pg{grid-template-columns:1fr!important}
-  .stats,.row{grid-template-columns:1fr!important}
-  .hero h1{font-size:2rem!important}
-  .container{padding:0 16px!important}
-}
-@media(max-width:480px){
-  .hero{padding:4rem 1rem!important}
-  .section,.sec{padding:2rem 1rem!important}
-}
-</style>
-</head><body>
-<nav class="eco-nav"><a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
-<div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="demo.html">Demo</a><a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a></div></nav>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PharmaSpark","description":"Track pharmaceutical innovation trends, emerging therapeutics, and competitive intelligence with AI-powered market analysis and patent monitoring.","url":"https://mokangmedical.github.io/pharmaspark/","provider":{"@type":"Organization","name":"MoKangMedical"}}
+</script>
+</head>
+<body>
+<nav id="opc-nav" style="position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(10,10,30,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(99,102,241,0.2);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <a href="https://mokangmedical.github.io/opc-homepage/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-size:15px">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="url(#ng1)" stroke-width="2.5"/><path d="M10 16h12M16 10v12" stroke="url(#ng1)" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="ng1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#818cf8"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs></svg>
+    <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent">MoKangMedical</span>
+  </a>
+  <div style="display:flex;gap:6px;align-items:center">
+    <a href="https://mokangmedical.github.io/opc-homepage/" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:8px">生态首页</a>
+    <a href="https://github.com/MoKangMedical" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:8px">GitHub</a>
+    <a href="https://mokangmedical.github.io/opc-alliance/" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:6px 16px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none">OPC Hub</a>
+  </div>
+</nav>
 
-<!-- Hero -->
-<section class="hero" style="min-height:70vh;display:flex;align-items:center;justify-content:center;">
-<canvas id="hero-canvas"></canvas>
-<div style="position:relative;z-index:1;max-width:800px;margin:0 auto;">
-<div class="badge">3D Molecular Intelligence</div>
-<h1>PharmaSpark</h1>
-<p class="subtitle">AI-powered drug discovery platform with real-time 3D molecular visualization. From target identification to clinical trial design — accelerate every step of your pipeline.</p>
-<div class="btn-group" style="margin-bottom:2rem;">
-<a href="demo.html" class="btn btn-primary">Launch Interactive Demo</a>
-<a href="features.html" class="btn btn-outline">Explore Features</a>
-</div>
-<div class="stats" style="max-width:600px;margin:0 auto;">
-<div><div class="stat-num">2,847</div><div class="stat-label">Validated Targets</div></div>
-<div><div class="stat-num">10M+</div><div class="stat-label">Compounds/Hour</div></div>
-<div><div class="stat-num">91.3%</div><div class="stat-label">Prediction AUC</div></div>
-<div><div class="stat-num">70%</div><div class="stat-label">Time Reduction</div></div>
-</div>
-</div>
+<section class="hero">
+  <div class="container">
+    <div class="badge">MoKangMedical</div>
+    <h1>PharmaSpark</h1>
+    <p>Pharmaceutical Innovation Intelligence</p>
+    <p style="font-size:1rem;color:#94a3b8;max-width:600px;margin:0 auto 2rem">Track pharmaceutical innovation trends, emerging therapeutics, and competitive intelligence with AI-powered market analysis and patent monitoring.</p>
+    <div class="btn-group">
+      <a href="#features" class="btn btn-primary">Explore Features</a>
+      <a href="#pricing" class="btn btn-outline">View Pricing</a>
+      <a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-outline" target="_blank">GitHub</a>
+    </div>
+  </div>
 </section>
 
-<!-- Pipeline -->
-<section class="section">
-<h2 class="section-title">End-to-End Discovery Pipeline</h2>
-<p class="section-desc">One platform spanning the entire drug development lifecycle</p>
-<div class="pipeline">
-<div class="pipeline-step fade-up"><div class="step-icon" style="background:rgba(6,182,212,0.1);">🎯</div><h4>Target Discovery</h4><p>Multi-omics analysis</p></div>
-<div class="pipeline-arrow">&#8594;</div>
-<div class="pipeline-step fade-up"><div class="step-icon" style="background:rgba(139,92,246,0.1);">🧬</div><h4>Molecular Design</h4><p>Generative chemistry</p></div>
-<div class="pipeline-arrow">&#8594;</div>
-<div class="pipeline-step fade-up"><div class="step-icon" style="background:rgba(16,185,129,0.1);">🔬</div><h4>Lead Optimization</h4><p>Multi-objective ADMET</p></div>
-<div class="pipeline-arrow">&#8594;</div>
-<div class="pipeline-step fade-up"><div class="step-icon" style="background:rgba(245,158,11,0.1);">🧪</div><h4>Preclinical</h4><p>PBPK & safety modeling</p></div>
-<div class="pipeline-arrow">&#8594;</div>
-<div class="pipeline-step fade-up"><div class="step-icon" style="background:rgba(239,68,68,0.1);">📊</div><h4>Clinical Trials</h4><p>Adaptive design AI</p></div>
-<div class="pipeline-arrow">&#8594;</div>
-<div class="pipeline-step fade-up"><div class="step-icon" style="background:rgba(59,130,246,0.1);">📋</div><h4>Regulatory</h4><p>60+ authorities</p></div>
+<section class="section" id="features">
+  <div class="container">
+    <h2 class="section-title">Core Capabilities</h2>
+    <p class="section-desc">Powerful features designed for modern biomedical research</p>
+    <div class="features-grid">
+<div class="feature-card fade-up">
+  <div class="feature-icon">🧬</div>
+  <h3>Pipeline Tracker</h3>
+  <p>Monitor 5,000+ drug pipelines across therapeutic areas with stage updates</p>
 </div>
+<div class="feature-card fade-up">
+  <div class="feature-icon">⚡</div>
+  <h3>Patent Intelligence</h3>
+  <p>AI-powered patent landscape analysis and freedom-to-operate assessments</p>
+</div>
+<div class="feature-card fade-up">
+  <div class="feature-icon">🔬</div>
+  <h3>Market Forecasting</h3>
+  <p>Revenue and market share predictions using ensemble models</p>
+</div>
+<div class="feature-card fade-up">
+  <div class="feature-icon">📊</div>
+  <h3>Competitor Analysis</h3>
+  <p>Track competitor activities, deals, and strategic moves in real-time</p>
+</div>
+<div class="feature-card fade-up">
+  <div class="feature-icon">🛡️</div>
+  <h3>Deal Database</h3>
+  <p>Comprehensive database of pharma partnerships, licensing, and M&A deals</p>
+</div>
+<div class="feature-card fade-up">
+  <div class="feature-icon">📚</div>
+  <h3>Custom Reports</h3>
+  <p>Auto-generated reports with executive summaries and data visualizations</p>
+</div>
+
+    </div>
+  </div>
 </section>
 
-<!-- Showcase -->
-<section class="section">
-<h2 class="section-title">Platform Showcase</h2>
-<p class="section-desc">Explore the capabilities that set PharmaSpark apart</p>
-<div class="showcase-grid">
-<div class="showcase-card fade-up">
-<div class="card-visual"><div class="mol-preview">⚛</div><div class="visual-overlay"></div></div>
-<div class="card-body">
-<h3>3D Molecular Viewer</h3>
-<p>Real-time Gaussian Splatting visualization of protein structures, drug-target interactions, and binding pockets. Supports PDB, SDF, and MOL2 formats with interactive rotation, zoom, and atom-level inspection.</p>
-<div class="card-tags"><span>3D Visualization</span><span>PDB/SDF</span><span>Real-time</span></div>
+<section class="section" id="pricing" style="background:linear-gradient(180deg,transparent,rgba(255,255,255,0.02))">
+  <div class="container">
+    <h2 class="section-title">Pricing</h2>
+    <p class="section-desc">Choose the plan that fits your needs</p>
+    <div class="pricing-grid">
+<div class="pricing-card fade-up">
+  <div class="pricing-name">Starter</div>
+  <div class="pricing-price">$0</div>
+  <ul class="pricing-features"><li>Basic pipeline data</li><li>10 reports/month</li><li>Community support</li></ul>
+  <a href="#" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
 </div>
+<div class="pricing-card featured fade-up">
+  <div class="pricing-name">Professional</div>
+  <div class="pricing-price">$499/mo</div>
+  <ul class="pricing-features"><li>Full pipeline</li><li>Unlimited reports</li><li>API access</li><li>Priority support</li></ul>
+  <a href="#" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a>
 </div>
-<div class="showcase-card fade-up">
-<div class="card-visual"><div class="mol-preview">🤖</div><div class="visual-overlay"></div></div>
-<div class="card-body">
-<h3>AI Target Engine</h3>
-<p>Knowledge graph connecting 2.5M biomedical entities from 35M publications. Integrates GWAS, proteomics, and pathway data to identify and rank novel drug targets with druggability scores.</p>
-<div class="card-tags"><span>Knowledge Graph</span><span>Multi-omics</span><span>GWAS</span></div>
+<div class="pricing-card fade-up">
+  <div class="pricing-name">Enterprise</div>
+  <div class="pricing-price">Custom</div>
+  <ul class="pricing-features"><li>Custom data feeds</li><li>On-premise</li><li>Consulting</li><li>SLA</li></ul>
+  <a href="#" class="btn btn-outline" style="width:100%;justify-content:center">Get Started</a>
 </div>
-</div>
-<div class="showcase-card fade-up">
-<div class="card-visual"><div class="mol-preview">💊</div><div class="visual-overlay"></div></div>
-<div class="card-body">
-<h3>Generative Chemistry</h3>
-<p>Diffusion-based molecular generator explores chemical space beyond traditional medicinal chemistry. Simultaneously optimizes binding affinity, selectivity, synthetic accessibility, and ADMET properties.</p>
-<div class="card-tags"><span>Diffusion Models</span><span>MPO</span><span>Pareto Front</span></div>
-</div>
-</div>
-<div class="showcase-card fade-up">
-<div class="card-visual"><div class="mol-preview">📊</div><div class="visual-overlay"></div></div>
-<div class="card-body">
-<h3>Clinical Trial Simulator</h3>
-<p>Analyzes 450K+ historical trials to optimize protocol design. Bayesian dose-finding, adaptive enrichment, and platform trial architectures modeled via Monte Carlo simulation.</p>
-<div class="card-tags"><span>Adaptive Design</span><span>Monte Carlo</span><span>450K+ Trials</span></div>
-</div>
-</div>
-</div>
+
+    </div>
+  </div>
 </section>
 
-<!-- Technology -->
-<section class="section">
-<h2 class="section-title">Technology Foundation</h2>
-<p class="section-desc">Built on cutting-edge AI frameworks and pharmaceutical science standards</p>
-<div class="tech-badges">
-<div class="tech-badge">Graph Neural Networks</div>
-<div class="tech-badge">Diffusion Models</div>
-<div class="tech-badge">Transformer Architecture</div>
-<div class="tech-badge">3D Gaussian Splatting</div>
-<div class="tech-badge">PBPK Modeling</div>
-<div class="tech-badge">Knowledge Graphs</div>
-<div class="tech-badge">Bayesian Optimization</div>
-<div class="tech-badge">Federated Learning</div>
-<div class="tech-badge">ICH Standards</div>
-<div class="tech-badge">Three.js / WebGL</div>
-</div>
+<section class="cta">
+  <div class="container">
+    <h2>Ready to Get Started?</h2>
+    <p>Join thousands of researchers using PharmaSpark to accelerate their work</p>
+    <div class="btn-group">
+      <a href="#" class="btn btn-primary">Start Free Trial</a>
+      <a href="https://mokangmedical.github.io/opc-homepage/" class="btn btn-outline">Explore Ecosystem</a>
+    </div>
+  </div>
 </section>
 
-<!-- Pricing Preview -->
-<section class="section">
-<h2 class="section-title">Simple, Transparent Pricing</h2>
-<p class="section-desc">Plans designed for every stage of pharmaceutical innovation</p>
-<div class="pricing-grid">
-<div class="price-card fade-up">
-<h3>Researcher</h3>
-<div class="price-tag">$149<span>/mo</span></div>
-<ul>
-<li>5 concurrent projects</li>
-<li>1M compound library</li>
-<li>Basic ADMET prediction</li>
-<li>Community support</li>
-</ul>
-<a href="pricing.html" class="btn btn-outline" style="width:100%;justify-content:center;">Learn More</a>
-</div>
-<div class="price-card featured fade-up">
-<div class="price-badge">Most Popular</div>
-<h3>Biotech</h3>
-<div class="price-tag">$599<span>/mo</span></div>
-<ul>
-<li>Unlimited projects</li>
-<li>100M+ compound library</li>
-<li>Full ADMET + PBPK</li>
-<li>Clinical trial optimizer</li>
-<li>API access</li>
-</ul>
-<a href="pricing.html" class="btn btn-primary" style="width:100%;justify-content:center;">Get Started</a>
-</div>
-<div class="price-card fade-up">
-<h3>Enterprise</h3>
-<div class="price-tag">$1,999<span>/mo</span></div>
-<ul>
-<li>Custom model training</li>
-<li>GxP-validated environment</li>
-<li>On-premise deployment</li>
-<li>Regulatory dossier builder</li>
-<li>Dedicated support</li>
-</ul>
-<a href="pricing.html" class="btn btn-outline" style="width:100%;justify-content:center;">Contact Sales</a>
-</div>
-</div>
-</section>
-
-<!-- Testimonials -->
-<section class="section">
-<h2 class="section-title">Trusted by Research Teams</h2>
-<p class="section-desc">What scientists and drug developers say about PharmaSpark</p>
-<div class="testimonial-grid">
-<div class="testimonial-card fade-up">
-<div class="quote">PharmaSpark's target discovery engine identified 3 novel targets for our rare disease program that we had completely missed with manual literature review. The knowledge graph integration is genuinely impressive.</div>
-<div class="author"><div class="avatar">JC</div><div class="info"><div class="name">Dr. James Chen</div><div class="role">VP Research, BioNex Therapeutics</div></div></div>
-</div>
-<div class="testimonial-card fade-up">
-<div class="quote">We reduced our lead optimization cycle from 18 months to 5 months. The multi-objective Pareto analysis saved us from pursuing compounds that would have failed in ADMET profiling downstream.</div>
-<div class="author"><div class="avatar">SM</div><div class="info"><div class="name">Dr. Sarah Mitchell</div><div class="role">Head of Medicinal Chemistry, Vertex Labs</div></div></div>
-</div>
-<div class="testimonial-card fade-up">
-<div class="quote">The clinical trial simulator predicted our enrollment challenges 6 months before they happened. We redesigned the protocol and saved an estimated $4M in trial costs.</div>
-<div class="author"><div class="avatar">RK</div><div class="info"><div class="name">Dr. Raj Kapoor</div><div class="role">Clinical Operations Director, NovaPharma</div></div></div>
-</div>
-</div>
-</section>
-
-<!-- CTA -->
-<section class="section">
-<div class="cta-banner fade-up">
-<h2>Accelerate Your Drug Discovery Pipeline</h2>
-<p>Join 200+ research teams using PharmaSpark to bring therapies from bench to bedside faster.</p>
-<div class="btn-group">
-<a href="demo.html" class="btn btn-primary">Try Interactive Demo</a>
-<a href="pricing.html" class="btn btn-outline">View Pricing</a>
-</div>
-</div>
-</section>
-
-<footer class="footer"><div class="footer-links">
-<a href="https://mokangmedical.github.io/opc-homepage/">OPC Ecosystem</a>
-<a href="https://github.com/MoKangMedical/pharmaspark">GitHub Repository</a>
-<a href="about.html">About</a>
-<a href="features.html">Features</a>
-<a href="pricing.html">Pricing</a>
-<a href="demo.html">Demo</a>
-</div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
-
-<!-- OPC Eco Nav -->
-<div style="position:fixed;bottom:20px;right:20px;z-index:99;background:rgba(17,24,39,.95);backdrop-filter:blur(10px);border:1px solid #1e293b;border-radius:12px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:200px">
-<div style="font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05rem;padding:4px 8px;border-bottom:1px solid #1e293b;margin-bottom:6px">OPC Ecosystem</div>
-<a href="https://mokangmedical.github.io/opc-homepage/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">OPC Home</a>
-<a href="https://mokangmedical.github.io/DrugMind/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">DrugMind</a>
-<a href="https://mokangmedical.github.io/PharmaSim/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">PharmaSim</a>
-<a href="https://mokangmedical.github.io/medichat-rd/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">MediChat-RD</a>
-<a href="https://mokangmedical.github.io/tianyan/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">Tianyan</a>
-</div>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem</a>
+      <a href="https://github.com/MoKangMedical">GitHub</a>
+      <a href="https://mokangmedical.github.io/opc-alliance/">OPC Alliance</a>
+    </div>
+    <p style="color:#94a3b8;font-size:0.85rem">&copy; 2025 MoKangMedical. All rights reserved.</p>
+  </div>
+</footer>
 
 <script>
-// Hero particle animation
-(function() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h, particles = [];
-  function resize() { w = canvas.width = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight; }
-  window.addEventListener('resize', resize); resize();
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * w; this.y = Math.random() * h;
-      this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5;
-      this.r = Math.random() * 2 + 0.5; this.alpha = Math.random() * 0.5 + 0.1;
-      this.color = ['#06b6d4','#3b82f6','#8b5cf6'][Math.floor(Math.random()*3)];
-    }
-    update() {
-      this.x += this.vx; this.y += this.vy;
-      if (this.x < 0 || this.x > w) this.vx *= -1;
-      if (this.y < 0 || this.y > h) this.vy *= -1;
-    }
-    draw() {
-      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
-      ctx.fillStyle = this.color; ctx.globalAlpha = this.alpha; ctx.fill();
-    }
-  }
-  for (let i = 0; i < 80; i++) particles.push(new Particle());
-  function animate() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => { p.update(); p.draw(); });
-    // Draw connections
-    ctx.globalAlpha = 0.05; ctx.strokeStyle = '#3b82f6'; ctx.lineWidth = 0.5;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i+1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 150) {
-          ctx.globalAlpha = 0.05 * (1 - dist/150);
-          ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
-        }
-      }
-    }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(animate);
-  }
-  animate();
-})();
-
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; observer.unobserve(entry.target); }
-  });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-up, .card, .showcase-card, .pipeline-step, .testimonial-card, .price-card').forEach(el => {
-  el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'all 0.6s cubic-bezier(0.16,1,0.3,1)'; observer.observe(el);
-});
-
-// Counter animation
-document.querySelectorAll('.stat-num').forEach(el => {
-  const text = el.textContent;
-  const match = text.match(/^([\d,]+)/);
-  if (!match) return;
-  const target = parseInt(match[1].replace(/,/g, ''));
-  const suffix = text.replace(match[1], '');
-  let current = 0; const increment = target / 60;
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) { current = target; clearInterval(timer); }
-    el.textContent = Math.floor(current).toLocaleString() + suffix;
-  }, 25);
-});
-
-// Navbar scroll
-const nav = document.querySelector('.eco-nav');
-if (nav) { window.addEventListener('scroll', () => { nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)'; }); }
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 </script>
 </body></html>
