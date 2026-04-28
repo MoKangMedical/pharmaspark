@@ -65,6 +65,19 @@
 .cta-banner p { color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem; }
 </style>
 <meta name="theme-color" content="#0a0a0f">
+<style>
+@media(max-width:768px){
+  .nav-links,.nl,.links{display:none!important}
+  .features-grid,.fg,.p-grid,.pricing-grid,.pg{grid-template-columns:1fr!important}
+  .stats,.row{grid-template-columns:1fr!important}
+  .hero h1{font-size:2rem!important}
+  .container{padding:0 16px!important}
+}
+@media(max-width:480px){
+  .hero{padding:4rem 1rem!important}
+  .section,.sec{padding:2rem 1rem!important}
+}
+</style>
 </head><body>
 <nav class="eco-nav"><a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
 <div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="demo.html">Demo</a><a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a></div></nav>
