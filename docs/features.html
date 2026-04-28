@@ -1,236 +1,250 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>PharmaSpark Features — AI Drug Discovery Platform</title><meta name="description" content="Explore PharmaSpark's powerful AI-driven features for pharmaceutical research and drug development.">
+<title>Features — PharmaSpark | MoKangMedical</title><meta name="description" content="Explore PharmaSpark's comprehensive AI-powered features for drug discovery, lead optimization, clinical trials, and regulatory intelligence.">
 <link rel="stylesheet" href="https://mokangmedical.github.io/opc-homepage/shared-design-system.css">
 <style>
-/* Page-specific styles for detailed features */
-.feature-hero { text-align:center; padding:8rem 2rem 4rem; }
-.feature-hero h1 { font-size:clamp(2rem,5vw,3.5rem); font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa,#f472b6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1rem; }
-.feature-hero .subtitle { color:#94a3b8; font-size:1.15rem; max-width:600px; margin:0 auto; line-height:1.7; }
-
-.feature-detail { max-width:1100px; margin:0 auto; padding:4rem 2rem; }
-.feature-block { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; margin-bottom:5rem; }
-.feature-block.reverse { direction:rtl; }
-.feature-block.reverse > * { direction:ltr; }
-.feature-text h2 { font-size:1.8rem; font-weight:700; color:#f1f5f9; margin-bottom:1rem; }
-.feature-text p { color:#94a3b8; line-height:1.8; margin-bottom:1.5rem; }
-.feature-text ul { list-style:none; padding:0; }
-.feature-text ul li { color:#cbd5e1; padding:.5rem 0; padding-left:1.5rem; position:relative; }
-.feature-text ul li::before { content:"✦"; position:absolute; left:0; color:#60a5fa; }
-.feature-visual { background:linear-gradient(135deg,rgba(96,165,250,.08),rgba(167,139,250,.08)); border:1px solid #1e293b; border-radius:16px; padding:2.5rem; text-align:center; min-height:280px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
-.feature-visual .icon-large { font-size:4rem; margin-bottom:1rem; }
-.feature-visual .visual-label { color:#60a5fa; font-size:.85rem; text-transform:uppercase; letter-spacing:.08rem; margin-bottom:.5rem; }
-.feature-visual .visual-stat { font-size:2.5rem; font-weight:800; color:#f1f5f9; }
-.feature-visual .visual-sub { color:#94a3b8; font-size:.9rem; margin-top:.5rem; }
-
-.capabilities-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-top:2rem; }
-.cap-card { background:rgba(15,23,42,.6); border:1px solid #1e293b; border-radius:12px; padding:2rem; transition:all .3s ease; }
-.cap-card:hover { border-color:#334155; transform:translateY(-4px); box-shadow:0 8px 30px rgba(0,0,0,.3); }
-.cap-card h3 { color:#f1f5f9; font-size:1.15rem; margin-bottom:.75rem; }
-.cap-card p { color:#94a3b8; line-height:1.7; font-size:.95rem; }
-.cap-icon { font-size:2rem; margin-bottom:1rem; display:block; }
-
-.integration-section { background:rgba(15,23,42,.4); border-top:1px solid #1e293b; border-bottom:1px solid #1e293b; padding:4rem 2rem; margin:3rem 0; }
-.integration-section h2 { text-align:center; font-size:1.8rem; color:#f1f5f9; margin-bottom:.5rem; }
-.integration-section .section-desc { text-align:center; color:#94a3b8; max-width:600px; margin:0 auto 2.5rem; }
-.integrations-list { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; max-width:900px; margin:0 auto; }
-.int-chip { background:rgba(30,41,59,.8); border:1px solid #334155; border-radius:8px; padding:.6rem 1.2rem; color:#cbd5e1; font-size:.9rem; transition:all .2s; }
-.int-chip:hover { border-color:#60a5fa; color:#60a5fa; }
-
-@media (max-width:768px) {
-  .feature-block { grid-template-columns:1fr; }
-  .feature-block.reverse { direction:ltr; }
-  .capabilities-grid { grid-template-columns:1fr; }
+.page-hero { padding: 5rem 2rem 3rem; text-align: center; background: linear-gradient(180deg, #0a1628 0%, var(--bg) 100%); position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(59,130,246,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139,92,246,0.1) 0%, transparent 50%); }
+.page-hero > * { position: relative; z-index: 1; }
+.page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+.breadcrumb { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumb a { color: var(--accent-light); }
+.feature-section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+.feature-block { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 5rem; }
+.feature-block.reverse { direction: rtl; }
+.feature-block.reverse > * { direction: ltr; }
+.feature-text h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); }
+.feature-text p { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem; }
+.feature-visual { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; position: relative; overflow: hidden; }
+.feature-visual::after { content: ''; position: absolute; top: 0; right: 0; width: 150px; height: 150px; background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%); border-radius: 50%; }
+.feature-visual h4 { font-size: 1rem; color: var(--accent-light); margin-bottom: 1.25rem; }
+.metric-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+.metric-row:last-child { border-bottom: none; }
+.metric-label { color: var(--text-muted); font-size: 0.9rem; }
+.metric-value { color: var(--text); font-weight: 600; font-size: 0.9rem; }
+.capability-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.capability-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: all 0.3s; }
+.capability-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+.capability-card .icon { font-size: 2rem; margin-bottom: 1rem; }
+.capability-card h4 { font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--text); }
+.capability-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+.tech-stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.tech-item { background: var(--primary-light); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; text-align: center; transition: all 0.3s; }
+.tech-item:hover { border-color: var(--accent); }
+.tech-item .tech-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
+.tech-item .tech-desc { color: var(--text-muted); font-size: 0.8rem; }
+.section-divider { max-width: 1200px; margin: 0 auto; border: none; border-top: 1px solid var(--border); }
+@media (max-width: 768px) {
+  .feature-block { grid-template-columns: 1fr; gap: 2rem; }
+  .feature-block.reverse { direction: ltr; }
+  .capability-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head><body>
 <nav class="eco-nav"><a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
-<div class="nav-links"><a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a><a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem</a><a href="index.html">Home</a><a href="features.html" style="color:#60a5fa">Features</a><a href="pricing.html">Pricing</a></div></nav>
+<div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="demo.html">Demo</a></div></nav>
 
-<section class="feature-hero">
-<div class="badge">Pharma AI</div>
-<h1>Powerful Features</h1>
-<p class="subtitle">From target discovery to market access — PharmaSpark accelerates every stage of the drug development pipeline with cutting-edge AI.</p>
+<section class="page-hero">
+<div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Features</span></div>
+<h1>Platform Features</h1>
+<p class="subtitle">End-to-end AI-powered capabilities spanning the entire drug development lifecycle — from molecular design to market access</p>
 </section>
 
-<section class="feature-detail">
-
 <!-- Feature 1: Target Discovery -->
+<section class="feature-section">
 <div class="feature-block fade-up">
 <div class="feature-text">
-<h2>🎯 AI-Driven Target Discovery</h2>
-<p>Identify and validate novel drug targets with unprecedented speed. Our multi-modal AI engine analyzes genomic, proteomic, and clinical data to surface the most promising biological targets.</p>
-<ul>
-<li>Genome-wide association study (GWAS) integration</li>
-<li>Protein-protein interaction network analysis</li>
-<li>Druggability scoring with ML models</li>
-<li>Biomarker correlation mapping</li>
-<li>Literature mining from 35M+ publications</li>
-</ul>
+<h3>🎯 AI-Powered Target Discovery</h3>
+<p>PharmaSpark's target discovery engine integrates multi-omics data analysis — combining genomics, proteomics, transcriptomics, and metabolomics — to identify and validate novel drug targets with high confidence scores.</p>
+<p>Our proprietary knowledge graph connects 2.5 million biomedical entities from 35 million scientific publications, clinical trial records, patent filings, and real-world evidence databases. Machine learning models trained on historical target success rates predict druggability, safety profiles, and competitive landscapes for each candidate target.</p>
+<p>The platform performs pathway enrichment analysis, genetic association scoring (GWAS integration), and protein-protein interaction network mapping to reveal intervention points that maximize therapeutic impact while minimizing off-target risk.</p>
 </div>
-<div class="feature-visual">
-<div class="icon-large">🧬</div>
-<div class="visual-label">Discovery Engine</div>
-<div class="visual-stat">50+</div>
-<div class="visual-sub">Validated drug targets identified</div>
+<div class="feature-visual fade-up">
+<h4>Target Analysis Dashboard</h4>
+<div class="metric-row"><span class="metric-label">Druggable Targets</span><span class="metric-value">2,847 validated</span></div>
+<div class="metric-row"><span class="metric-label">Knowledge Graph Entities</span><span class="metric-value">2.5M+</span></div>
+<div class="metric-row"><span class="metric-label">Publications Analyzed</span><span class="metric-value">35M+</span></div>
+<div class="metric-row"><span class="metric-label">Pathway Databases</span><span class="metric-value">12 integrated</span></div>
+<div class="metric-row"><span class="metric-label">Prediction Accuracy</span><span class="metric-value">91.3% AUC</span></div>
+<div class="metric-row"><span class="metric-label">Processing Speed</span><span class="metric-value">&lt;10 min/target</span></div>
 </div>
 </div>
+
+<hr class="section-divider">
 
 <!-- Feature 2: Lead Optimization -->
 <div class="feature-block reverse fade-up">
 <div class="feature-text">
-<h2>💊 Molecular Lead Optimization</h2>
-<p>Predict and optimize molecular properties before synthesis. Reduce costly wet-lab iterations by simulating ADMET profiles, binding affinities, and toxicity risks computationally.</p>
-<ul>
-<li>QSAR/QSPR property prediction</li>
-<li>ADMET profile simulation</li>
-<li>Off-target toxicity screening</li>
-<li>Synthetic accessibility scoring</li>
-<li>Multi-objective optimization (potency, selectivity, solubility)</li>
-</ul>
+<h3>💊 Molecular Lead Optimization</h3>
+<p>Once a target is validated, PharmaSpark's generative chemistry engine designs novel compounds with optimized drug-like properties. Using diffusion-based molecular generators and reinforcement learning, the platform explores chemical space far beyond traditional medicinal chemistry intuition.</p>
+<p>The lead optimization pipeline simultaneously optimizes multiple objectives: binding affinity (predicted via 3D graph neural networks), selectivity (off-target profiling against 468 safety targets), synthetic accessibility (retrosynthetic route prediction), and ADMET properties (absorption, distribution, metabolism, excretion, toxicity).</p>
+<p>Multi-parameter optimization (MPO) scoring functions balance competing molecular properties using configurable Pareto-front analysis, ensuring that optimized leads have the best chance of succeeding in preclinical development and beyond.</p>
 </div>
-<div class="feature-visual">
-<div class="icon-large">⚗️</div>
-<div class="visual-label">Optimization Pipeline</div>
-<div class="visual-stat">1000+</div>
-<div class="visual-sub">Compounds screened per session</div>
+<div class="feature-visual fade-up">
+<h4>Optimization Performance</h4>
+<div class="metric-row"><span class="metric-label">Compounds Evaluated</span><span class="metric-value">10M+ / hour</span></div>
+<div class="metric-row"><span class="metric-label">ADMET Prediction</span><span class="metric-value">94% concordance</span></div>
+<div class="metric-row"><span class="metric-label">Binding Affinity MAE</span><span class="metric-value">0.42 kcal/mol</span></div>
+<div class="metric-row"><span class="metric-label">Off-Target Coverage</span><span class="metric-value">468 safety panels</span></div>
+<div class="metric-row"><span class="metric-label">Synthetic Routes</span><span class="metric-value">Top-5 ranked</span></div>
+<div class="metric-row"><span class="metric-label">Time to Lead</span><span class="metric-value">70% reduction</span></div>
 </div>
 </div>
 
-<!-- Feature 3: Clinical Trial Design -->
+<hr class="section-divider">
+
+<!-- Feature 3: Preclinical Intelligence -->
 <div class="feature-block fade-up">
 <div class="feature-text">
-<h2>🧪 Clinical Trial Simulation</h2>
-<p>Design smarter clinical trials with AI-powered protocol optimization. Simulate patient populations, endpoints, and adaptive designs to maximize success probability.</p>
-<ul>
-<li>Adaptive trial design simulation</li>
-<li>Patient stratification modeling</li>
-<li>Endpoint selection optimization</li>
-<li>Sample size calculation with Bayesian methods</li>
-<li>Historical trial data benchmarking</li>
-</ul>
+<h3>🧪 Preclinical Development Intelligence</h3>
+<p>PharmaSpark bridges the translational gap between discovery and clinical development with comprehensive preclinical modeling. Our platform predicts in vivo pharmacokinetics (PK) from in vitro data using physiologically-based pharmacokinetic (PBPK) modeling calibrated with thousands of compound datasets.</p>
+<p>Species allometric scaling, IVIVE (in vitro-in vivo extrapolation), and human dose predictions help clinical teams design first-in-human studies with optimized starting doses. Safety pharmacology predictions cover cardiovascular (hERG, QT prolongation), hepatic (DILI, CYP inhibition), renal, and CNS safety endpoints.</p>
+<p>The integrated study protocol generator creates IND-ready preclinical study outlines aligned with FDA/ICH S-series guidelines, reducing the time from lead nomination to IND filing.</p>
 </div>
-<div class="feature-visual">
-<div class="icon-large">📋</div>
-<div class="visual-label">Trial Optimizer</div>
-<div class="visual-stat">30%</div>
-<div class="visual-sub">Average timeline reduction</div>
+<div class="feature-visual fade-up">
+<h4>Preclinical Metrics</h4>
+<div class="metric-row"><span class="metric-label">PBPK Model Accuracy</span><span class="metric-value">2-fold error: 87%</span></div>
+<div class="metric-row"><span class="metric-label">hERG Liability AUC</span><span class="metric-value">0.96</span></div>
+<div class="metric-row"><span class="metric-label">DILI Prediction</span><span class="metric-value">0.91 AUC</span></div>
+<div class="metric-row"><span class="metric-label">Species Scaling</span><span class="metric-value">Mouse, Rat, Dog, Monkey</span></div>
+<div class="metric-row"><span class="metric-label">Study Protocols</span><span class="metric-value">ICH S1-S9 compliant</span></div>
+<div class="metric-row"><span class="metric-label">IND Preparation</span><span class="metric-value">40% faster</span></div>
 </div>
 </div>
 
-<!-- Feature 4: Regulatory Intelligence -->
+<hr class="section-divider">
+
+<!-- Feature 4: Clinical Trial Design -->
 <div class="feature-block reverse fade-up">
 <div class="feature-text">
-<h2>📑 Regulatory Path Intelligence</h2>
-<p>Navigate FDA, EMA, and global regulatory landscapes with AI-curated guidance. Get submission strategy recommendations based on precedent analysis and real-time regulatory updates.</p>
-<ul>
-<li>FDA/EMA submission pathway mapping</li>
-<li>Regulatory precedent database (10K+ approvals)</li>
-<li>Accelerated pathway eligibility screening</li>
-<li>Document checklist auto-generation</li>
-<li>Real-time regulatory change monitoring</li>
-</ul>
+<h3>📊 Clinical Trial Design & Optimization</h3>
+<p>PharmaSpark's clinical intelligence module analyzes 450,000+ historical clinical trials from ClinicalTrials.gov, EudraCT, and proprietary databases to optimize trial design. Our AI models predict enrollment rates, dropout probabilities, and endpoint sensitivity based on disease area, patient population, and protocol design choices.</p>
+<p>Adaptive trial design simulation allows sponsors to evaluate Bayesian dose-finding designs, seamless Phase II/III protocols, biomarker-driven enrichment strategies, and platform trial architectures before committing resources. Monte Carlo simulations model thousands of trial scenarios to identify designs with the highest probability of success.</p>
+<p>The patient stratification engine integrates genomic biomarkers, clinical characteristics, and real-world evidence to identify responder populations, enabling precision medicine approaches that improve efficacy signals and reduce sample sizes.</p>
 </div>
-<div class="feature-visual">
-<div class="icon-large">🏛️</div>
-<div class="visual-label">Regulatory AI</div>
-<div class="visual-stat">10K+</div>
-<div class="visual-sub">Approval precedents analyzed</div>
+<div class="feature-visual fade-up">
+<h4>Trial Intelligence</h4>
+<div class="metric-row"><span class="metric-label">Historical Trials</span><span class="metric-value">450K+ analyzed</span></div>
+<div class="metric-row"><span class="metric-label">Enrollment Prediction</span><span class="metric-value">±15% accuracy</span></div>
+<div class="metric-row"><span class="metric-label">Scenario Simulations</span><span class="metric-value">10K+ per design</span></div>
+<div class="metric-row"><span class="metric-label">Biomarker Panels</span><span class="metric-value">500+ validated</span></div>
+<div class="metric-row"><span class="metric-label">Adaptive Designs</span><span class="metric-value">12 architectures</span></div>
+<div class="metric-row"><span class="metric-label">Trial Duration Savings</span><span class="metric-value">25-40%</span></div>
 </div>
 </div>
 
-<!-- Feature 5: Market & Commercial -->
+<hr class="section-divider">
+
+<!-- Feature 5: Regulatory Path -->
 <div class="feature-block fade-up">
 <div class="feature-text">
-<h2>📊 Market & Commercial Intelligence</h2>
-<p>Make data-driven commercial decisions with competitive landscape analysis, pricing models, and market access strategies powered by real-world evidence.</p>
-<ul>
-<li>Competitive landscape mapping</li>
-<li>HEOR-based pricing optimization</li>
-<li>Patient population sizing</li>
-<li>Launch sequencing simulation</li>
-<li>Payer coverage prediction models</li>
-</ul>
+<h3>📋 Regulatory Path Intelligence</h3>
+<p>Navigating global regulatory requirements is one of the most complex challenges in drug development. PharmaSpark's regulatory AI engine maintains a continuously updated knowledge base covering FDA, EMA, PMDA, NMPA, and 60+ additional health authority requirements worldwide.</p>
+<p>The platform analyzes 20+ years of regulatory approval decisions, complete response letters, advisory committee outcomes, and post-marketing requirements to predict approval likelihood and identify optimal submission strategies. Special pathway recommendations include Fast Track, Breakthrough Therapy, Accelerated Approval, Priority Review (FDA), PRIME (EMA), and SAKIGAKE (PMDA).</p>
+<p>Automated regulatory dossier generation creates ICH-compliant Module 1-5 document templates, pre-populated with available nonclinical and clinical data, reducing submission preparation timelines by up to 60%.</p>
 </div>
-<div class="feature-visual">
-<div class="icon-large">📈</div>
-<div class="visual-label">Market Intel</div>
-<div class="visual-stat">$2M+</div>
-<div class="visual-sub">Average cost reduction per program</div>
+<div class="feature-visual fade-up">
+<h4>Regulatory Intelligence</h4>
+<div class="metric-row"><span class="metric-label">Approval Decisions</span><span class="metric-value">15K+ analyzed</span></div>
+<div class="metric-row"><span class="metric-label">Approval Prediction</span><span class="metric-value">87% accuracy</span></div>
+<div class="metric-row"><span class="metric-label">Regulatory Pathways</span><span class="metric-value">24 pathways mapped</span></div>
+<div class="metric-row"><span class="metric-label">Health Authorities</span><span class="metric-value">60+ covered</span></div>
+<div class="metric-row"><span class="metric-label">Dossier Templates</span><span class="metric-value">ICH M4 compliant</span></div>
+<div class="metric-row"><span class="metric-label">Submission Prep</span><span class="metric-value">60% time reduction</span></div>
 </div>
 </div>
 
+<hr class="section-divider">
+
+<!-- Feature 6: Market Access & Pricing -->
+<div class="feature-block reverse fade-up">
+<div class="feature-text">
+<h3>💰 Market Access & Health Economics</h3>
+<p>PharmaSpark's HEOR (Health Economics and Outcomes Research) module provides data-driven pricing and market access strategies. The platform integrates real-world claims data, health technology assessment (HTA) criteria, and payer decision models to optimize product positioning and reimbursement strategies.</p>
+<p>Cost-effectiveness modeling uses disease-specific Markov models and microsimulation engines calibrated with published clinical evidence and epidemiological data. Budget impact models project payer-level financial implications across commercial, Medicare, Medicaid, and international markets.</p>
+<p>The competitive intelligence dashboard monitors pipeline activities, patent landscapes, pricing benchmarks, and formulary decisions across 50+ therapeutic categories, enabling proactive strategic planning for launch sequencing and lifecycle management.</p>
+</div>
+<div class="feature-visual fade-up">
+<h4>Market Access Metrics</h4>
+<div class="metric-row"><span class="metric-label">HTA Bodies Covered</span><span class="metric-value">NICE, G-BA, PBAC, CADTH+</span></div>
+<div class="metric-row"><span class="metric-label">Claims Data Lives</span><span class="metric-value">200M+ patient-years</span></div>
+<div class="metric-row"><span class="metric-label">CEA Models</span><span class="metric-value">150+ templates</span></div>
+<div class="metric-row"><span class="metric-label">Pricing Benchmarks</span><span class="metric-value">50+ categories</span></div>
+<div class="metric-row"><span class="metric-label">Patent Landscape</span><span class="metric-value">Real-time monitoring</span></div>
+<div class="metric-row"><span class="metric-label">Launch Readiness</span><span class="metric-value">8 months faster</span></div>
+</div>
+</div>
 </section>
 
 <!-- Additional Capabilities -->
 <section class="section">
 <h2 class="section-title">Additional Capabilities</h2>
-<p class="section-desc">Built on a modern, extensible platform designed for enterprise-scale pharmaceutical research</p>
-<div class="capabilities-grid">
-<div class="cap-card fade-up">
-<span class="cap-icon">🔌</span>
-<h3>REST API & SDK</h3>
-<p>Full programmatic access with Python and R SDKs. Integrate PharmaSpark into your existing workflows and pipelines seamlessly.</p>
+<p class="section-desc">Powerful tools that integrate across every stage of the drug development pipeline</p>
+<div class="capability-grid">
+<div class="capability-card fade-up">
+<div class="icon">🔗</div>
+<h4>ELN & LIMS Integration</h4>
+<p>Seamless integration with Electronic Lab Notebooks (Benchling, Dotmatics, IDBS) and Laboratory Information Management Systems. Bidirectional data sync ensures computational predictions are validated against experimental results in real-time.</p>
 </div>
-<div class="cap-card fade-up">
-<span class="cap-icon">🔒</span>
-<h3>Enterprise Security</h3>
-<p>SOC 2 Type II compliant. End-to-end encryption, role-based access control, and audit logging for regulated environments.</p>
+<div class="capability-card fade-up">
+<div class="icon">🛡️</div>
+<h4>GxP-Validated Environment</h4>
+<p>FDA 21 CFR Part 11 compliant computing environment with full audit trails, electronic signatures, and data integrity controls. Validated workflows for GLP, GCP, and GMP applications ensure regulatory-grade computational analyses.</p>
 </div>
-<div class="cap-card fade-up">
-<span class="cap-icon">🤖</span>
-<h3>Custom Model Training</h3>
-<p>Fine-tune models on your proprietary datasets. Transfer learning from our foundation models to your specific therapeutic areas.</p>
+<div class="capability-card fade-up">
+<div class="icon">📈</div>
+<h4>Portfolio Analytics</h4>
+<p>Executive-level dashboards providing portfolio-level risk assessment, resource allocation optimization, and stage-gate decision support. Monte Carlo portfolio simulations model probability of technical and regulatory success (PTRS) across the pipeline.</p>
 </div>
-<div class="cap-card fade-up">
-<span class="cap-icon">☁️</span>
-<h3>Cloud & On-Premise</h3>
-<p>Deploy on our managed cloud or within your own infrastructure. Air-gapped installations available for sensitive programs.</p>
+<div class="capability-card fade-up">
+<div class="icon">🤖</div>
+<h4>Custom Model Training</h4>
+<p>Train proprietary ML models on your internal compound libraries and assay data using federated learning approaches. Models remain on your infrastructure while leveraging PharmaSpark's architecture, ensuring data confidentiality with maximum predictive power.</p>
 </div>
-<div class="cap-card fade-up">
-<span class="cap-icon">📊</span>
-<h3>Interactive Dashboards</h3>
-<p>Real-time project dashboards with customizable visualizations. Track pipeline progress, milestones, and key metrics at a glance.</p>
+<div class="capability-card fade-up">
+<div class="icon">🌍</div>
+<h4>Real-World Evidence</h4>
+<p>Integration with electronic health records, claims databases, registries, and wearable device data for post-market surveillance, label expansion support, and comparative effectiveness research using causal inference methods.</p>
 </div>
-<div class="cap-card fade-up">
-<span class="cap-icon">🔗</span>
-<h3>Data Integrations</h3>
-<p>Connect to ChEMBL, PubChem, ClinicalTrials.gov, patent databases, and electronic health records through pre-built connectors.</p>
+<div class="capability-card fade-up">
+<div class="icon">⚡</div>
+<h4>API & Workflow Engine</h4>
+<p>RESTful API access for programmatic platform interaction. Build custom workflows using our low-code pipeline editor or integrate PharmaSpark capabilities directly into existing computational chemistry and data science environments.</p>
 </div>
 </div>
 </section>
 
-<!-- Integrations -->
-<div class="integration-section">
-<h2>Seamless Integrations</h2>
-<p class="section-desc">PharmaSpark connects with the tools and databases your team already uses</p>
-<div class="integrations-list">
-<span class="int-chip">ChEMBL</span>
-<span class="int-chip">PubChem</span>
-<span class="int-chip">UniProt</span>
-<span class="int-chip">ClinicalTrials.gov</span>
-<span class="int-chip">PDB</span>
-<span class="int-chip">DrugBank</span>
-<span class="int-chip">SNOMED CT</span>
-<span class="int-chip">OMOP CDM</span>
-<span class="int-chip">REDCap</span>
-<span class="int-chip">AWS HealthLake</span>
-<span class="int-chip">Snowflake</span>
-<span class="int-chip">Databricks</span>
+<!-- Technology Stack -->
+<section class="section">
+<h2 class="section-title">Technology Foundation</h2>
+<p class="section-desc">Built on cutting-edge AI/ML frameworks and pharmaceutical science standards</p>
+<div class="tech-stack">
+<div class="tech-item fade-up"><div class="tech-name">Graph Neural Networks</div><div class="tech-desc">Molecular property prediction</div></div>
+<div class="tech-item fade-up"><div class="tech-name">Diffusion Models</div><div class="tech-desc">De novo molecule generation</div></div>
+<div class="tech-item fade-up"><div class="tech-name">Transformer Architecture</div><div class="tech-desc">Protein structure & binding</div></div>
+<div class="tech-item fade-up"><div class="tech-name">PBPK Modeling</div><div class="tech-desc">Pharmacokinetic simulation</div></div>
+<div class="tech-item fade-up"><div class="tech-name">Knowledge Graphs</div><div class="tech-desc">Biomedical relationship mapping</div></div>
+<div class="tech-item fade-up"><div class="tech-name">Bayesian Optimization</div><div class="tech-desc">Experimental design</div></div>
+<div class="tech-item fade-up"><div class="tech-name">Federated Learning</div><div class="tech-desc">Privacy-preserving ML</div></div>
+<div class="tech-item fade-up"><div class="tech-name">ICH Standards</div><div class="tech-desc">Regulatory compliance</div></div>
 </div>
-</div>
+</section>
 
-<!-- CTA -->
 <section class="section" style="text-align:center">
-<h2 class="section-title">Ready to accelerate your pipeline?</h2>
-<p class="section-desc">Join leading biotech and pharmaceutical companies using PharmaSpark to bring therapies to market faster.</p>
-<div class="btn-group" style="justify-content:center;margin-top:2rem">
-<a href="pricing.html" class="btn btn-primary">View Pricing</a>
-<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-outline">View on GitHub</a>
+<h2 class="section-title">See PharmaSpark in Action</h2>
+<p class="section-desc">Experience how these features work together to transform your drug development pipeline.</p>
+<div class="btn-group">
+<a href="demo.html" class="btn btn-primary">Request a Demo</a>
+<a href="pricing.html" class="btn btn-outline">View Pricing</a>
 </div>
 </section>
 
-<footer class="footer"><div class="footer-links"><a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a><a href="https://github.com/MoKangMedical">GitHub Organization</a><a href="https://github.com/MoKangMedical/pharmaspark">This Project</a></div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
+<footer class="footer"><div class="footer-links">
+<a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a>
+<a href="https://github.com/MoKangMedical">GitHub Organization</a>
+<a href="https://github.com/MoKangMedical/pharmaspark">This Project</a>
+</div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
 
 <!-- OPC Eco Nav -->
 <div style="position:fixed;bottom:20px;right:20px;z-index:99;background:rgba(17,24,39,.95);backdrop-filter:blur(10px);border:1px solid #1e293b;border-radius:12px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:200px">
@@ -243,7 +257,6 @@
 </div>
 
 <script>
-// Scroll reveal animation
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -253,31 +266,13 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.1 });
-
-document.querySelectorAll('.feature-block, .cap-card, .card, [class*="feature"], [class*="card"]').forEach(el => {
+document.querySelectorAll('.fade-up, .card, .capability-card, .tech-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
     observer.observe(el);
 });
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-});
-
-// Navbar background on scroll
 const nav = document.querySelector('nav, .nav, .navbar, header');
-if (nav) {
-    window.addEventListener('scroll', () => {
-        nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)';
-    });
-}
-
-console.log('PharmaSpark Features page loaded');
+if (nav) { window.addEventListener('scroll', () => { nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)'; }); }
 </script>
 </body></html>
