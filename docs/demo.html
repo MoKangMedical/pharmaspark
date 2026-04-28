@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Request a Demo — PharmaSpark | MoKangMedical</title><meta name="description" content="Request a personalized demo of PharmaSpark's AI-powered drug development platform. See how we can accelerate your pharmaceutical pipeline.">
+<link rel="stylesheet" href="https://mokangmedical.github.io/opc-homepage/shared-design-system.css">
+<style>
+.page-hero { padding: 5rem 2rem 3rem; text-align: center; background: linear-gradient(180deg, #0a1628 0%, var(--bg) 100%); position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(59,130,246,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139,92,246,0.1) 0%, transparent 50%); }
+.page-hero > * { position: relative; z-index: 1; }
+.page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+.breadcrumb { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumb a { color: var(--accent-light); }
+.demo-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; }
+.form-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+.form-card .form-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 0.75rem 1rem; background: var(--primary-light); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-size: 0.95rem; font-family: inherit;
+    transition: border-color 0.3s; outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit { margin-top: 0.5rem; }
+.form-note { color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem; line-height: 1.5; }
+.demo-info { padding-top: 1rem; }
+.info-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem; transition: all 0.3s; }
+.info-block:hover { border-color: var(--accent); transform: translateY(-2px); }
+.info-block h3 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+.info-block p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+.info-block .info-highlight { display: flex; gap: 1rem; margin-top: 1rem; }
+.info-block .info-highlight .highlight-item { flex: 1; text-align: center; padding: 0.75rem; background: var(--primary-light); border-radius: 8px; }
+.info-block .info-highlight .highlight-item .num { font-size: 1.3rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.info-block .info-highlight .highlight-item .lbl { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; }
+.workflow-steps { margin-top: 2rem; }
+.workflow-steps h3 { font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center; }
+.step-item { display: flex; gap: 1.25rem; margin-bottom: 1.5rem; align-items: flex-start; }
+.step-num { width: 40px; height: 40px; min-width: 40px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; color: #fff; }
+.step-content h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+.step-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+.use-case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.use-case { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: all 0.3s; }
+.use-case:hover { border-color: var(--accent); transform: translateY(-3px); }
+.use-case .uc-icon { font-size: 2rem; margin-bottom: 1rem; }
+.use-case h4 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+.use-case p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.testimonial { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: all 0.3s; }
+.testimonial:hover { border-color: var(--accent); }
+.testimonial .quote { color: var(--text-muted); font-style: italic; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem; position: relative; padding-left: 1.25rem; }
+.testimonial .quote::before { content: '"'; position: absolute; left: 0; top: -5px; font-size: 2rem; color: var(--accent); font-style: normal; }
+.testimonial .author { font-weight: 600; font-size: 0.9rem; }
+.testimonial .author-role { color: var(--text-muted); font-size: 0.8rem; }
+@media (max-width: 768px) {
+  .demo-layout { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .use-case-grid, .testimonial-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head><body>
+<nav class="eco-nav"><a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
+<div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="demo.html">Demo</a></div></nav>
+
+<section class="page-hero">
+<div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Demo</span></div>
+<h1>Request a Demo</h1>
+<p class="subtitle">See how PharmaSpark can accelerate your drug development pipeline with AI-powered target-to-therapy workflows</p>
+</section>
+
+<section class="section">
+<div class="demo-layout">
+<!-- Demo Form -->
+<div class="form-card fade-up">
+<h3>Schedule Your Personalized Demo</h3>
+<p class="form-subtitle">Fill out the form below and our scientific team will reach out within 24 hours to schedule a tailored walkthrough.</p>
+<form id="demoForm" onsubmit="handleSubmit(event)">
+<div class="form-row">
+<div class="form-group">
+<label for="firstName">First Name *</label>
+<input type="text" id="firstName" name="firstName" required placeholder="John">
+</div>
+<div class="form-group">
+<label for="lastName">Last Name *</label>
+<input type="text" id="lastName" name="lastName" required placeholder="Smith">
+</div>
+</div>
+<div class="form-group">
+<label for="email">Work Email *</label>
+<input type="email" id="email" name="email" required placeholder="john.smith@company.com">
+</div>
+<div class="form-group">
+<label for="company">Organization *</label>
+<input type="text" id="company" name="company" required placeholder="Acme Biotech Inc.">
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="role">Role</label>
+<select id="role" name="role">
+<option value="">Select your role</option>
+<option value="scientist">Computational Scientist</option>
+<option value="medchem">Medicinal Chemist</option>
+<option value="biologist">Biologist / Pharmacologist</option>
+<option value="clinical">Clinical Development</option>
+<option value="regulatory">Regulatory Affairs</option>
+<option value="executive">Executive / VP R&D</option>
+<option value="it">IT / Platform</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="form-group">
+<label for="companySize">Team Size</label>
+<select id="companySize" name="companySize">
+<option value="">Select team size</option>
+<option value="1-10">1-10 people</option>
+<option value="11-50">11-50 people</option>
+<option value="51-200">51-200 people</option>
+<option value="201-1000">201-1,000 people</option>
+<option value="1000+">1,000+ people</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="interest">Primary Interest</label>
+<select id="interest" name="interest">
+<option value="">What interests you most?</option>
+<option value="target">Target Discovery & Validation</option>
+<option value="lead">Lead Optimization & Design</option>
+<option value="preclinical">Preclinical Development</option>
+<option value="clinical">Clinical Trial Design</option>
+<option value="regulatory">Regulatory Intelligence</option>
+<option value="market">Market Access & HEOR</option>
+<option value="full">Full Platform Evaluation</option>
+</select>
+</div>
+<div class="form-group">
+<label for="therapeutic">Therapeutic Area</label>
+<select id="therapeutic" name="therapeutic">
+<option value="">Select therapeutic area</option>
+<option value="oncology">Oncology</option>
+<option value="neuro">Neuroscience / CNS</option>
+<option value="immuno">Immunology / Autoimmune</option>
+<option value="cardio">Cardiovascular / Metabolic</option>
+<option value="infectious">Infectious Disease</option>
+<option value="rare">Rare / Orphan Diseases</option>
+<option value="cell-gene">Cell & Gene Therapy</option>
+<option value="other-ta">Other</option>
+</select>
+</div>
+<div class="form-group">
+<label for="challenges">Key Challenges</label>
+<textarea id="challenges" name="challenges" placeholder="Tell us about your current drug development challenges and what you hope PharmaSpark can help with..."></textarea>
+</div>
+<div class="form-submit">
+<button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:1rem;font-size:1rem;">Request Demo</button>
+</div>
+<p class="form-note">By submitting this form, you agree to be contacted by the PharmaSpark team regarding your demo request. We respect your privacy — your information will never be shared with third parties.</p>
+</form>
+</div>
+
+<!-- Demo Info Sidebar -->
+<div class="demo-info">
+<div class="info-block fade-up">
+<h3>🎯 What to Expect</h3>
+<p>Your personalized 45-minute demo will showcase PharmaSpark's capabilities tailored to your specific therapeutic area, pipeline stage, and team needs. Our scientific team — not sales reps — will walk you through real use cases relevant to your work.</p>
+<div class="info-highlight">
+<div class="highlight-item"><div class="num">45</div><div class="lbl">Minute demo</div></div>
+<div class="highlight-item"><div class="num">24h</div><div class="lbl">Response time</div></div>
+<div class="highlight-item"><div class="num">14d</div><div class="lbl">Free trial</div></div>
+</div>
+</div>
+
+<div class="info-block fade-up">
+<h3>🔬 Scientific Team</h3>
+<p>Our demos are led by PhD-level computational chemists, biologists, and clinical scientists who understand pharmaceutical R&D. They'll answer your technical questions and show you exactly how PharmaSpark fits into your existing workflows.</p>
+</div>
+
+<div class="info-block fade-up">
+<h3>🚀 Quick Start</h3>
+<p>After your demo, we can provision a 14-day free trial environment with sample data matching your therapeutic area. Import your own compound libraries and run initial analyses to evaluate PharmaSpark's performance on your actual targets.</p>
+</div>
+
+<div class="info-block fade-up">
+<h3>🔒 Data Security</h3>
+<p>All demo sessions use synthetic or published data only. If you choose to share proprietary structures during your trial, rest assured they're processed in an isolated, encrypted environment with zero data retention after your session ends.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Demo Workflow -->
+<section class="section">
+<div class="workflow-steps">
+<h2 class="section-title">How It Works</h2>
+<p class="section-desc">From demo request to full platform evaluation in four simple steps</p>
+<div style="max-width:700px;margin:2rem auto 0;">
+<div class="step-item fade-up">
+<div class="step-num">1</div>
+<div class="step-content">
+<h4>Submit Your Request</h4>
+<p>Fill out the demo form with your background, therapeutic focus, and current challenges. This helps our team prepare a highly relevant presentation.</p>
+</div>
+</div>
+<div class="step-item fade-up">
+<div class="step-num">2</div>
+<div class="step-content">
+<h4>Scientific Consultation</h4>
+<p>A domain expert contacts you within 24 hours to discuss your needs, answer preliminary questions, and schedule the demo at a convenient time.</p>
+</div>
+</div>
+<div class="step-item fade-up">
+<div class="step-num">3</div>
+<div class="step-content">
+<h4>Personalized Demo</h4>
+<p>A 45-minute live walkthrough of PharmaSpark tailored to your use case — target discovery, lead optimization, clinical design, or regulatory strategy.</p>
+</div>
+</div>
+<div class="step-item fade-up">
+<div class="step-num">4</div>
+<div class="step-content">
+<h4>Free Trial & Onboarding</h4>
+<p>Access a 14-day free trial with your own data. Our team provides onboarding support to help you run initial analyses and validate PharmaSpark's capabilities.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Use Cases -->
+<section class="section">
+<h2 class="section-title">Common Use Cases</h2>
+<p class="section-desc">See how teams across the pharmaceutical industry leverage PharmaSpark</p>
+<div class="use-case-grid">
+<div class="use-case fade-up">
+<div class="uc-icon">🧬</div>
+<h4>Novel Target Identification</h4>
+<p>A neuroscience biotech used PharmaSpark's multi-omics analysis to identify 3 novel targets for neuroinflammation, validated with genetic association data from 500K+ patient records. Targets advanced to lead optimization within 6 months.</p>
+</div>
+<div class="use-case fade-up">
+<div class="uc-icon">💊</div>
+<h4>Lead-to-Candidate Acceleration</h4>
+<p>An oncology startup reduced lead-to-candidate time from 18 months to 5 months using PharmaSpark's generative chemistry and multi-parameter ADMET optimization. 4 of 6 nominated candidates passed GLP tox studies on the first attempt.</p>
+</div>
+<div class="use-case fade-up">
+<div class="uc-icon">📊</div>
+<h4>Adaptive Trial Optimization</h4>
+<p>A mid-size pharma redesigned their Phase II dose-finding study using PharmaSpark's Bayesian adaptive simulation. The optimized design enrolled 40% fewer patients while achieving higher statistical power and identifying the optimal dose 6 months earlier.</p>
+</div>
+<div class="use-case fade-up">
+<div class="uc-icon">📋</div>
+<h4>Regulatory Strategy</h4>
+<p>A rare disease company used PharmaSpark's regulatory intelligence to identify and secure Breakthrough Therapy Designation and Priority Review, shortening their FDA approval timeline by approximately 14 months compared to standard review.</p>
+</div>
+<div class="use-case fade-up">
+<div class="uc-icon">💰</div>
+<h4>Market Access Planning</h4>
+<p>A specialty pharma leveraged PharmaSpark's HEOR module to build a compelling cost-effectiveness dossier that secured favorable HTA decisions in 4 major European markets simultaneously, achieving first-pass reimbursement in 3 of 4.</p>
+</div>
+<div class="use-case fade-up">
+<div class="uc-icon">🔗</div>
+<h4>Portfolio Decision Support</h4>
+<p>A top-20 pharma used PharmaSpark's portfolio analytics to reprioritize their 40+ compound pipeline, reallocating resources to programs with the highest PTRS. Portfolio-level NPV improved by an estimated $200M+.</p>
+</div>
+</div>
+</section>
+
+<!-- Testimonials -->
+<section class="section">
+<h2 class="section-title">What Teams Are Saying</h2>
+<p class="section-desc">Feedback from pharmaceutical professionals using PharmaSpark</p>
+<div class="testimonial-grid">
+<div class="testimonial fade-up">
+<div class="quote">PharmaSpark's target discovery engine identified a novel kinase target we'd overlooked in our internal analysis. That compound is now our lead preclinical candidate with best-in-class selectivity profile.</div>
+<div class="author">Director of Computational Chemistry</div>
+<div class="author-role">Series B Oncology Biotech</div>
+</div>
+<div class="testimonial fade-up">
+<div class="quote">The regulatory path intelligence saved us months of uncertainty. Having data-driven recommendations for our FDA submission strategy — backed by analysis of 15,000+ prior decisions — gave our leadership team confidence to pursue an accelerated pathway.</div>
+<div class="author">VP Regulatory Affairs</div>
+<div class="author-role">Rare Disease Pharmaceutical Company</div>
+</div>
+<div class="testimonial fade-up">
+<div class="quote">We evaluated 3 platforms and PharmaSpark was the only one that delivered genuine end-to-end capabilities — from molecular design through clinical trial simulation. The integration across modules is seamless and the scientific rigor is evident.</div>
+<div class="author">Chief Scientific Officer</div>
+<div class="author-role">Immuno-oncology Startup</div>
+</div>
+</div>
+</section>
+
+<section class="section" style="text-align:center">
+<h2 class="section-title">Ready to Get Started?</h2>
+<p class="section-desc">Join pharmaceutical innovators accelerating their pipelines with PharmaSpark.</p>
+<div class="btn-group">
+<a href="pricing.html" class="btn btn-outline">View Pricing</a>
+<a href="features.html" class="btn btn-outline">Explore Features</a>
+</div>
+</section>
+
+<footer class="footer"><div class="footer-links">
+<a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a>
+<a href="https://github.com/MoKangMedical">GitHub Organization</a>
+<a href="https://github.com/MoKangMedical/pharmaspark">This Project</a>
+</div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
+
+<!-- OPC Eco Nav -->
+<div style="position:fixed;bottom:20px;right:20px;z-index:99;background:rgba(17,24,39,.95);backdrop-filter:blur(10px);border:1px solid #1e293b;border-radius:12px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:200px">
+<div style="font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05rem;padding:4px 8px;border-bottom:1px solid #1e293b;margin-bottom:6px">OPC Ecosystem</div>
+<a href="https://mokangmedical.github.io/opc-homepage/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏠 OPC Home</a>
+<a href="https://mokangmedical.github.io/DrugMind/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">💊 DrugMind</a>
+<a href="https://mokangmedical.github.io/PharmaSim/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🧪 PharmaSim</a>
+<a href="https://mokangmedical.github.io/medichat-rd/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏥 MediChat-RD</a>
+<a href="https://mokangmedical.github.io/tianyan/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">👁️ Tianyan</a>
+</div>
+
+<script>
+function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = '✓ Request Submitted!';
+    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    btn.disabled = true;
+    setTimeout(() => {
+        btn.textContent = 'Request Demo';
+        btn.style.background = '';
+        btn.disabled = false;
+    }, 3000);
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up, .info-block, .use-case, .testimonial, .step-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    observer.observe(el);
+});
+const nav = document.querySelector('nav, .nav, .navbar, header');
+if (nav) { window.addEventListener('scroll', () => { nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)'; }); }
+</script>
+</body></html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pricing — PharmaSpark | MoKangMedical</title><meta name="description" content="PharmaSpark pricing plans for researchers, biotech companies, and enterprise pharmaceutical organizations.">
+<link rel="stylesheet" href="https://mokangmedical.github.io/opc-homepage/shared-design-system.css">
+<style>
+.page-hero { padding: 5rem 2rem 3rem; text-align: center; background: linear-gradient(180deg, #0a1628 0%, var(--bg) 100%); position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(59,130,246,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139,92,246,0.1) 0%, transparent 50%); }
+.page-hero > * { position: relative; z-index: 1; }
+.page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
+.breadcrumb { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumb a { color: var(--accent-light); }
+.toggle-wrapper { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
+.toggle-wrapper span { font-size: 0.95rem; color: var(--text-muted); }
+.toggle-wrapper span.active { color: var(--text); font-weight: 600; }
+.toggle-switch { position: relative; width: 52px; height: 28px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; cursor: pointer; transition: background 0.3s; }
+.toggle-switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: var(--gradient); border-radius: 50%; transition: transform 0.3s; }
+.toggle-switch.annual::after { transform: translateX(24px); }
+.toggle-switch.annual { background: var(--accent-glow); border-color: var(--accent); }
+.pricing-detail { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 3rem; margin-bottom: 3rem; transition: all 0.3s; }
+.pricing-detail:hover { border-color: var(--accent); box-shadow: 0 0 30px rgba(59,130,246,0.1); }
+.pricing-detail .plan-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+.pricing-detail .plan-header h3 { font-size: 1.5rem; }
+.pricing-detail .plan-header .plan-price { text-align: right; }
+.pricing-detail .plan-header .price-amount { font-size: 2.5rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.pricing-detail .plan-header .price-period { color: var(--text-muted); font-size: 0.85rem; }
+.pricing-detail .plan-header .price-annual { color: var(--success); font-size: 0.8rem; margin-top: 0.25rem; }
+.pricing-detail .plan-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; max-width: 700px; }
+.feature-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+.feature-col h4 { font-size: 1rem; color: var(--accent-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+.feature-col ul { list-style: none; }
+.feature-col ul li { padding: 0.4rem 0; color: var(--text-muted); font-size: 0.9rem; }
+.feature-col ul li::before { content: '✓ '; color: var(--success); font-weight: 700; }
+.feature-col ul li.disabled { color: #475569; }
+.feature-col ul li.disabled::before { content: '— '; color: #475569; }
+.featured-tag { display: inline-block; background: var(--gradient); color: #fff; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-left: 0.75rem; vertical-align: middle; }
+.add-ons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.addon-card { background: var(--primary-light); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: all 0.3s; }
+.addon-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.addon-card h4 { font-size: 1rem; margin-bottom: 0.5rem; }
+.addon-card .addon-price { color: var(--accent-light); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.addon-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; }
+.faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; transition: all 0.3s; }
+.faq-item:hover { border-color: var(--accent); }
+.faq-item h4 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--text); }
+.faq-item p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+.enterprise-cta { background: var(--primary); border: 1px solid var(--accent); border-radius: var(--radius); padding: 3rem; text-align: center; box-shadow: 0 0 40px rgba(59,130,246,0.1); margin-top: 3rem; }
+.enterprise-cta h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+.enterprise-cta p { color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem; line-height: 1.7; }
+@media (max-width: 768px) {
+  .pricing-detail .plan-header { flex-direction: column; }
+  .pricing-detail .plan-header .plan-price { text-align: left; }
+  .feature-columns { grid-template-columns: 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head><body>
+<nav class="eco-nav"><a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
+<div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="demo.html">Demo</a></div></nav>
+
+<section class="page-hero">
+<div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Pricing</span></div>
+<h1>Pricing Plans</h1>
+<p class="subtitle">Flexible plans designed for every stage of pharmaceutical innovation — from academic researchers to global pharma enterprises</p>
+</section>
+
+<section class="section">
+<div class="toggle-wrapper">
+<span class="active">Monthly</span>
+<div class="toggle-switch" id="billingToggle" onclick="toggleBilling()"></div>
+<span>Annual <span style="color:var(--success);font-size:0.8rem">(Save 20%)</span></span>
+</div>
+
+<!-- Researcher Plan -->
+<div class="pricing-detail fade-up">
+<div class="plan-header">
+<div>
+<h3>Researcher</h3>
+<p style="color:var(--text-muted);font-size:0.9rem;margin-top:0.25rem">For academic researchers and small labs exploring AI-driven drug discovery</p>
+</div>
+<div class="plan-price">
+<div class="price-amount" data-monthly="$149" data-annual="$119">$149</div>
+<div class="price-period">per user / month</div>
+<div class="price-annual">Billed annually: $1,428/user/year</div>
+</div>
+</div>
+<div class="plan-desc">The Researcher plan provides essential computational drug discovery tools for academic labs, graduate research groups, and individual scientists. Access target discovery, molecular property prediction, and literature mining capabilities with support for up to 5 concurrent projects.</div>
+<div class="feature-columns">
+<div class="feature-col">
+<h4>Discovery Tools</h4>
+<ul>
+<li>Target identification from omics data</li>
+<li>Molecular property prediction (basic)</li>
+<li>Virtual screening (1M compound library)</li>
+<li>Literature mining & knowledge graph</li>
+<li class="disabled">Generative molecule design</li>
+</ul>
+</div>
+<div class="feature-col">
+<h4>Platform</h4>
+<ul>
+<li>5 concurrent projects</li>
+<li>10 GB data storage</li>
+<li>Web-based interface</li>
+<li>Community support forum</li>
+<li>Standard compute resources</li>
+</ul>
+</div>
+<div class="feature-col">
+<h4>Data & Integration</h4>
+<ul>
+<li>ChEMBL, PubChem access</li>
+<li>PDB structure database</li>
+<li>CSV/SDF file import</li>
+<li>Basic result export</li>
+<li class="disabled">API access</li>
+</ul>
+</div>
+</div>
+<div class="btn-group" style="justify-content:flex-start">
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary">Get Started</a>
+<a href="demo.html" class="btn btn-outline">Request Demo</a>
+</div>
+</div>
+
+<!-- Biotech Plan -->
+<div class="pricing-detail fade-up" style="border-color:var(--accent);box-shadow:0 0 30px rgba(59,130,246,0.15);">
+<div class="plan-header">
+<div>
+<h3>Biotech <span class="featured-tag">Most Popular</span></h3>
+<p style="color:var(--text-muted);font-size:0.9rem;margin-top:0.25rem">For biotech startups and mid-size R&D teams with active drug programs</p>
+</div>
+<div class="plan-price">
+<div class="price-amount" data-monthly="$599" data-annual="$479">$599</div>
+<div class="price-period">per user / month</div>
+<div class="price-annual">Billed annually: $5,748/user/year</div>
+</div>
+</div>
+<div class="plan-desc">The Biotech plan unlocks the full PharmaSpark platform for active drug development programs. Generative chemistry, advanced ADMET prediction, preclinical modeling, and clinical trial design tools enable teams to move from target to IND with AI-powered confidence.</div>
+<div class="feature-columns">
+<div class="feature-col">
+<h4>Full Discovery Suite</h4>
+<ul>
+<li>Everything in Researcher</li>
+<li>Generative molecule design (diffusion models)</li>
+<li>Lead optimization (multi-objective)</li>
+<li>Virtual screening (100M+ compound library)</li>
+<li>3D binding affinity prediction</li>
+</ul>
+</div>
+<div class="feature-col">
+<h4>Preclinical & Clinical</h4>
+<ul>
+<li>Full ADMET prediction suite</li>
+<li>PBPK modeling & dose prediction</li>
+<li>Clinical trial design optimizer</li>
+<li>Adaptive trial simulation</li>
+<li>Patient stratification engine</li>
+</ul>
+</div>
+<div class="feature-col">
+<h4>Platform & Support</h4>
+<ul>
+<li>Unlimited concurrent projects</li>
+<li>100 GB data storage</li>
+<li>RESTful API access</li>
+<li>Priority email support (24hr)</li>
+<li>Team collaboration tools</li>
+</ul>
+</div>
+</div>
+<div class="btn-group" style="justify-content:flex-start">
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary">Get Started</a>
+<a href="demo.html" class="btn btn-outline">Request Demo</a>
+</div>
+</div>
+
+<!-- Pharma Enterprise Plan -->
+<div class="pricing-detail fade-up">
+<div class="plan-header">
+<div>
+<h3>Pharma Enterprise</h3>
+<p style="color:var(--text-muted);font-size:0.9rem;margin-top:0.25rem">For large pharmaceutical companies and global R&D organizations</p>
+</div>
+<div class="plan-price">
+<div class="price-amount" data-monthly="$1,999" data-annual="$1,599">$1,999</div>
+<div class="price-period">per user / month</div>
+<div class="price-annual">Billed annually: $19,188/user/year</div>
+</div>
+</div>
+<div class="plan-desc">The Pharma Enterprise plan delivers the complete PharmaSpark ecosystem with enterprise-grade security, GxP validation, custom model training, regulatory submission tools, and dedicated support. Designed for organizations with complex pipelines requiring validated computational environments.</div>
+<div class="feature-columns">
+<div class="feature-col">
+<h4>Enterprise Discovery</h4>
+<ul>
+<li>Everything in Biotech</li>
+<li>Custom model training (federated learning)</li>
+<li>Proprietary compound library integration</li>
+<li>Unlimited virtual screening scale</li>
+<li>Quantum-chemical property calculation</li>
+</ul>
+</div>
+<div class="feature-col">
+<h4>Regulatory & Market Access</h4>
+<ul>
+<li>Regulatory path intelligence (60+ authorities)</li>
+<li>Dossier template generation (ICH M4)</li>
+<li>HEOR & cost-effectiveness modeling</li>
+<li>Payer decision modeling</li>
+<li>Competitive intelligence dashboard</li>
+</ul>
+</div>
+<div class="feature-col">
+<h4>Enterprise Platform</h4>
+<ul>
+<li>GxP-validated environment (21 CFR Part 11)</li>
+<li>Private cloud / on-premise deployment</li>
+<li>ELN & LIMS integration</li>
+<li>Dedicated customer success manager</li>
+<li>Custom SLA (99.9% uptime)</li>
+</ul>
+</div>
+</div>
+<div class="btn-group" style="justify-content:flex-start">
+<a href="demo.html" class="btn btn-primary">Contact Sales</a>
+<a href="demo.html" class="btn btn-outline">Request Demo</a>
+</div>
+</div>
+</section>
+
+<!-- Add-ons -->
+<section class="section">
+<h2 class="section-title">Optional Add-Ons</h2>
+<p class="section-desc">Enhance any plan with specialized modules and services</p>
+<div class="add-ons-grid">
+<div class="addon-card fade-up">
+<h4>🧬 Genomics Module</h4>
+<div class="addon-price">+$199/user/month</div>
+<p>Whole-genome analysis, variant calling, polygenic risk scoring, and pharmacogenomics integration for precision medicine approaches.</p>
+</div>
+<div class="addon-card fade-up">
+<h4>📋 Regulatory Dossier Builder</h4>
+<div class="addon-price">+$299/user/month</div>
+<p>Automated ICH-compliant document generation with data integration, version control, and collaborative review workflows for IND/NDA/MAA submissions.</p>
+</div>
+<div class="addon-card fade-up">
+<h4>💰 HEOR Premium</h4>
+<div class="addon-price">+$249/user/month</div>
+<p>Advanced health economics modeling with Markov models, microsimulation, budget impact analysis, and payer evidence generation tools.</p>
+</div>
+<div class="addon-card fade-up">
+<h4>🏗️ Custom Compute</h4>
+<div class="addon-price">+Usage-based</div>
+<p>Dedicated GPU clusters for large-scale virtual screening, molecular dynamics simulation, and custom model training with guaranteed resource allocation.</p>
+</div>
+<div class="addon-card fade-up">
+<h4>🎓 Training & Onboarding</h4>
+<div class="addon-price">$5,000 one-time</div>
+<p>Comprehensive onboarding program including workflow design, team training, data migration, and 90-day optimization support from our scientific team.</p>
+</div>
+<div class="addon-card fade-up">
+<h4>🔗 API Premium</h4>
+<div class="addon-price">+$149/user/month</div>
+<p>Extended API access with higher rate limits (10K req/min), webhook notifications, batch processing endpoints, and priority queue processing.</p>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+<h2 class="section-title">Frequently Asked Questions</h2>
+<p class="section-desc">Common questions about PharmaSpark pricing and plans</p>
+<div class="faq-grid">
+<div class="faq-item fade-up">
+<h4>Can I switch plans mid-contract?</h4>
+<p>Yes. You can upgrade your plan at any time and the price difference will be prorated. Downgrades take effect at the next billing cycle. Annual plans include a 30-day satisfaction guarantee.</p>
+</div>
+<div class="faq-item fade-up">
+<h4>Is there a free trial available?</h4>
+<p>We offer a 14-day free trial of the Biotech plan with full feature access. Academic researchers may qualify for discounted pricing through our Academic Access Program — contact us for details.</p>
+</div>
+<div class="faq-item fade-up">
+<h4>What about data security and IP protection?</h4>
+<p>All data is encrypted at rest (AES-256) and in transit (TLS 1.3). Enterprise plans offer private cloud deployment, VPC peering, and data residency guarantees. Your compound data and models remain your intellectual property at all times.</p>
+</div>
+<div class="faq-item fade-up">
+<h4>Do you support on-premise deployment?</h4>
+<p>Yes, the Pharma Enterprise plan supports fully on-premise deployment on your own infrastructure. We provide Docker containers, Kubernetes Helm charts, and air-gapped installation options for high-security environments.</p>
+</div>
+<div class="faq-item fade-up">
+<h4>What regulatory compliance do you support?</h4>
+<p>PharmaSpark's GxP environment (Enterprise plan) is validated per FDA 21 CFR Part 11, EU Annex 11, and GAMP 5 guidelines. We provide IQ/OQ/PQ documentation and ongoing change control for validated workflows.</p>
+</div>
+<div class="faq-item fade-up">
+<h4>How does custom model training work?</h4>
+<p>Enterprise customers can train proprietary models on their internal data using federated learning — the model architecture trains on your data within your environment, and only model gradients (not raw data) are aggregated. This ensures full IP protection while leveraging PharmaSpark's ML infrastructure.</p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="enterprise-cta fade-up">
+<h3>Need a Custom Solution?</h3>
+<p>For organizations with unique requirements — multi-site deployments, specialized therapeutic area models, custom integrations, or volume licensing — our enterprise team will design a tailored package.</p>
+<div class="btn-group">
+<a href="demo.html" class="btn btn-primary">Contact Enterprise Sales</a>
+<a href="features.html" class="btn btn-outline">Compare Features</a>
+</div>
+</div>
+</section>
+
+<footer class="footer"><div class="footer-links">
+<a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a>
+<a href="https://github.com/MoKangMedical">GitHub Organization</a>
+<a href="https://github.com/MoKangMedical/pharmaspark">This Project</a>
+</div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
+
+<!-- OPC Eco Nav -->
+<div style="position:fixed;bottom:20px;right:20px;z-index:99;background:rgba(17,24,39,.95);backdrop-filter:blur(10px);border:1px solid #1e293b;border-radius:12px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:200px">
+<div style="font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05rem;padding:4px 8px;border-bottom:1px solid #1e293b;margin-bottom:6px">OPC Ecosystem</div>
+<a href="https://mokangmedical.github.io/opc-homepage/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏠 OPC Home</a>
+<a href="https://mokangmedical.github.io/DrugMind/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">💊 DrugMind</a>
+<a href="https://mokangmedical.github.io/PharmaSim/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🧪 PharmaSim</a>
+<a href="https://mokangmedical.github.io/medichat-rd/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏥 MediChat-RD</a>
+<a href="https://mokangmedical.github.io/tianyan/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">👁️ Tianyan</a>
+</div>
+
+<script>
+// Billing toggle
+function toggleBilling() {
+    const toggle = document.getElementById('billingToggle');
+    toggle.classList.toggle('annual');
+    const isAnnual = toggle.classList.contains('annual');
+    document.querySelectorAll('.price-amount').forEach(el => {
+        el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+    });
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up, .pricing-detail, .addon-card, .faq-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    observer.observe(el);
+});
+const nav = document.querySelector('nav, .nav, .navbar, header');
+if (nav) { window.addEventListener('scroll', () => { nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)'; }); }
+</script>
+</body></html>
