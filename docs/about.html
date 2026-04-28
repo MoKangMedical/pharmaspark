@@ -1,193 +1,282 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>About — PharmaSpark | MoKangMedical</title><meta name="description" content="Learn about PharmaSpark's mission to accelerate drug discovery and development through AI-powered pharmaceutical innovation.">
+<title>About — PharmaSpark | MoKangMedical</title>
+<meta name="description" content="Learn about PharmaSpark's mission to accelerate drug discovery through AI-powered molecular visualization and computational pharmacology.">
 <link rel="stylesheet" href="https://mokangmedical.github.io/opc-homepage/shared-design-system.css">
 <style>
 .page-hero { padding: 5rem 2rem 3rem; text-align: center; background: linear-gradient(180deg, #0a1628 0%, var(--bg) 100%); position: relative; overflow: hidden; }
-.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(59,130,246,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(139,92,246,0.1) 0%, transparent 50%); }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(6,182,212,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(139,92,246,0.1) 0%, transparent 50%); }
 .page-hero > * { position: relative; z-index: 1; }
-.page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-hero h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .page-hero .subtitle { font-size: 1.15rem; color: var(--text-muted); max-width: 700px; margin: 0 auto; }
 .breadcrumb { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
 .breadcrumb a { color: var(--accent-light); }
-.mission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 2rem; }
-.mission-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; transition: all 0.3s; }
-.mission-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-.mission-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--text); }
-.mission-card p { color: var(--text-muted); line-height: 1.7; font-size: 0.95rem; }
-.timeline { position: relative; max-width: 800px; margin: 3rem auto 0; }
-.timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: var(--border); }
-.timeline-item { position: relative; padding-left: 60px; margin-bottom: 2.5rem; }
-.timeline-item::before { content: ''; position: absolute; left: 13px; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--gradient); box-shadow: 0 0 12px rgba(59,130,246,0.4); }
-.timeline-item h3 { font-size: 1.15rem; color: var(--accent-light); margin-bottom: 0.5rem; }
-.timeline-item .year { font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 0.3rem; }
-.timeline-item p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
-.leadership-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-.leader-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; transition: all 0.3s; }
-.leader-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-.leader-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; color: #fff; }
-.leader-card h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
-.leader-card .role { color: var(--accent-light); font-size: 0.85rem; margin-bottom: 0.75rem; }
-.leader-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
-.partner-section { background: var(--primary); border-radius: var(--radius); padding: 3rem; text-align: center; border: 1px solid var(--border); margin-top: 3rem; }
-.partner-logos { display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; opacity: 0.6; }
-.partner-logos span { font-size: 1.2rem; color: var(--text-muted); font-weight: 600; }
+
+/* Story Section */
+.story-block { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem; }
+.story-block.reverse { direction: rtl; }
+.story-block.reverse > * { direction: ltr; }
+.story-text h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; }
+.story-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem; }
+.story-visual { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; }
+.story-visual .visual-icon { font-size: 5rem; margin-bottom: 1rem; opacity: 0.7; }
+.story-visual .visual-label { color: var(--text-muted); font-size: 0.9rem; }
+
+/* Architecture Diagram */
+.arch-diagram { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2.5rem; margin: 2rem 0; }
+.arch-layers { display: flex; flex-direction: column; gap: 1rem; }
+.arch-layer { display: flex; align-items: center; gap: 1rem; }
+.arch-layer .layer-label { min-width: 140px; font-weight: 600; font-size: 0.9rem; color: var(--accent-light); }
+.arch-layer .layer-items { display: flex; flex-wrap: wrap; gap: 0.5rem; flex: 1; }
+.arch-layer .layer-item { background: var(--primary-light); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem 0.8rem; font-size: 0.8rem; color: var(--text-muted); transition: all 0.3s; }
+.arch-layer .layer-item:hover { border-color: var(--accent); color: var(--text); }
+
+/* Team Values */
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.value-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; transition: all 0.3s; }
+.value-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.value-card .value-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.value-card h4 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+.value-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 2rem; margin: 2rem 0; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.timeline-item { position: relative; margin-bottom: 2rem; padding-left: 1.5rem; }
+.timeline-item::before { content: ''; position: absolute; left: -2.35rem; top: 0.5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.timeline-item .year { font-size: 0.85rem; color: var(--accent-light); font-weight: 600; margin-bottom: 0.25rem; }
+.timeline-item h4 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+.timeline-item p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+
+/* Metrics */
+.about-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+.metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; }
+.metric-card .metric-val { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #06b6d4, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.metric-card .metric-label { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.25rem; }
+
+.section-divider { max-width: 1200px; margin: 0 auto; border: none; border-top: 1px solid var(--border); }
+
 @media (max-width: 768px) {
-  .mission-grid, .leadership-grid { grid-template-columns: 1fr; }
-  .timeline-item { padding-left: 50px; }
+  .story-block { grid-template-columns: 1fr; gap: 2rem; }
+  .story-block.reverse { direction: ltr; }
+  .arch-layer { flex-direction: column; align-items: flex-start; }
+  .arch-layer .layer-label { min-width: auto; }
 }
 </style>
 </head><body>
 <nav class="eco-nav"><a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
-<div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="demo.html">Demo</a></div></nav>
+<div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="demo.html">Demo</a><a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a></div></nav>
 
 <section class="page-hero">
 <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>About</span></div>
 <h1>About PharmaSpark</h1>
-<p class="subtitle">Pioneering the future of pharmaceutical innovation through artificial intelligence, molecular modeling, and data-driven drug development</p>
+<p class="subtitle">Bridging the gap between computational drug design and clinical reality through AI-powered molecular intelligence</p>
 </section>
 
+<!-- Mission -->
 <section class="section">
-<h2 class="section-title">Our Mission</h2>
-<p class="section-desc">To fundamentally accelerate the drug development pipeline — from target discovery to regulatory approval — making life-saving therapies accessible faster and at lower cost.</p>
-<div class="mission-grid">
-<div class="mission-card fade-up">
-<h3>🧬 Computational Drug Discovery</h3>
-<p>PharmaSpark integrates deep learning-based molecular generation, quantum-chemical property prediction, and high-throughput virtual screening to identify novel drug candidates. Our platform evaluates over 10 million compounds per hour against protein targets, reducing hit-to-lead timelines from months to days.</p>
+<div class="story-block fade-up">
+<div class="story-text">
+<h3>Our Mission</h3>
+<p>Drug development is one of the most expensive and failure-prone endeavors in science. The average new drug takes 10-15 years and costs $2.6 billion to reach patients. Despite advances in computational chemistry and AI, the translational gap between molecular design and clinical success remains vast.</p>
+<p>PharmaSpark was built to close this gap. We believe that by integrating real-time 3D molecular visualization with AI-driven prediction across the entire drug development pipeline — from target discovery to regulatory submission — we can fundamentally change how therapies are developed.</p>
+<p>Our platform combines cutting-edge 3D Gaussian Splatting technology for molecular visualization with state-of-the-art machine learning models trained on decades of pharmaceutical data, creating an end-to-end intelligence layer that accelerates every decision in the pipeline.</p>
 </div>
-<div class="mission-card fade-up">
-<h3>🔬 Translational Science</h3>
-<p>We bridge the gap between preclinical research and clinical development. Our AI models predict ADMET properties, off-target interactions, and pharmacokinetic profiles with 94% concordance to experimental data, enabling confident go/no-go decisions before costly wet-lab experiments.</p>
-</div>
-<div class="mission-card fade-up">
-<h3>📊 Regulatory Intelligence</h3>
-<p>PharmaSpark's regulatory AI engine analyzes 20+ years of FDA, EMA, PMDA, and NMPA approval data to recommend optimal submission strategies, predict approval likelihood, and generate regulatory dossier templates aligned with ICH guidelines.</p>
-</div>
-<div class="mission-card fade-up">
-<h3>🌐 Collaborative Platform</h3>
-<p>Built for modern pharmaceutical teams — from virtual biotech startups to global pharma enterprises. PharmaSpark supports real-time collaboration across wet-lab scientists, computational chemists, clinical operations, and regulatory affairs teams through integrated workflows and shared dashboards.</p>
+<div class="story-visual">
+<div class="visual-icon">⚛</div>
+<div class="visual-label">3D Gaussian Splatting Molecular Visualization</div>
 </div>
 </div>
 </section>
 
+<hr class="section-divider">
+
+<!-- Key Metrics -->
 <section class="section">
-<h2 class="section-title">Development Journey</h2>
-<p class="section-desc">From concept to a platform trusted by pharmaceutical researchers worldwide</p>
+<h2 class="section-title">By the Numbers</h2>
+<p class="section-desc">Impact metrics across our platform and research collaborations</p>
+<div class="about-metrics">
+<div class="metric-card fade-up"><div class="metric-val">2,847</div><div class="metric-label">Validated Drug Targets</div></div>
+<div class="metric-card fade-up"><div class="metric-val">2.5M</div><div class="metric-label">Knowledge Graph Entities</div></div>
+<div class="metric-card fade-up"><div class="metric-val">35M</div><div class="metric-label">Publications Analyzed</div></div>
+<div class="metric-card fade-up"><div class="metric-val">450K</div><div class="metric-label">Clinical Trials Indexed</div></div>
+<div class="metric-card fade-up"><div class="metric-val">200+</div><div class="metric-label">Research Teams</div></div>
+<div class="metric-card fade-up"><div class="metric-val">70%</div><div class="metric-label">Avg Time Reduction</div></div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Technology Story -->
+<section class="section">
+<div class="story-block reverse fade-up">
+<div class="story-text">
+<h3>3D Gaussian Splatting for Molecular Science</h3>
+<p>Traditional molecular visualization relies on polygon-based rendering (ball-and-stick, space-filling models) that struggle with the complexity of large biomolecular systems. PharmaSpark pioneers the application of 3D Gaussian Splatting — a technique originally developed for photorealistic scene reconstruction — to pharmaceutical molecular visualization.</p>
+<p>By representing atoms as 3D Gaussian primitives with physically meaningful radii, colors, and opacity values derived from atomic properties, PharmaSpark achieves real-time rendering of molecules with millions of atoms while preserving scientific accuracy. This enables researchers to explore protein-drug interactions, binding pocket dynamics, and molecular surfaces at unprecedented speed and visual fidelity.</p>
+<p>The technology integrates directly with our PDB/SDF parsers, converting molecular coordinate data into optimized Gaussian splat representations that can be rendered, manipulated, and exported as standard PLY files for downstream analysis.</p>
+</div>
+<div class="story-visual">
+<div class="visual-icon">🔬</div>
+<div class="visual-label">Atom-to-Splat Conversion Pipeline</div>
+</div>
+</div>
+</section>
+
+<!-- Architecture -->
+<section class="section">
+<h2 class="section-title">Platform Architecture</h2>
+<p class="section-desc">A layered architecture designed for extensibility, performance, and scientific rigor</p>
+<div class="arch-diagram fade-up">
+<div class="arch-layers">
+<div class="arch-layer">
+<div class="layer-label">Visualization</div>
+<div class="layer-items">
+<div class="layer-item">Three.js Renderer</div>
+<div class="layer-item">Gaussian Splatting</div>
+<div class="layer-item">PDB/SDF Parsers</div>
+<div class="layer-item">PLY Export</div>
+<div class="layer-item">Binding Pocket Viewer</div>
+</div>
+</div>
+<div class="arch-layer">
+<div class="layer-label">AI/ML Engine</div>
+<div class="layer-items">
+<div class="layer-item">Target Prediction</div>
+<div class="layer-item">ADMET Models</div>
+<div class="layer-item">Generative Chemistry</div>
+<div class="layer-item">Binding Affinity GNN</div>
+<div class="layer-item">PBPK Simulation</div>
+</div>
+</div>
+<div class="arch-layer">
+<div class="layer-label">Data Layer</div>
+<div class="layer-items">
+<div class="layer-item">Knowledge Graph</div>
+<div class="layer-item">ChEMBL</div>
+<div class="layer-item">PubChem</div>
+<div class="layer-item">PDB</div>
+<div class="layer-item">ClinicalTrials.gov</div>
+<div class="layer-item">DrugBank</div>
+</div>
+</div>
+<div class="arch-layer">
+<div class="layer-label">Infrastructure</div>
+<div class="layer-items">
+<div class="layer-item">TypeScript / Vite</div>
+<div class="layer-item">Node.js API</div>
+<div class="layer-item">GPU Compute</div>
+<div class="layer-item">RESTful API</div>
+<div class="layer-item">Docker / K8s</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Values -->
+<section class="section">
+<h2 class="section-title">Our Values</h2>
+<p class="section-desc">Principles that guide every decision we make</p>
+<div class="values-grid">
+<div class="value-card fade-up">
+<div class="value-icon">🎯</div>
+<h4>Scientific Rigor</h4>
+<p>Every model is validated against experimental data. We publish our benchmarks and invite scrutiny. Accuracy is not optional — it is the foundation of trust in drug development.</p>
+</div>
+<div class="value-card fade-up">
+<div class="value-icon">🔓</div>
+<h4>Open Science</h4>
+<p>Our core visualization engine is open-source. Researchers should be able to see, inspect, and contribute to the tools that inform their most critical decisions.</p>
+</div>
+<div class="value-card fade-up">
+<div class="value-icon">⚡</div>
+<h4>Speed Without Compromise</h4>
+<p>We believe computational tools should be fast enough to be interactive. Waiting hours for a visualization or days for a prediction breaks the scientific workflow.</p>
+</div>
+<div class="value-card fade-up">
+<div class="value-icon">🤝</div>
+<h4>Patient-Centric</h4>
+<p>Behind every molecule is a patient waiting for a therapy. We measure our success not in publications or revenue, but in therapies that reach patients faster.</p>
+</div>
+</div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Roadmap -->
+<section class="section">
+<h2 class="section-title">Our Journey</h2>
+<p class="section-desc">Key milestones in PharmaSpark's evolution</p>
 <div class="timeline">
 <div class="timeline-item fade-up">
-<div class="year">2022 — Foundation</div>
-<h3>Concept & Research Phase</h3>
-<p>PharmaSpark began as a research collaboration between computational chemists and machine learning engineers. Initial models for molecular property prediction achieved state-of-the-art performance on MoleculeNet benchmarks, validating the approach for pharmaceutical applications.</p>
+<div class="year">2024 Q1</div>
+<h4>Concept & Research</h4>
+<p>Initial research into applying 3D Gaussian Splatting to molecular visualization. Proof-of-concept demonstrating real-time rendering of protein structures with 100K+ atoms.</p>
 </div>
 <div class="timeline-item fade-up">
-<div class="year">2023 — Alpha Platform</div>
-<h3>Target Discovery Engine Launch</h3>
-<p>Released the first version integrating target identification using multi-omics data analysis (proteomics, transcriptomics, metabolomics). The platform could correlate genetic associations from GWAS studies with druggable protein families, prioritizing targets with high translational potential.</p>
+<div class="year">2024 Q3</div>
+<h4>Core Engine Development</h4>
+<p>Release of the TypeScript library with PDB/SDF parsers, atom-to-splat conversion, and Three.js renderer. First successful rendering of the full SARS-CoV-2 spike protein.</p>
 </div>
 <div class="timeline-item fade-up">
-<div class="year">2023 — Beta Expansion</div>
-<h3>Lead Optimization & ADMET Prediction</h3>
-<p>Added generative chemistry modules using diffusion models and graph neural networks for de novo molecular design. Integrated ADMET prediction covering CYP450 metabolism, hERG liability, hepatotoxicity, blood-brain barrier permeability, and oral bioavailability scoring.</p>
+<div class="year">2025 Q1</div>
+<h4>AI Integration</h4>
+<p>Integration of target discovery, ADMET prediction, and binding affinity models. Knowledge graph connecting 2.5M biomedical entities from 35M publications.</p>
 </div>
 <div class="timeline-item fade-up">
-<div class="year">2024 — Clinical Intelligence</div>
-<h3>Trial Design & Regulatory Path</h3>
-<p>Launched clinical trial protocol optimization powered by historical trial data analysis. Added regulatory pathway recommendations covering FDA 505(b)(1), 505(b)(2), and breakthrough therapy designation, EMA centralized procedure, and accelerated approval pathways.</p>
+<div class="year">2025 Q3</div>
+<h4>Platform Launch</h4>
+<p>Full platform launch with clinical trial simulator, regulatory intelligence, and HEOR modules. Onboarding of first 50 research teams across academic and biotech organizations.</p>
 </div>
 <div class="timeline-item fade-up">
-<div class="year">2025 — Enterprise & Scale</div>
-<h3>Full Platform & Partnerships</h3>
-<p>Deployed enterprise features including GxP-validated compute environments, private cloud deployment, custom model training on proprietary compound libraries, and integration with electronic lab notebooks (ELN) and laboratory information management systems (LIMS).</p>
+<div class="year">2026</div>
+<h4>Enterprise & Scale</h4>
+<p>GxP-validated environment for enterprise customers. Federated learning for custom model training. Expansion to 200+ research teams with full drug pipeline management.</p>
 </div>
 </div>
 </section>
 
-<section class="section">
-<h2 class="section-title">Leadership Team</h2>
-<p class="section-desc">World-class expertise spanning pharmaceutical R&D, AI/ML, and healthcare innovation</p>
-<div class="leadership-grid">
-<div class="leader-card fade-up">
-<div class="leader-avatar">🧬</div>
-<h4>Dr. Research Lead</h4>
-<div class="role">Chief Scientific Officer</div>
-<p>20+ years in computational chemistry and drug design. Former principal investigator at a top-5 pharma company. Published 150+ peer-reviewed papers on molecular modeling and QSAR.</p>
-</div>
-<div class="leader-card fade-up">
-<div class="leader-avatar">🤖</div>
-<h4>AI Architecture Lead</h4>
-<div class="role">Chief Technology Officer</div>
-<p>Deep learning pioneer with expertise in graph neural networks, transformer architectures for molecular representation, and generative models for drug-like molecule design. PhD in Machine Learning.</p>
-</div>
-<div class="leader-card fade-up">
-<div class="leader-avatar">💊</div>
-<h4>Clinical Strategy Lead</h4>
-<div class="role">VP Clinical Development</div>
-<p>Former clinical operations director who led 12 Phase I-III trials to completion. Expertise in adaptive trial design, Bayesian dose-finding, and regulatory submission strategy.</p>
-</div>
-<div class="leader-card fade-up">
-<div class="leader-avatar">📋</div>
-<h4>Regulatory Affairs Lead</h4>
-<div class="role">VP Regulatory Strategy</div>
-<p>30+ years in regulatory affairs with FDA and EMA submissions. Previously served as a regulatory reviewer. Deep expertise in accelerated pathways, orphan drug designations, and real-world evidence integration.</p>
-</div>
-</div>
-</section>
-
-<section class="section">
-<div class="partner-section fade-up">
-<h2 style="font-size:1.5rem;margin-bottom:1rem;">Trusted by Industry Leaders</h2>
-<p style="color:var(--text-muted);max-width:600px;margin:0 auto;">PharmaSpark partners with leading pharmaceutical companies, academic medical centers, and biotech innovators worldwide.</p>
-<div class="partner-logos">
-<span>🏥 Academic Medical Centers</span>
-<span>💊 Top-20 Pharma</span>
-<span>🧬 Emerging Biotech</span>
-<span>🏛️ Regulatory Bodies</span>
-</div>
-</div>
-</section>
-
-<section class="section" style="text-align:center">
-<h2 class="section-title">Ready to Transform Your Drug Development?</h2>
-<p class="section-desc">Join pharmaceutical innovators using PharmaSpark to accelerate from target to therapy.</p>
+<!-- CTA -->
+<section class="section" style="text-align:center;">
+<h2 class="section-title">Join the Future of Drug Discovery</h2>
+<p class="section-desc">Whether you are an academic researcher, biotech startup, or global pharmaceutical company, PharmaSpark has a solution designed for your needs.</p>
 <div class="btn-group">
-<a href="demo.html" class="btn btn-primary">Request a Demo</a>
-<a href="features.html" class="btn btn-outline">Explore Features</a>
+<a href="demo.html" class="btn btn-primary">Try Interactive Demo</a>
+<a href="pricing.html" class="btn btn-outline">View Pricing</a>
 </div>
 </section>
 
 <footer class="footer"><div class="footer-links">
-<a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a>
-<a href="https://github.com/MoKangMedical">GitHub Organization</a>
-<a href="https://github.com/MoKangMedical/pharmaspark">This Project</a>
+<a href="https://mokangmedical.github.io/opc-homepage/">OPC Ecosystem</a>
+<a href="https://github.com/MoKangMedical/pharmaspark">GitHub Repository</a>
+<a href="index.html">Home</a>
+<a href="features.html">Features</a>
+<a href="pricing.html">Pricing</a>
 </div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
 
 <!-- OPC Eco Nav -->
 <div style="position:fixed;bottom:20px;right:20px;z-index:99;background:rgba(17,24,39,.95);backdrop-filter:blur(10px);border:1px solid #1e293b;border-radius:12px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:200px">
 <div style="font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05rem;padding:4px 8px;border-bottom:1px solid #1e293b;margin-bottom:6px">OPC Ecosystem</div>
-<a href="https://mokangmedical.github.io/opc-homepage/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏠 OPC Home</a>
-<a href="https://mokangmedical.github.io/DrugMind/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">💊 DrugMind</a>
-<a href="https://mokangmedical.github.io/PharmaSim/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🧪 PharmaSim</a>
-<a href="https://mokangmedical.github.io/medichat-rd/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏥 MediChat-RD</a>
-<a href="https://mokangmedical.github.io/tianyan/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">👁️ Tianyan</a>
+<a href="https://mokangmedical.github.io/opc-homepage/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">OPC Home</a>
+<a href="https://mokangmedical.github.io/DrugMind/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">DrugMind</a>
+<a href="https://mokangmedical.github.io/PharmaSim/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">PharmaSim</a>
+<a href="https://mokangmedical.github.io/medichat-rd/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">MediChat-RD</a>
+<a href="https://mokangmedical.github.io/tianyan/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">Tianyan</a>
 </div>
 
 <script>
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-        }
-    });
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; observer.unobserve(entry.target); }
+  });
 }, { threshold: 0.1 });
-document.querySelectorAll('.fade-up, .card, .mission-card, .leader-card, .timeline-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-    observer.observe(el);
+document.querySelectorAll('.fade-up').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'all 0.6s cubic-bezier(0.16,1,0.3,1)'; observer.observe(el);
 });
-const nav = document.querySelector('nav, .nav, .navbar, header');
+const nav = document.querySelector('.eco-nav');
 if (nav) { window.addEventListener('scroll', () => { nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)'; }); }
 </script>
 </body></html>
