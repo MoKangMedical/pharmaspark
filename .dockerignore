@@ -1,0 +1,49 @@
+# PharmaSpark .dockerignore
+
+# Dependencies
+node_modules
+server/node_modules
+
+# Build artifacts
+dist
+server/dist
+
+# Development files
+.env
+.env.local
+.env.development
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs
+
+# Test files
+tests
+*.test.ts
+
+# Documentation
+docs
+*.md
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Temporary files
+tmp
+temp
