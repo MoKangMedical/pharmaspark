@@ -11,4 +11,67 @@
 <section class="section" id="features"><h2 class="section-title">Key Features</h2><p class="section-desc">Powerful capabilities designed for medical professionals and researchers</p><div class="card-grid"><div class="card fade-up"><div class="card-icon">🎯</div><h3>Target Discovery</h3><p>AI-driven target identification and validation</p></div><div class="card fade-up"><div class="card-icon">💊</div><h3>Lead Optimization</h3><p>Molecular property prediction and optimization</p></div><div class="card fade-up"><div class="card-icon">📊</div><h3>Market Analysis</h3><p>Competitive intelligence and market sizing</p></div><div class="card fade-up"><div class="card-icon">🧪</div><h3>Trial Design</h3><p>Optimize clinical trial protocols with simulation</p></div><div class="card fade-up"><div class="card-icon">📋</div><h3>Regulatory Path</h3><p>FDA/EMA submission strategy recommendations</p></div><div class="card fade-up"><div class="card-icon">💰</div><h3>Pricing Strategy</h3><p>HEOR-based pricing and market access modeling</p></div></div></section>
 <section class="section" id="pricing"><h2 class="section-title">Pricing Plans</h2><p class="section-desc">Choose the plan that fits your needs</p><div class="pricing-grid"><div class="price-card "><h3>Researcher</h3><div class="price-tag">$149/mo</div><ul><li>Basic analytics</li><li>5 projects</li><li>Community support</li></ul><a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a></div><div class="price-card featured"><div class="price-badge">Most Popular</div><h3>Biotech</h3><div class="price-tag">$599/mo</div><ul><li>Full platform</li><li>Unlimited projects</li><li>API access</li><li>Support</li></ul><a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a></div><div class="price-card "><h3>Pharma</h3><div class="price-tag">$1999/mo</div><ul><li>Enterprise features</li><li>Custom models</li><li>Dedicated support</li><li>SLA</li></ul><a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a></div></div></section>
 <footer class="footer"><div class="footer-links"><a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a><a href="https://github.com/MoKangMedical">GitHub Organization</a><a href="https://github.com/MoKangMedical/pharmaspark">This Project</a></div><p>&copy; 2025 MoKangMedical. All rights reserved.</p></footer>
+
+<!-- OPC Eco Nav -->
+<div style="position:fixed;bottom:20px;right:20px;z-index:99;background:rgba(17,24,39,.95);backdrop-filter:blur(10px);border:1px solid #1e293b;border-radius:12px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.4);max-width:200px">
+<div style="font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05rem;padding:4px 8px;border-bottom:1px solid #1e293b;margin-bottom:6px">OPC Ecosystem</div>
+<a href="https://mokangmedical.github.io/opc-homepage/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏠 OPC Home</a>
+<a href="https://mokangmedical.github.io/DrugMind/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">💊 DrugMind</a>
+<a href="https://mokangmedical.github.io/PharmaSim/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🧪 PharmaSim</a>
+<a href="https://mokangmedical.github.io/medichat-rd/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">🏥 MediChat-RD</a>
+<a href="https://mokangmedical.github.io/tianyan/" style="display:block;padding:3px 8px;color:#94a3b8;font-size:.78rem;text-decoration:none;border-radius:4px;transition:all .2s">👁️ Tianyan</a>
+</div>
+
+<script>
+// Scroll reveal animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.feature-card, .card, .pricing-card, .stat-card, [class*="feature"], [class*="card"]').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    observer.observe(el);
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+// Navbar background on scroll
+const nav = document.querySelector('nav, .nav, .navbar, header');
+if (nav) {
+    window.addEventListener('scroll', () => {
+        nav.style.background = window.scrollY > 50 ? 'rgba(10,10,15,0.98)' : 'rgba(10,10,15,0.85)';
+    });
+}
+
+// Counter animation for stats
+document.querySelectorAll('[data-count], .stat-number, .counter').forEach(el => {
+    const target = parseInt(el.dataset.count || el.textContent);
+    if (isNaN(target)) return;
+    let current = 0;
+    const increment = target / 60;
+    const suffix = el.dataset.suffix || '';
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = Math.floor(current).toLocaleString() + suffix;
+    }, 25);
+});
+
+console.log('MoKangMedical interactive features loaded');
+</script>
 </body></html>
