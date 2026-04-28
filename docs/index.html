@@ -1,670 +1,98 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PharmaSpark - 3D分子可视化平台</title>
-    <meta name="description" content="PharmaSpark — 3D Gaussian Splatting for Pharmaceutical & Biomedical Visualization">
-    <meta name="keywords" content="3D Gaussian Splatting, molecular visualization, drug discovery, protein structure, pharmaceutical, biomedical">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="PharmaSpark - 3D分子可视化平台">
-    <meta property="og:description" content="基于3D Gaussian Splatting技术的分子可视化平台">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mokangmedical.github.io/pharmaspark/">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fff;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header - 借鉴RCSB PDB设计 */
-        header {
-            background: #fff;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-top {
-            background: #1a1a2e;
-            padding: 8px 0;
-            text-align: center;
-        }
-        
-        .header-top p {
-            color: #888;
-            font-size: 12px;
-            margin: 0;
-        }
-        
-        .header-main {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #00d4ff;
-            margin: 0;
-        }
-        
-        .logo span {
-            font-size: 12px;
-            color: #888;
-            background: #f0f0f0;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-        
-        nav {
-            display: flex;
-            gap: 20px;
-        }
-        
-        nav a {
-            color: #333;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        
-        nav a:hover {
-            color: #00d4ff;
-            border-bottom-color: #00d4ff;
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background: #00d4ff;
-            color: #000;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: background 0.2s;
-        }
-        
-        .btn:hover {
-            background: #00b8d4;
-        }
-        
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
-        }
-        
-        .btn-secondary:hover {
-            background: #e0e0e0;
-        }
-        
-        /* Hero Section - 借鉴RCSB PDB的搜索框设计 */
-        .hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 60px 0;
-            text-align: center;
-        }
-        
-        .hero h2 {
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        
-        .search-box {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .search-box input {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-        }
-        
-        .search-box input::placeholder {
-            color: #888;
-        }
-        
-        .search-box button {
-            padding: 15px 30px;
-            background: #00d4ff;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 32px;
-            font-weight: 700;
-            color: #00d4ff;
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            color: #888;
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-        
-        .features h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 50px;
-            color: #1a1a2e;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #e0e0e0;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: #00d4ff;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: #1a1a2e;
-        }
-        
-        .feature-card p {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        /* Demo Section */
-        .demo {
-            padding: 80px 0;
-            background: #fff;
-        }
-        
-        .demo h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 50px;
-            color: #1a1a2e;
-        }
-        
-        .demo-container {
-            background: #1a1a2e;
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .demo-container p {
-            color: #888;
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-        
-        /* Pricing Section */
-        .pricing {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-        
-        .pricing h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 50px;
-            color: #1a1a2e;
-        }
-        
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .pricing-card {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid #e0e0e0;
-            text-align: center;
-        }
-        
-        .pricing-card.popular {
-            border-color: #00d4ff;
-            box-shadow: 0 10px 30px rgba(0,212,255,0.2);
-        }
-        
-        .pricing-card h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #1a1a2e;
-        }
-        
-        .pricing-card .price {
-            font-size: 48px;
-            font-weight: 700;
-            margin: 20px 0;
-            color: #1a1a2e;
-        }
-        
-        .pricing-card .price span {
-            font-size: 16px;
-            color: #888;
-        }
-        
-        .pricing-card ul {
-            list-style: none;
-            margin: 20px 0;
-        }
-        
-        .pricing-card li {
-            padding: 10px 0;
-            color: #666;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        /* Tech Stack */
-        .tech-stack {
-            padding: 80px 0;
-            background: #fff;
-        }
-        
-        .tech-stack h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 50px;
-            color: #1a1a2e;
-        }
-        
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-        }
-        
-        .tech-item {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .tech-item h4 {
-            color: #1a1a2e;
-            margin-bottom: 10px;
-        }
-        
-        .tech-item p {
-            color: #888;
-            font-size: 12px;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            text-align: center;
-            border-top: 1px solid #e0e0e0;
-            background: #1a1a2e;
-        }
-        
-        footer p {
-            color: #888;
-            font-size: 14px;
-        }
-        
-        footer a {
-            color: #00d4ff;
-            text-decoration: none;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-main {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero h2 {
-                font-size: 28px;
-            }
-            
-            .search-box {
-                flex-direction: column;
-            }
-            
-            .stats {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PharmaSpark — MoKangMedical</title>
+<meta name="description" content="Pharmaceutical Innovation Hub — AI-powered drug development from target discovery to market access">
+<link rel="stylesheet" href="https://mokangmedical.github.io/opc-homepage/shared-design-system.css">
 </head>
-<body style="padding-top:56px!important">
-<nav id="opc-nav" style="position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(10,10,30,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(99,102,241,0.2);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
-  <a href="https://mokangmedical.github.io/opc-homepage/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-size:15px">
-    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="url(#ng1)" stroke-width="2.5"/><path d="M10 16h12M16 10v12" stroke="url(#ng1)" stroke-width="2.5" stroke-linecap="round"/><defs><linearGradient id="ng1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#818cf8"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs></svg>
-    <span style="background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent">MoKangMedical</span>
-  </a>
-  <div style="display:flex;gap:6px;align-items:center">
-    <a href="https://mokangmedical.github.io/opc-homepage/" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:8px">生态首页</a>
-    <a href="https://github.com/MoKangMedical" target="_blank" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;padding:6px 12px;border-radius:8px">GitHub</a>
-    <a href="https://mokangmedical.github.io/opc-alliance/" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:6px 16px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none">OPC Hub</a>
-  </div>
+<body>
+<nav class="eco-nav">
+<a class="nav-brand" href="https://mokangmedical.github.io/opc-homepage/">MoKangMedical</a>
+<div class="nav-links">
+<a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a>
+<a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem</a>
+<a href="#features">Features</a>
+<a href="#pricing">Pricing</a>
+</div>
 </nav>
-    <header>
-        <div class="header-top">
-            <div class="container">
-                <p>基于3D Gaussian Splatting技术的分子可视化平台</p>
-            </div>
-        </div>
-        <div class="container">
-            <div class="header-main">
-                <div class="logo">
-                    <h1>PharmaSpark</h1>
-                    <span>v0.2.0</span>
-                </div>
-                <nav>
-                    <a href="#features">功能</a>
-                    <a href="#demo">演示</a>
-                    <a href="#pricing">定价</a>
-                    <a href="#tech-stack">技术栈</a>
-                    <a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a>
-                </nav>
-                <div class="auth-buttons">
-                    <a href="https://github.com/MoKangMedical/pharmaspark" class="btn">开始使用</a>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <section class="hero">
-        <div class="container">
-            <h2>3D分子可视化平台</h2>
-            <p>基于3D Gaussian Splatting技术，为药物发现和生物医学研究提供高质量的分子可视化解决方案</p>
-            <div class="search-box">
-                <input type="text" placeholder="输入PDB ID、分子名称或化学式...">
-                <button>搜索</button>
-            </div>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">14</div>
-                    <div class="stat-label">可视化模式</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">10</div>
-                    <div class="stat-label">颜色方案</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">5</div>
-                    <div class="stat-label">文件格式</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">30</div>
-                    <div class="stat-label">测试用例</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="features" id="features">
-        <div class="container">
-            <h2>核心功能</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                        </svg>
-                    </div>
-                    <h3>分子解析</h3>
-                    <p>支持PDB、SDF、MOL2、XYZ、PQR等多种分子文件格式的解析和处理</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                        </svg>
-                    </div>
-                    <h3>3D高斯溅射</h3>
-                    <p>将分子结构转换为高质量的3D高斯溅射数据，实现实时渲染</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                            <polyline points="21 15 16 10 5 21"></polyline>
-                        </svg>
-                    </div>
-                    <h3>可视化选项</h3>
-                    <p>14种可视化模式、10种颜色方案，满足不同研究需求</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </div>
-                    <h3>用户系统</h3>
-                    <p>完整的用户注册、登录、个人中心和API配额管理</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="17 8 12 3 7 8"></polyline>
-                            <line x1="12" y1="3" x2="12" y2="15"></line>
-                        </svg>
-                    </div>
-                    <h3>数据管理</h3>
-                    <p>分子上传、下载、保存、历史记录和标签管理</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                        </svg>
-                    </div>
-                    <h3>分析功能</h3>
-                    <p>分子分析、对接可视化、相似性搜索等功能</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="demo" id="demo">
-        <div class="container">
-            <h2>功能演示</h2>
-            <div class="demo-container">
-                <p>PharmaSpark提供直观的3D分子可视化界面，支持多种交互操作</p>
-                <a href="https://github.com/MoKangMedical/pharmaspark" class="btn">查看源代码</a>
-            </div>
-        </div>
-    </section>
-    
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2>订阅方案</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>免费版</h3>
-                    <div class="price">$0<span>/月</span></div>
-                    <ul>
-                        <li>1,000次API调用/月</li>
-                        <li>基础分子解析</li>
-                        <li>基础可视化</li>
-                        <li>社区支持</li>
-                    </ul>
-                    <a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-secondary">开始使用</a>
-                </div>
-                <div class="pricing-card popular">
-                    <h3>专业版</h3>
-                    <div class="price">$29<span>/月</span></div>
-                    <ul>
-                        <li>10,000次API调用/月</li>
-                        <li>高级分子解析</li>
-                        <li>所有可视化选项</li>
-                        <li>分子存储和管理</li>
-                        <li>分析功能</li>
-                        <li>邮件支持</li>
-                    </ul>
-                    <a href="https://github.com/MoKangMedical/pharmaspark" class="btn">立即订阅</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>企业版</h3>
-                    <div class="price">$99<span>/月</span></div>
-                    <ul>
-                        <li>无限API调用</li>
-                        <li>所有功能</li>
-                        <li>自定义部署</li>
-                        <li>优先支持</li>
-                        <li>SLA保障</li>
-                    </ul>
-                    <a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-secondary">联系我们</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section class="tech-stack" id="tech-stack">
-        <div class="container">
-            <h2>技术栈</h2>
-            <div class="tech-grid">
-                <div class="tech-item">
-                    <h4>TypeScript</h4>
-                    <p>类型安全</p>
-                </div>
-                <div class="tech-item">
-                    <h4>Vite</h4>
-                    <p>快速构建</p>
-                </div>
-                <div class="tech-item">
-                    <h4>Three.js</h4>
-                    <p>3D图形</p>
-                </div>
-                <div class="tech-item">
-                    <h4>Spark.js</h4>
-                    <p>高斯溅射</p>
-                </div>
-                <div class="tech-item">
-                    <h4>Express.js</h4>
-                    <p>后端框架</p>
-                </div>
-                <div class="tech-item">
-                    <h4>SQLite</h4>
-                    <p>数据存储</p>
-                </div>
-                <div class="tech-item">
-                    <h4>Stripe</h4>
-                    <p>支付集成</p>
-                </div>
-                <div class="tech-item">
-                    <h4>Docker</h4>
-                    <p>容器部署</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 PharmaSpark. All rights reserved. | <a href="https://github.com/MoKangMedical/pharmaspark">GitHub</a></p>
-        </div>
-    </footer>
+
+<section class="hero">
+<div class="badge">Pharma AI</div>
+<h1>PharmaSpark</h1>
+<p class="subtitle">Pharmaceutical Innovation Hub — AI-powered drug development from target discovery to market access</p>
+<div class="btn-group">
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary">View on GitHub</a>
+<a href="#features" class="btn btn-outline">Explore Features</a>
+</div>
+</section>
+
+<section class="section" id="stats">
+<div class="stats"><div><div class="stat-num">50+</div><div class="stat-label">Drug Targets</div></div><div><div class="stat-num">1000+</div><div class="stat-label">Compounds</div></div><div><div class="stat-num">30%</div><div class="stat-label">Time Saved</div></div><div><div class="stat-num">$2M+</div><div class="stat-label">Cost Reduction</div></div></div>
+</section>
+
+<section class="section" id="features">
+<h2 class="section-title">Key Features</h2>
+<p class="section-desc">Powerful capabilities designed for medical professionals and researchers</p>
+<div class="card-grid"><div class="card fade-up">
+<div class="card-icon">🎯</div>
+<h3>Target Discovery</h3>
+<p>AI-driven target identification and validation</p>
+</div><div class="card fade-up">
+<div class="card-icon">💊</div>
+<h3>Lead Optimization</h3>
+<p>Molecular property prediction and optimization</p>
+</div><div class="card fade-up">
+<div class="card-icon">📊</div>
+<h3>Market Analysis</h3>
+<p>Competitive intelligence and market sizing</p>
+</div><div class="card fade-up">
+<div class="card-icon">🧪</div>
+<h3>Trial Design</h3>
+<p>Optimize clinical trial protocols with simulation</p>
+</div><div class="card fade-up">
+<div class="card-icon">📋</div>
+<h3>Regulatory Path</h3>
+<p>FDA/EMA submission strategy recommendations</p>
+</div><div class="card fade-up">
+<div class="card-icon">💰</div>
+<h3>Pricing Strategy</h3>
+<p>HEOR-based pricing and market access modeling</p>
+</div></div>
+</section>
+
+<section class="section" id="pricing">
+<h2 class="section-title">Pricing Plans</h2>
+<p class="section-desc">Choose the plan that fits your needs</p>
+<div class="pricing-grid"><div class="price-card ">
+
+<h3>Researcher</h3>
+<div class="price-tag">$149/mo</div>
+<ul><li>Basic analytics</li><li>5 projects</li><li>Community support</li></ul>
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a>
+</div><div class="price-card featured">
+<div class="price-badge">Most Popular</div>
+<h3>Biotech</h3>
+<div class="price-tag">$599/mo</div>
+<ul><li>Full platform</li><li>Unlimited projects</li><li>API access</li><li>Support</li></ul>
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a>
+</div><div class="price-card ">
+
+<h3>Pharma</h3>
+<div class="price-tag">$1999/mo</div>
+<ul><li>Enterprise features</li><li>Custom models</li><li>Dedicated support</li><li>SLA</li></ul>
+<a href="https://github.com/MoKangMedical/pharmaspark" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a>
+</div></div>
+</section>
+
+<footer class="footer">
+<div class="footer-links">
+<a href="https://mokangmedical.github.io/opc-homepage/">Ecosystem Home</a>
+<a href="https://github.com/MoKangMedical">GitHub Organization</a>
+<a href="https://github.com/MoKangMedical/pharmaspark">This Project</a>
+</div>
+<p>&copy; 2025 MoKangMedical. All rights reserved.</p>
+</footer>
 </body>
 </html>
